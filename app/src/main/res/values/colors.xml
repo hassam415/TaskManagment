@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey">#F8FAFC</color>
+    <color name="darknavey">#1E3A5F</color>
+    <color name="TaskAssign">#EDE9FE</color>
+    <color name="Todo">#DBEAFE</color>
+    <color name="InProgress">#FEF3C7</color>
+    <color name="InReview">#CCFBF1</color>
+    <color name="Completed">#DCFCE7</color>
+</resources>

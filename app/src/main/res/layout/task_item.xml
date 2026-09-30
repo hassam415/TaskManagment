@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12sp"
+            android:layout_margin="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="3dp"
+                android:layout_margin="6dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/title"
+                        android:textSize="20dp"
+
+                        android:textColor="@color/darknavey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="To do"
+                        android:textSize="12sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        app:chipCornerRadius="20dp"
+                        app:chipMinHeight="32dp"
+                        app:closeIconVisible="false"
+                        app:checkedIconVisible="false" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/discription"
+
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</layout>

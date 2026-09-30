@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/darknavey"
+        android:title="Add Comment"
+        android:titleTextColor="@color/white"/>
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:id="@+id/commentedit"
+    android:layout_margin="14dp"
+    android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Comment"/>
+</com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
