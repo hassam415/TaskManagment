@@ -2,6 +2,9 @@ package com.example.taskmanagement;
 
 import android.net.Uri;
 
+
+import com.google.firebase.Timestamp;
+
 import java.util.List;
 
 public class Task {
@@ -9,6 +12,15 @@ public class Task {
     List<String>selecteduser;
   List<String>selectedImges;
   String uid;
+  Timestamp times_tamp;
+
+    public Timestamp getTimes_tamp() {
+        return times_tamp;
+    }
+
+    public void setTimes_tamp(Timestamp times_tamp) {
+        this.times_tamp = times_tamp;
+    }
 
     public String getStatus() {
         return status;
@@ -26,13 +38,14 @@ public class Task {
         this.uid = uid;
     }
 
-    public Task(String title, String discription, String status, List<String> selecteduser, List<String> selectedImges, String uid) {
+    public Task(String title, String discription, String status, List<String> selecteduser, List<String> selectedImges, String uid, Timestamp times_tamp) {
         this.title = title;
         this.discription = discription;
         this.status = status;
         this.selecteduser = selecteduser;
         this.selectedImges = selectedImges;
         this.uid = uid;
+        this.times_tamp = times_tamp;
     }
 
     public List<String> getSelectedImges() {

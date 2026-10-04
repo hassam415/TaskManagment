@@ -9,4 +9,5 @@
     <color name="InProgress">#FEF3C7</color>
     <color name="InReview">#CCFBF1</color>
     <color name="Completed">#DCFCE7</color>
+    <color name="blue">#00c3ff</color>
 </resources>

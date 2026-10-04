@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -38,6 +39,7 @@ DashboardViewModel dashboardViewModel;
         taskcount = view.findViewById(R.id.taskcount);
         toDoCard = view.findViewById(R.id.toDoCard);
         progressCard = view.findViewById(R.id.progressCard);
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
         reviewCard = view.findViewById(R.id.reviewCard);
         compltCard = view.findViewById(R.id.compltCard);
         toDo = view.findViewById(R.id.toDo);
@@ -45,8 +47,10 @@ DashboardViewModel dashboardViewModel;
         review = view.findViewById(R.id.review);
         compltext = view.findViewById(R.id.compltext);
         card = view.findViewById(R.id.card);
+        filterBtn.setVisibility(View.GONE);
         auth = FirebaseAuth.getInstance();
         String id = auth.getCurrentUser().getUid();
+
         taskViewModel = new TaskViewModel(new TaskRepository());
         dashboardViewModel=new DashboardViewModel(new DashboardRepository());
         toDoCard.setOnClickListener(new View.OnClickListener() {

@@ -5,10 +5,14 @@
     <data>
 
     </data>
-
-    <FrameLayout
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         tools:context=".SingleUserTaskListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -33,5 +37,65 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/filterLayout"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter Tasks"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+
+        <Spinner
+            android:layout_marginTop="4dp"
+            android:id="@+id/statusSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"/>
+        <TextView
+            android:text="Select Date"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edtfromdate"
+                android:hint="From"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/editto"
+                android:hint="To "
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/applybtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/darknavey"
+            android:text="Apply Filter"/>
+
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
+
 </layout>

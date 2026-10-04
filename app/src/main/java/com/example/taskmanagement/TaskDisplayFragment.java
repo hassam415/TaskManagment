@@ -58,7 +58,8 @@ public class TaskDisplayFragment extends Fragment {
         materialbtn = view.findViewById(R.id.materialbtn);
         title = view.findViewById(R.id.title);
         discript = view.findViewById(R.id.discript);
-
+ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+filterBtn.setVisibility(View.GONE);
         commentRecycler = view.findViewById(R.id.commentRecycler);
         customUser = view.findViewById(R.id.customUser);
         customImage.showLoader();
@@ -87,16 +88,9 @@ startActivity(intent);
     }
 });
 
-        ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<>(
-                        getContext(),
-                        android.R.layout.simple_spinner_item,
-                        status
-                );
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, status);
 
-        arrayAdapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(arrayAdapter);
 

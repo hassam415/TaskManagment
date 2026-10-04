@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,12 +34,14 @@ public class SplashActivity extends AppCompatActivity {
         });
         ff=FirebaseFirestore.getInstance();
         mauth=FirebaseAuth.getInstance();
-        String id=mauth.getCurrentUser().getUid();
+        FirebaseUser id= mauth.getCurrentUser();
         if (id==null){
             Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }else {
-            ff.collection("User").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            String user=mauth.getUid();
+            ff.collection("User").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     String role=documentSnapshot.getString("role");
@@ -47,8 +52,17 @@ public class SplashActivity extends AppCompatActivity {
                         Intent intent=new Intent(SplashActivity.this,UserDashBoardActivity.class);
                         startActivity(intent);
                     }
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
+
         }
 
     }

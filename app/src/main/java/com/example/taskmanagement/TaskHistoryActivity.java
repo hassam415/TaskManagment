@@ -15,6 +15,8 @@ import com.example.taskmanagement.callback.ResponseCallback;
 import com.example.taskmanagement.databinding.ActivityTaskHistoryBinding;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskHistoryActivity extends MyBaseActivity {
@@ -47,7 +49,11 @@ List<Task>taskList=new ArrayList<>();
             taskViewModel.getTaskActivity(id, new ResponseCallback<List<TaskActivity>>() {
                 @Override
                 public void onSuccess(List<TaskActivity> data, String message) {
+
                     taskActivities.clear();
+
+                    Collections.sort(data, (a, b) ->b.getTime_stamp().compareTo(a.getTime_stamp())
+                    );
                     taskActivities.addAll(data);
                     taskhistoryAdapter.notifyDataSetChanged();
                 }

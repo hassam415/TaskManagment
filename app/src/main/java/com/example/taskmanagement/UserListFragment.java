@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.taskmanagement.callback.ResponseCallback;
@@ -38,11 +39,11 @@ LinearLayout loader;
         loader=view.findViewById(R.id.loader);
 userbtn=view.findViewById(R.id.userbtn);
 userrecyler.setHasFixedSize(true);
-//AdminActivity mainActivity=(AdminActivity) requireActivity();
-//mainActivity.toolbar1.setTitle("Users");
 userrecyler.setLayoutManager(new LinearLayoutManager(getContext()));
 userAdapter=new UserAdapter(getContext(),userList);
 userrecyler.setAdapter(userAdapter);
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+        filterBtn.setVisibility(View.GONE);
 loader.setVisibility(View.VISIBLE);
 userAdapter.setOnUserClick(new UserAdapter.OnUserClick() {
     @Override

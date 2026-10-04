@@ -108,7 +108,7 @@ public class TaskRepository {
         task.setSelecteduser(selecteduser);
         task.setStatus("Task Assigned");
         task.setSelectedImges(imagurl);
-
+task.setTimes_tamp(Timestamp.now());
         DocumentReference documentReference =
                 fb.collection("Task").document();
 
@@ -271,14 +271,14 @@ public class TaskRepository {
                 fb.collection("Task Activity").whereEqualTo("taskId", taskId).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        DocumentSnapshot snapshot = queryDocumentSnapshots.getDocuments().get(0);
-                        TaskActivity oldactivity = snapshot.toObject(TaskActivity.class);
                         TaskActivity activity = new TaskActivity();
-                        activity.setTaskId(taskId);
-                        ;
-                        activity.setStatus(status);
-                        activity.setUserId(oldactivity.getUserId());
-                        activity.setTime_stamp(Timestamp.now());
+                        for (DocumentSnapshot snapshot:queryDocumentSnapshots.getDocuments()){
+                            TaskActivity oldactivity = snapshot.toObject(TaskActivity.class);
+                            activity.setTaskId(taskId);
+                            activity.setStatus(status);
+                            activity.setUserId(oldactivity.getUserId());
+                            activity.setTime_stamp(Timestamp.now());
+                        }
 
                         DocumentReference reference = fb.collection("Task Activity").document();
                         activity.setId(reference.getId());
@@ -349,6 +349,23 @@ public class TaskRepository {
                 responseCallback.onError(e.getLocalizedMessage());
             }
         });
+    }
+    public void setTaskByFilter(String status,Timestamp fromdate,Timestamp todate,ResponseCallback<List<Task>> responseCallback){
+        fb.collection("Task").whereEqualTo("status",status).whereGreaterThanOrEqualTo("times_tamp",fromdate).whereLessThan("times_tamp",todate).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<Task> taskList=new ArrayList<>();
+                for (DocumentSnapshot ds:queryDocumentSnapshots.getDocuments()){
+                    Task task=ds.toObject(Task.class);
+taskList.add(task);
+                }
+                responseCallback.onSuccess(taskList,"Success");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                responseCallback.onError(e.getLocalizedMessage());
+            }});
     }
 
 }

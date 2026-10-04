@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.taskmanagement.callback.ResponseCallback;
 
@@ -32,6 +33,8 @@ List<User>userList=new ArrayList<>();
         View  view=inflater.inflate(R.layout.fragment_user_detail,container,false);
 userdetailrecycler=view.findViewById(R.id.userdetailrecycler);
 userdetailrecycler.setHasFixedSize(true);
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+        filterBtn.setVisibility(View.GONE);
 userdetailrecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 userDetailAdapter=new UserDetailAdapter(getContext(),userList);
 userdetailrecycler.setAdapter(userDetailAdapter);

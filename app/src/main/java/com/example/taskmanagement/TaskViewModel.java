@@ -5,6 +5,7 @@ import android.net.Uri;
 import androidx.lifecycle.ViewModel;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.google.firebase.Timestamp;
 
 import java.util.List;
 
@@ -44,5 +45,8 @@ public class TaskViewModel extends ViewModel {
     }
     public void getSingleTaskByStatus(String id,String status,ResponseCallback<Task>responseCallback){
         taskRepository.getSingleTaskByStatus(id,status,responseCallback);
+    }
+    public void getTaskByFilter(String status,Timestamp fromDate,Timestamp toDate,ResponseCallback<List<Task>> responseCallback){
+        taskRepository.setTaskByFilter(status,fromDate,toDate,responseCallback);
     }
 }

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.taskmanagement.callback.ResponseCallback;
@@ -40,6 +41,7 @@ DashboardViewModel dashboardViewModel;
         View view=inflater.inflate(R.layout.fragment_dashboard,container,false);
     totaluser=view.findViewById(R.id.totaluser);
         toDoCard=view.findViewById(R.id.toDoCard);
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
         progressCard=view.findViewById(R.id.progressCard);
         reviewCard=view.findViewById(R.id.reviewCard);
         compltCard=view.findViewById(R.id.compltCard);
@@ -51,7 +53,7 @@ DashboardViewModel dashboardViewModel;
         toDo=view.findViewById(R.id.toDo);
         progress=view.findViewById(R.id.progress);
         compltext=view.findViewById(R.id.compltext);
-
+filterBtn.setVisibility(View.GONE);
        dashboardViewModel=new DashboardViewModel(new DashboardRepository());
         toDoCard.setOnClickListener(new View.OnClickListener() {
             @Override

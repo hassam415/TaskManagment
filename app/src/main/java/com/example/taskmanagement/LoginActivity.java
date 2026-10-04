@@ -43,6 +43,11 @@ public class LoginActivity extends AppCompatActivity {
                 if ("Admin Panel".equals(message)) {
                     Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+
+                    intent.setFlags(
+                            Intent.FLAG_ACTIVITY_NEW_TASK |
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    );
                     startActivity(intent);
                     finish();
                 } else {
@@ -51,7 +56,13 @@ public class LoginActivity extends AppCompatActivity {
                     binding.main.setVisibility(View.GONE);
                     binding.fragmentContainer.setVisibility(View.VISIBLE);
                     Intent intent=new Intent(LoginActivity.this,UserDashBoardActivity.class);
+
+                    intent.setFlags(
+                            Intent.FLAG_ACTIVITY_NEW_TASK |
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    );
                     startActivity(intent);
+                    finish();
                 }
 
             }

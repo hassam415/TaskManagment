@@ -36,15 +36,15 @@ public class UserDashBoardActivity extends MyBaseActivity implements NavigationV
 
     @Override
     public View getView() {
+        auth=FirebaseAuth.getInstance();
         binding = ActivityUserDashBoardBinding.inflate(getLayoutInflater());
         binding.navigationbar.setNavigationItemSelectedListener(UserDashBoardActivity.this);
         taskViewModel = new TaskViewModel(new TaskRepository());
         toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, super.binding.toolbar, R.string.open, R.string.close);
         binding.drawerLayout.addDrawerListener(toggle);
-        auth = FirebaseAuth.getInstance();
-        Id = auth.getCurrentUser().getUid();
         toggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
         toggle.syncState();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer,new UserDashboardFragment()).commit();
         return binding.getRoot();
     }
 
@@ -62,10 +62,12 @@ public class UserDashBoardActivity extends MyBaseActivity implements NavigationV
             setToolbarText("Dashboard");
         }
         if (id == R.id.logout) {
+            auth.signOut();
             Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(UserDashBoardActivity.this, LoginActivity.class);
 
             startActivity(intent);
+            finish();
         }
 
         return true;
