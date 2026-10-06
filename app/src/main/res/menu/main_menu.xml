@@ -18,6 +18,21 @@
         android:icon="@drawable/outline_add_task_24"
         app:showAsAction="never" />
     <item
+        android:id="@+id/status"
+        android:title="Statuses"
+        app:showAsAction="never"
+        android:icon="@drawable/outline_check_24"/>
+    <item
+        android:id="@+id/category"
+        android:title="Categories"
+        android:icon="@drawable/baseline_category_24"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/periorities"
+        android:title="Periorities"
+        app:showAsAction="never"
+        android:icon="@drawable/outline_flag_24"/>
+    <item
         android:id="@+id/logout"
         android:title="Logout"
         android:icon="@drawable/baseline_logout_24"

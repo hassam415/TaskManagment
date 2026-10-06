@@ -77,6 +77,18 @@ setToolbarText("DashBoard");
             startActivity(intent);
             finish();
         }
+        if (id ==R.id.periorities){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new PeriorityFragment()).commit();
+            setToolbarText("Periority");
+        }
+        if (id ==R.id.status){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new StatusFragment()).commit();
+            setToolbarText("Status");
+        }
+        if (id ==R.id.category){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new CategoryFragment()).commit();
+            setToolbarText("Category");
+        }
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
