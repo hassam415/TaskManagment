@@ -264,51 +264,53 @@ task.setTimes_tamp(Timestamp.now());
 
     }
 
-    public void updateStatus(String taskId, String status, ResponseCallback responseCallback) {
-        fb.collection("Task").document(taskId).update("status", status).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                fb.collection("Task Activity").whereEqualTo("taskId", taskId).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        TaskActivity activity = new TaskActivity();
-                        for (DocumentSnapshot snapshot:queryDocumentSnapshots.getDocuments()){
-                            TaskActivity oldactivity = snapshot.toObject(TaskActivity.class);
+    public void updateStatus(String taskId, String status,
+                             ResponseCallback callback) {
+
+        DocumentReference taskRef = fb.collection("Task").document(taskId);
+
+        taskRef.get().addOnSuccessListener(taskSnapshot -> {
+
+            if (!taskSnapshot.exists()) {
+                callback.onError("Task not found");
+                return;
+            }
+
+            List<String> userIds = (List<String>) taskSnapshot.get("selecteduser");
+
+            if (userIds == null || userIds.isEmpty()) {
+                callback.onError("No assigned users found");
+                return;
+            }
+
+            taskRef.update("status", status)
+                    .addOnSuccessListener(unused -> {
+
+                        for (String userId : userIds) {
+
+                            TaskActivity activity = new TaskActivity();
+
+                            DocumentReference activityRef = fb.collection("Task Activity").document();
+
+                            activity.setId(activityRef.getId());
                             activity.setTaskId(taskId);
+                            activity.setUserId(userId);
                             activity.setStatus(status);
-                            activity.setUserId(oldactivity.getUserId());
+                            activity.setDetail("Status changed to " + status);
                             activity.setTime_stamp(Timestamp.now());
+
+                            activityRef.set(activity).addOnSuccessListener(aVoid ->
+                                            Log.d("TaskActivity", "Activity saved for: " + userId))
+                                    .addOnFailureListener(e -> Log.e("TaskActivity", "Error: " + e.getMessage()));
                         }
 
-                        DocumentReference reference = fb.collection("Task Activity").document();
-                        activity.setId(reference.getId());
-                        reference.set(activity).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                responseCallback.onSuccess("Status Updated", "Successfully");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                responseCallback.onError(e.getLocalizedMessage());
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        responseCallback.onError(e.getLocalizedMessage());
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                responseCallback.onError(e.getLocalizedMessage());
-            }
-        });
+                        callback.onSuccess(null, "Status updated successfully");
+                    })
+                    .addOnFailureListener(e ->
+                            callback.onError(e.getMessage()));
 
-
+        }).addOnFailureListener(e ->
+                callback.onError(e.getMessage()));
     }
 
     public void getTaskByStatus(String status, ResponseCallback<List<Task>> responseCallback) {

@@ -181,7 +181,7 @@ startActivity(intent);
                                       taskViewModel.updateStatus(id, selectedSpinner, new ResponseCallback() {
                                           @Override
                                           public void onSuccess(Object data, String message) {
-                                              spinner.setEnabled(true);
+
 
 
                                           }
