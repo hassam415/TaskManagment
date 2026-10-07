@@ -55,4 +55,19 @@ public class CategoryRepository {
             }
         });
     }
+    public void updateCategory(String ID,String category,ResponseCallback<Category>responseCallback){
+        Category category1=new Category();
+        category1.setName(category);
+        fs.collection("Categories").document(ID).update("name",category).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                responseCallback.onSuccess(category1,"Success");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                responseCallback.onError(e.getLocalizedMessage());
+            }
+        });
+    }
 }

@@ -16,4 +16,7 @@ public class CategoryViewModel {
     public  void getList(ResponseCallback<List<Category>>callback){
         categoryRepository.getList(callback);
     }
+    public void updateCategory(String Id,String category,ResponseCallback<Category>responseCallback){
+        categoryRepository.updateCategory(Id,category,responseCallback);
+    }
 }

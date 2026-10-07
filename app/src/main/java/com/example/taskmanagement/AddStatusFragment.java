@@ -49,8 +49,8 @@ public class AddStatusFragment extends Fragment {
                         @Override
                         public void onSuccess(Status data, String message) {
                             binding.loader.setVisibility(View.GONE);
-
                             binding.status.setText(" ");
+                            getParentFragmentManager().popBackStack();
                         }
 
                         @Override
@@ -66,6 +66,7 @@ public class AddStatusFragment extends Fragment {
                             statusList.clear();
                             statusList.add(data);
                             binding.status.setText(" ");
+                            getParentFragmentManager().popBackStack();
                         }
 
                         @Override

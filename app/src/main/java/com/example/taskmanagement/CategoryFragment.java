@@ -42,9 +42,11 @@ binding.btn.setOnClickListener(new View.OnClickListener() {
         getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new AddCategoryFragment()).addToBackStack(null).commit();
     }
 });
+binding.loader.setVisibility(View.VISIBLE);
 categoryViewModel.getList(new ResponseCallback<List<Category>>() {
     @Override
     public void onSuccess(List<Category> data, String message) {
+        binding.loader.setVisibility(View.GONE);
         categories.clear();
         categories.addAll(data);
         categoryAdapter.notifyDataSetChanged();
@@ -52,7 +54,18 @@ categoryViewModel.getList(new ResponseCallback<List<Category>>() {
 
     @Override
     public void onError(String message) {
-
+binding.loader.setVisibility(View.GONE);
+    }
+});
+categoryAdapter.setOnCategoryClick(new CategoryAdapter.OnCategoryClick() {
+    @Override
+    public void OnClick(Category category) {
+        AddCategoryFragment fragment=new AddCategoryFragment();
+        Bundle bundle=new Bundle();
+        bundle.putString("Id",category.getId());
+        bundle.putString("Category",category.getName());
+        fragment.setArguments(bundle);
+        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).addToBackStack(null).commit();
     }
 });
         return binding.getRoot();
