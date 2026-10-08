@@ -8,11 +8,51 @@ import com.google.firebase.Timestamp;
 import java.util.List;
 
 public class Task {
-    String title,discription,status;
+    String title,discription,statusId,periorityId,categoryId;
     List<String>selecteduser;
   List<String>selectedImges;
   String uid;
   Timestamp times_tamp;
+
+    public Task(String title, String discription, String statusId, String periorityId, String categoryId, List<String> selecteduser, List<String> selectedImges, String uid, Timestamp times_tamp) {
+        this.title = title;
+        this.discription = discription;
+        this.statusId = statusId;
+        this.periorityId = periorityId;
+        this.categoryId = categoryId;
+        this.selecteduser = selecteduser;
+        this.selectedImges = selectedImges;
+        this.uid = uid;
+        this.times_tamp = times_tamp;
+    }
+
+    public String getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
+    }
+
+    public String getPeriorityId() {
+        return periorityId;
+    }
+
+    public void setPeriorityId(String periorityId) {
+        this.periorityId = periorityId;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getUid() {
+        return uid;
+    }
 
     public Timestamp getTimes_tamp() {
         return times_tamp;
@@ -22,31 +62,13 @@ public class Task {
         this.times_tamp = times_tamp;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getUid() {
-        return uid;
-    }
 
     public void setUid(String uid) {
         this.uid = uid;
     }
 
-    public Task(String title, String discription, String status, List<String> selecteduser, List<String> selectedImges, String uid, Timestamp times_tamp) {
-        this.title = title;
-        this.discription = discription;
-        this.status = status;
-        this.selecteduser = selecteduser;
-        this.selectedImges = selectedImges;
-        this.uid = uid;
-        this.times_tamp = times_tamp;
-    }
+
 
     public List<String> getSelectedImges() {
         return selectedImges;

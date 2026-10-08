@@ -23,7 +23,7 @@ android:layout_height="match_parent">
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <!-- Progress Loader -->
+
         <LinearLayout
             android:id="@+id/Loader"
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@ android:layout_height="match_parent">
 </LinearLayout>
 
 
-<!-- Filter Drawer -->
+
 <LinearLayout
     android:id="@+id/filterLayout"
     android:layout_width="300dp"
@@ -77,11 +77,88 @@ android:layout_height="match_parent">
         android:text="Filter Tasks"
         android:textSize="22sp"
         android:textStyle="bold"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="3"
+    android:orientation="horizontal">
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp">
 
-    <Spinner
-        android:id="@+id/statusSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/spinner_bg"
+            android:spinnerMode="dropdown"
+            android:paddingStart="8dp"
+            android:paddingEnd="24dp"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/outline_arrow_drop_down_24"
+            android:clickable="false"
+            android:focusable="false"/>
+
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp">
+
+        <Spinner
+            android:id="@+id/categoryspiner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/spinner_bg"
+            android:spinnerMode="dropdown"
+            android:paddingStart="8dp"
+            android:paddingEnd="24dp"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/outline_arrow_drop_down_24"
+            android:clickable="false"
+            android:focusable="false"/>
+
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp">
+
+        <Spinner
+            android:id="@+id/periorityspiner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/spinner_bg"
+            android:spinnerMode="dropdown"
+            android:paddingStart="8dp"
+            android:paddingEnd="24dp"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/outline_arrow_drop_down_24"
+            android:clickable="false"
+            android:focusable="false"/>
+
+    </FrameLayout>
+</LinearLayout>
+
     <TextView
         android:text="Select Date"
         android:layout_width="match_parent"

@@ -33,26 +33,45 @@ public class TaskRepository {
 
     }
 
-    public void saveDate(String title, String discription, List<String> selecteduser, List<String> images, ResponseCallback<Task> responseCallback) {
+    public void saveDate(String title, String discription,String status,String category,String periority,List<String> selecteduser, List<String> images, ResponseCallback<Task> responseCallback) {
 
         List<String> imagurl = new ArrayList<>();
 
         if (images == null || images.isEmpty()) {
 
-            saveTask(title, discription, selecteduser, imagurl, responseCallback);
+            saveTask(title, discription,status,category,periority, selecteduser, imagurl, responseCallback);
 
             return;
         }
 
-        uploadImages(title, discription, selecteduser, images, imagurl, 0, responseCallback);
+        uploadImages(title, discription,status, category,periority,selecteduser, images, imagurl, 0, responseCallback);
     }
 
 
-    private void uploadImages(String title, String discription, List<String> selecteduser, List<String> images, List<String> imagurl, int position, ResponseCallback<Task> responseCallback) {
+    private void uploadImages(
+            String title,
+            String discription,
+            String status,
+            String category,
+            String periority,
+            List<String> selecteduser,
+            List<String> images,
+            List<String> imagurl,
+            int position,
+            ResponseCallback<Task> responseCallback) {
 
         if (position >= images.size()) {
 
-            saveTask(title, discription, selecteduser, imagurl, responseCallback);
+            saveTask(
+                    title,
+                    discription,
+                    status,
+                    category,
+                    periority,
+                    selecteduser,
+                    imagurl,
+                    responseCallback
+            );
 
             return;
         }
@@ -63,7 +82,7 @@ public class TaskRepository {
 
         StorageReference reference = fs.getReference()
                 .child("Task Images")
-                .child(System.currentTimeMillis() + "jpg");
+                .child(System.currentTimeMillis() + ".jpg");
 
         reference.putFile(uri)
                 .addOnSuccessListener(taskSnapshot -> {
@@ -73,7 +92,18 @@ public class TaskRepository {
 
                                 imagurl.add(downloadUri.toString());
 
-                                uploadImages(title, discription, selecteduser, images, imagurl, position + 1, responseCallback);
+                                uploadImages(
+                                        title,
+                                        discription,
+                                        status,
+                                        category,
+                                        periority,
+                                        selecteduser,
+                                        images,
+                                        imagurl,
+                                        position + 1,
+                                        responseCallback
+                                );
 
                             })
                             .addOnFailureListener(e -> {
@@ -95,19 +125,17 @@ public class TaskRepository {
     }
 
 
-    private void saveTask(String title,
-                          String discription,
-                          List<String> selecteduser,
-                          List<String> imagurl,
-                          ResponseCallback<Task> responseCallback) {
+    private void saveTask(String title,String discription,String status,String category,String periority, List<String> selecteduser, List<String> imagurl, ResponseCallback<Task> responseCallback) {
 
         Task task = new Task();
 
         task.setTitle(title);
         task.setDiscription(discription);
         task.setSelecteduser(selecteduser);
-        task.setStatus("Task Assigned");
+        task.setStatusId(status);
         task.setSelectedImges(imagurl);
+        task.setCategoryId(category);
+        task.setPeriorityId(periority);
 task.setTimes_tamp(Timestamp.now());
         DocumentReference documentReference =
                 fb.collection("Task").document();
@@ -122,11 +150,7 @@ task.setTimes_tamp(Timestamp.now());
 
 
                 })
-                .addOnFailureListener(e -> {
-
-                    responseCallback.onError(
-                            e.getLocalizedMessage()
-                    );
+                .addOnFailureListener(e -> {responseCallback.onError(e.getLocalizedMessage());
 
                 });
     }
@@ -268,7 +292,11 @@ task.setTimes_tamp(Timestamp.now());
                              ResponseCallback callback) {
 
         DocumentReference taskRef = fb.collection("Task").document(taskId);
-
+fb.collection("Status").whereEqualTo("name",status).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+    @Override
+    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+        DocumentSnapshot statusId=queryDocumentSnapshots.getDocuments().get(0);
+        String id=statusId.getString("id");
         taskRef.get().addOnSuccessListener(taskSnapshot -> {
 
             if (!taskSnapshot.exists()) {
@@ -283,7 +311,7 @@ task.setTimes_tamp(Timestamp.now());
                 return;
             }
 
-            taskRef.update("status", status)
+            taskRef.update("statusId", id)
                     .addOnSuccessListener(unused -> {
 
                         for (String userId : userIds) {
@@ -312,9 +340,17 @@ task.setTimes_tamp(Timestamp.now());
         }).addOnFailureListener(e ->
                 callback.onError(e.getMessage()));
     }
+}).addOnFailureListener(new OnFailureListener() {
+    @Override
+    public void onFailure(@NonNull Exception e) {
+
+    }
+});
+
+    }
 
     public void getTaskByStatus(String status, ResponseCallback<List<Task>> responseCallback) {
-        fb.collection("Task").whereEqualTo("status", status).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        fb.collection("Task").whereEqualTo("statusId", status).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<Task> taskList = new ArrayList<>();
@@ -334,7 +370,7 @@ task.setTimes_tamp(Timestamp.now());
         });
     }
     public void getSingleTaskByStatus(String id,String status,ResponseCallback<Task>responseCallback){
-        fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("status",status).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("statusId",status).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<Task> taskList = new ArrayList<>();
@@ -353,7 +389,7 @@ task.setTimes_tamp(Timestamp.now());
         });
     }
     public void setTaskByFilter(String status,Timestamp fromdate,Timestamp todate,ResponseCallback<List<Task>> responseCallback){
-        fb.collection("Task").whereEqualTo("status",status).whereGreaterThanOrEqualTo("times_tamp",fromdate).whereLessThan("times_tamp",todate).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        fb.collection("Task").whereEqualTo("statusId",status).whereGreaterThanOrEqualTo("times_tamp",fromdate).whereLessThan("times_tamp",todate).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<Task> taskList=new ArrayList<>();
@@ -368,6 +404,53 @@ taskList.add(task);
             public void onFailure(@NonNull Exception e) {
                 responseCallback.onError(e.getLocalizedMessage());
             }});
+    }
+    public void updateCategory(String taskId,String category,ResponseCallback<Category>responseCallback){
+        DocumentReference reference=fb.collection("Task").document(taskId);
+        fb.collection("Categories").whereEqualTo("name",category).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+DocumentSnapshot documentSnapshot=queryDocumentSnapshots.getDocuments().get(0);
+String id=documentSnapshot.getString("id");
+reference.update("categoryId",id).addOnSuccessListener(new OnSuccessListener<Void>() {
+    @Override
+    public void onSuccess(Void unused) {
+        responseCallback.onSuccess(null,"Success");
+    }
+}).addOnFailureListener(new OnFailureListener() {
+    @Override
+    public void onFailure(@NonNull Exception e) {
+        responseCallback.onError(e.getLocalizedMessage());
+    }
+}).addOnFailureListener(new OnFailureListener() {
+    @Override
+    public void onFailure(@NonNull Exception e) {
+        responseCallback.onError(e.getLocalizedMessage());
+    }
+});
+            }
+        });
+    }
+    public void updatePeriority(String taskId,String periority,ResponseCallback<Periority>responseCallback){
+        DocumentReference documentReference=fb.collection("Task").document(taskId);
+        fb.collection("Periorities").whereEqualTo("name",periority).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                DocumentSnapshot documentSnapshot=queryDocumentSnapshots.getDocuments().get(0);
+                String id=documentSnapshot.getString("id");
+                documentReference.update("periorityId",id).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        responseCallback.onSuccess(null,"Sucess");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        responseCallback.onError(e.getLocalizedMessage());
+                    }
+                });
+            }
+        });
     }
 
 }

@@ -15,8 +15,8 @@ public class TaskViewModel extends ViewModel {
     public TaskViewModel(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
-    public void saveData(String title , String discription, List<String >selecteduser, List<String>images, ResponseCallback<Task> responseCallback){
-        taskRepository.saveDate(title,discription,selecteduser,images,responseCallback);
+    public void saveData(String title , String discription,String status,String category,String periority, List<String >selecteduser, List<String>images, ResponseCallback<Task> responseCallback){
+        taskRepository.saveDate(title,discription,status,category,periority,selecteduser,images,responseCallback);
     }
     public void getTask(ResponseCallback<List<Task>> responseCallback){
         taskRepository.getTask(responseCallback);
@@ -48,5 +48,11 @@ public class TaskViewModel extends ViewModel {
     }
     public void getTaskByFilter(String status,Timestamp fromDate,Timestamp toDate,ResponseCallback<List<Task>> responseCallback){
         taskRepository.setTaskByFilter(status,fromDate,toDate,responseCallback);
+    }
+    public void updateCategory(String taskId,String category,ResponseCallback<Category>responseCallback){
+        taskRepository.updateCategory(taskId,category,responseCallback);
+    }
+    public void updatePeriority(String taskId,String periority,ResponseCallback<Periority>responseCallback){
+        taskRepository.updatePeriority(taskId,periority,responseCallback);
     }
 }

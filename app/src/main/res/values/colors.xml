@@ -10,4 +10,5 @@
     <color name="InReview">#CCFBF1</color>
     <color name="Completed">#DCFCE7</color>
     <color name="blue">#00c3ff</color>
+    <color name="status">#9fa4d1</color>
 </resources>

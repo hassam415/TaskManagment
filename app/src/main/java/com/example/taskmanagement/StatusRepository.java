@@ -55,6 +55,20 @@ public class StatusRepository {
             }
         });
     }
+    public void getSingleStatus(String id,ResponseCallback<Status>responseCallback){
+        fs.collection("Status").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+Status status=documentSnapshot.toObject(Status.class);
+responseCallback.onSuccess(status,"Success");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+           responseCallback.onError(e.getLocalizedMessage());
+            }
+        });
+    }
     public void updateStatus(String id,String status,ResponseCallback<Status>responseCallback){
         Status status1=new Status();
         status1.setName(status);

@@ -19,4 +19,7 @@ public class StatusViewModel {
     public void updateStatus(String id,String status,ResponseCallback<Status>responseCallback){
         statusRepository.updateStatus(id,status,responseCallback);
     }
+    public void getSingleStatus(String id,ResponseCallback<Status>responseCallback){
+        statusRepository.getSingleStatus(id,responseCallback);
+    }
 }

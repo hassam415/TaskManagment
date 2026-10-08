@@ -44,7 +44,7 @@ public class TaskListFragment extends Fragment {
     String []statuses={" Status", "To do","In Progess","In Review","Completed"};
 LinearLayout Loader;
     DrawerLayout filterDrawer;
-    Spinner statusSpinner;
+    Spinner spinner;
     Button applybtn;
     EditText edtfromdate,editto;
     Calendar startDate=null;
@@ -67,7 +67,7 @@ ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
         edtfromdate = view.findViewById(R.id.edtfromdate);
         editto = view.findViewById(R.id.editto);
         filterDrawer = view.findViewById(R.id.filterDrawer);
-        statusSpinner = view.findViewById(R.id.statusSpinner);
+        spinner = view.findViewById(R.id.spinner);
 
         taskAdapter = new TaskAdapter(getContext(), taskList);
         taskrecycler.setHasFixedSize(true);
@@ -76,6 +76,7 @@ ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
         taskViewModel = new TaskViewModel(new TaskRepository());
         Loader.setVisibility(View.VISIBLE);
         filterBtn.setVisibility(View.VISIBLE);
+
         filterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,11 +84,11 @@ ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
             }
         });
         ArrayAdapter<String>arrayAdapter=new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item,statuses);
-        statusSpinner.setAdapter(arrayAdapter);
+        spinner.setAdapter(arrayAdapter);
         applybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String selectedspiner=statusSpinner.getSelectedItem().toString();
+                String selectedspiner=spinner.getSelectedItem().toString();
 
                 Calendar last = (EndDate != null) ? EndDate : startDate;
 
@@ -102,10 +103,10 @@ ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
                 end.set(Calendar.MINUTE, 0);
                 end.set(Calendar.SECOND, 0);
                 end.set(Calendar.MILLISECOND, 0);
-                end.add(Calendar.DAY_OF_MONTH, 1);   // aakhri din bhi shamil
+                end.add(Calendar.DAY_OF_MONTH, 1);
 
-                String statusFilter = statusSpinner.getSelectedItemPosition() == 0
-                        ? null : statusSpinner.getSelectedItem().toString();
+                String statusFilter = spinner.getSelectedItemPosition() == 0
+                        ? null : spinner.getSelectedItem().toString();
                 taskViewModel.getTaskByFilter(selectedspiner,new Timestamp(start.getTime()), new Timestamp(end.getTime()), new ResponseCallback<List<Task>>() {
                     @Override
                     public void onSuccess(List<Task> data, String message) {
