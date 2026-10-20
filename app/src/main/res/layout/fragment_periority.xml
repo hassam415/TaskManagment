@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/addBtn"
+            app:tint="@color/white"
             app:backgroundTint="@color/darknavey"
             android:src="@drawable/baseline_add_24"
             android:layout_gravity="end|bottom"

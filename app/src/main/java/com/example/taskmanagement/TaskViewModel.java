@@ -46,8 +46,8 @@ public class TaskViewModel extends ViewModel {
     public void getSingleTaskByStatus(String id,String status,ResponseCallback<Task>responseCallback){
         taskRepository.getSingleTaskByStatus(id,status,responseCallback);
     }
-    public void getTaskByFilter(String status,Timestamp fromDate,Timestamp toDate,ResponseCallback<List<Task>> responseCallback){
-        taskRepository.setTaskByFilter(status,fromDate,toDate,responseCallback);
+    public void getTaskByFilter(String status,String category,String periority,Timestamp fromDate,Timestamp toDate,ResponseCallback<List<Task>> responseCallback){
+        taskRepository.setTaskByFilter(status,category,periority,fromDate,toDate,responseCallback);
     }
     public void updateCategory(String taskId,String category,ResponseCallback<Category>responseCallback){
         taskRepository.updateCategory(taskId,category,responseCallback);

@@ -85,13 +85,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="24dp"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:src="@drawable/outline_arrow_drop_down_24"
-                    android:clickable="false"
-                    android:focusable="false"/>
+
 
             </FrameLayout>
             <FrameLayout
@@ -110,13 +104,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="24dp"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:src="@drawable/outline_arrow_drop_down_24"
-                    android:clickable="false"
-                    android:focusable="false"/>
+
 
             </FrameLayout>
             <FrameLayout
@@ -135,13 +123,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="24dp"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:src="@drawable/outline_arrow_drop_down_24"
-                    android:clickable="false"
-                    android:focusable="false"/>
+
 
             </FrameLayout>
         </LinearLayout>

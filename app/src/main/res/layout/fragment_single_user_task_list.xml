@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -40,62 +41,208 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/filterLayout"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:orientation="vertical"
         android:padding="20dp"
-        android:background="@android:color/white">
+        android:background="#F7F8FC">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Filter Tasks"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
-
-        <Spinner
-            android:layout_marginTop="4dp"
-            android:id="@+id/statusSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <View
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E0E0E0"/>
-        <TextView
-            android:text="Select Date"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/edtfromdate"
-                android:hint="From"
-                android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="18dp">
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editto"
-                android:hint="To "
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Filter Tasks"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/darknavey"/>
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Find tasks using the filters below"
+                android:textSize="13sp"
+                android:textColor="#777E8C"/>
+
         </LinearLayout>
-        <Button
-            android:id="@+id/applybtn"
+
+        <!-- Status Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="STATUS"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/darknavey"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dropdown"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Category Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CATEGORY"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/darknavey"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <Spinner
+                    android:id="@+id/categoryspiner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dropdown"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Priority Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PRIORITY"
+                    android:textColor="@color/darknavey"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <Spinner
+                    android:id="@+id/periorityspiner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dropdown"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Date Range Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DATE RANGE"
+                    android:layout_marginLeft="7dp"
+                    android:textColor="@color/darknavey"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/selectDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:minHeight="48dp"
+                    android:text="Select Date"
+                    app:cornerRadius="8dp"
+
+
+                    />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Apply Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/applybtn"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Apply Filters"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
             android:backgroundTint="@color/darknavey"
-            android:text="Apply Filter"/>
+            app:cornerRadius="10dp"
+            app:icon="@drawable/outline_check_24"
+            app:iconGravity="textStart"
+            app:iconTint="@android:color/white"/>
 
     </LinearLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

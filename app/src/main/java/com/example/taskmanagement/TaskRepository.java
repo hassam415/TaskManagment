@@ -388,8 +388,8 @@ fb.collection("Status").whereEqualTo("name",status).get().addOnSuccessListener(n
             }
         });
     }
-    public void setTaskByFilter(String status,Timestamp fromdate,Timestamp todate,ResponseCallback<List<Task>> responseCallback){
-        fb.collection("Task").whereEqualTo("statusId",status).whereGreaterThanOrEqualTo("times_tamp",fromdate).whereLessThan("times_tamp",todate).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+    public void setTaskByFilter(String status,String category ,String periority,Timestamp fromdate,Timestamp todate,ResponseCallback<List<Task>> responseCallback){
+        fb.collection("Task").whereEqualTo("statusId",status).whereEqualTo("categoryId",category).whereEqualTo("periorityId",periority).whereGreaterThanOrEqualTo("times_tamp",fromdate).whereLessThan("times_tamp",todate).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<Task> taskList=new ArrayList<>();

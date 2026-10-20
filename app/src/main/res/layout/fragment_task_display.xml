@@ -60,6 +60,12 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/date"
+            android:padding="2dp"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,13 +89,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="24dp"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:src="@drawable/outline_arrow_drop_down_24"
-                    android:clickable="false"
-                    android:focusable="false"/>
+
 
             </FrameLayout>
             <FrameLayout
@@ -108,13 +108,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="24dp"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:src="@drawable/outline_arrow_drop_down_24"
-                    android:clickable="false"
-                    android:focusable="false"/>
+
 
             </FrameLayout>
             <FrameLayout
@@ -133,13 +127,6 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="24dp"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:src="@drawable/outline_arrow_drop_down_24"
-                    android:clickable="false"
-                    android:focusable="false"/>
 
             </FrameLayout>
         </LinearLayout>

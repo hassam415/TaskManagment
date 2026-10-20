@@ -21,9 +21,13 @@ import android.widget.TextView;
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.Timestamp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class TaskDisplayFragment extends Fragment {
@@ -35,6 +39,7 @@ public class TaskDisplayFragment extends Fragment {
     List<Comment> commentList = new ArrayList<>();
     RecyclerView commentRecycler;
     String id;
+    TextView date;
     TextView title,discript;
     ImageButton imgbtn;
     ImageView materialbtn;
@@ -72,6 +77,7 @@ statusViewModel=new StatusViewModel(new StatusRepository());
         categoryspinner = view.findViewById(R.id.categoryspinner);
         periorityspinner = view.findViewById(R.id.periorityspinner);
         imgbtn = view.findViewById(R.id.imgbtn);
+        date = view.findViewById(R.id.date);
         spinner = view.findViewById(R.id.spinner);
         materialbtn = view.findViewById(R.id.materialbtn);
         title = view.findViewById(R.id.title);
@@ -187,6 +193,11 @@ periorityViewModel.getList(new ResponseCallback<List<Periority>>() {
                 public void onSuccess(Task data, String message) {
                      title.setText(data.getTitle());
                      discript.setText(data.getDiscription());
+
+                    Timestamp time=data.getTimes_tamp();
+                    Date date1=time.toDate();
+                    SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    date.setText("Date : "+sdf.format(date1));
                  statusId=data.getStatusId();
                   categoryID=data.getCategoryId();
                           periorityId= data.getPeriorityId();

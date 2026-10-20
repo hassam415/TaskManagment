@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -38,6 +39,7 @@
             android:id="@+id/btn"
             android:layout_gravity="end|bottom"
             android:layout_margin="15dp"
+            app:tint="@color/white"
             android:backgroundTint="@color/darknavey"
             android:src="@drawable/baseline_add_24"
             android:layout_width="match_parent"

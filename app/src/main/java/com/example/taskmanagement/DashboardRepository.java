@@ -41,12 +41,12 @@ public class DashboardRepository {
             }
         });
     }
-    public void getAssignTask(ResponseCallback<Integer> callback){
-        fb.collection("Task").whereEqualTo("status","In Review").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+  public void getTaskStatus(String statusId,ResponseCallback<Integer> callback){
+        fb.collection("Task").whereEqualTo("statusId",statusId).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int totalassign= queryDocumentSnapshots.size();
-                callback.onSuccess(totalassign,"No of Assign Task");
+                int count=queryDocumentSnapshots.size();
+                callback.onSuccess(count,"Success");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -54,104 +54,21 @@ public class DashboardRepository {
                 callback.onError(e.getLocalizedMessage());
             }
         });
+  }
+  public void getSingleUserTask(String statusId,String id,ResponseCallback<Integer>callback){
+fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("statusId",statusId).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+    @Override
+    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+        int count=queryDocumentSnapshots.size();
+        callback.onSuccess(count,"Succes");
     }
-    public void getToDo(ResponseCallback<Integer>callback){
-        fb.collection("Task").whereEqualTo("status","To do").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int toDosize= queryDocumentSnapshots.size();
-                callback.onSuccess(toDosize,"No of To do");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onError(e.getLocalizedMessage());
-            }
-        });
+}).addOnFailureListener(new OnFailureListener() {
+    @Override
+    public void onFailure(@NonNull Exception e) {
+        callback.onError(e.getLocalizedMessage());
     }
-    public void getInProgress(ResponseCallback<Integer>callback){
-        fb.collection("Task").whereEqualTo("status","In Progess").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int inProgress= queryDocumentSnapshots.size();
-                callback.onSuccess(inProgress,"No of Progresss");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onError(e.getLocalizedMessage());
-            }
-        });
-    }
-    public void getCompletTask(ResponseCallback<Integer>callback){
-        fb.collection("Task").whereEqualTo("status","Completed").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int complet=queryDocumentSnapshots.size();
-                callback.onSuccess(complet,"Complete");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onError(e.getLocalizedMessage());
-            }
-        });
-    }
-    public void getSingleCompletTask(String id,ResponseCallback<Integer>callback){
-        fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("status","Completed").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int complet=queryDocumentSnapshots.size();
-                callback.onSuccess(complet,"Complete");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onError(e.getLocalizedMessage());
-            }
-        });
-    }
-    public void getSingleInProgress(String id,ResponseCallback<Integer>callback){
-        fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("status","In Progess").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int inProgress= queryDocumentSnapshots.size();
-                callback.onSuccess(inProgress,"No of Progresss");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onError(e.getLocalizedMessage());
-            }
-        });
-    }
-    public void getSingleToDo(String id,ResponseCallback<Integer>callback){
-        fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("status","To do").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int toDosize= queryDocumentSnapshots.size();
-                callback.onSuccess(toDosize,"No of To do");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onError(e.getLocalizedMessage());
-            }
-        });
-    }
-    public void getSingleReviewTask(String id,ResponseCallback<Integer> callback){
-        fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("status","In Review").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int totalassign= queryDocumentSnapshots.size();
-                callback.onSuccess(totalassign,"No of Assign Task");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onError(e.getLocalizedMessage());
-            }
-        });
-    }
+});
+  }
+
 
 }
