@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,10 @@ import com.example.taskmanagement.callback.ResponseCallback;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,6 +66,10 @@ public class TaskDisplayFragment extends Fragment {
     String statusId;
     String categoryID;
     String periorityId;
+    ApiTaskViewModel apiTaskViewModel;
+    StatusApiRepository statusApiRepository;
+    PriorityRepository priorityRepository ;
+    CategoryApiRepository categoryApiRepository;
     public TaskDisplayFragment() {
         // Required empty public constructor
     }
@@ -78,6 +87,10 @@ statusViewModel=new StatusViewModel(new StatusRepository());
         periorityspinner = view.findViewById(R.id.periorityspinner);
         imgbtn = view.findViewById(R.id.imgbtn);
         date = view.findViewById(R.id.date);
+        apiTaskViewModel=new ApiTaskViewModel(new ApiTaskRepository());
+        statusApiRepository=new StatusApiRepository();
+        priorityRepository=new PriorityRepository();
+        categoryApiRepository=new CategoryApiRepository();
         spinner = view.findViewById(R.id.spinner);
         materialbtn = view.findViewById(R.id.materialbtn);
         title = view.findViewById(R.id.title);
@@ -102,7 +115,7 @@ customUser.showLoader();
 
 
         customImage.setview();
-        customUser.setview();
+       // customUser.setview();
 
 materialbtn.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -113,23 +126,36 @@ intent.putExtra("Activityid",id);
 startActivity(intent);
     }
 });
-statusName.add("Status");
-statusAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,statusName);
-        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(statusAdapter);
-        statusViewModel.getList(new ResponseCallback<List<Status>>() {
-            @Override
-            public void onSuccess(List<Status> data, String message) {
-                statusList.clear();
-                statusList.addAll(data);
-                statusName.clear();
-                statusName.add("Status");
-                for (Status status:data){
-                    statusName.add(status.getName());
+//statusName.add("Status");
+//statusAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,statusName);
+  //      statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    //    spinner.setAdapter(statusAdapter);
+      //  statusViewModel.getList(new ResponseCallback<List<Status>>() {
+        //    @Override
+          //  public void onSuccess(List<Status> data, String message) {
+            //    statusList.clear();
+              //  statusList.addAll(data);
+                //statusName.clear();
+            //    statusName.add("Status");
+              //  for (Status status:data){
+                //    statusName.add(status.getName());
 
-                }
-                statusAdapter.notifyDataSetChanged();
-               setSelectedStatus();
+          //      }
+            //    statusAdapter.notifyDataSetChanged();
+              // setSelectedStatus();
+         //   }
+
+        //    @Override
+          //  public void onError(String message) {
+
+//            }
+  //      });
+        statusApiRepository.getStatusList(new ResponseCallback<List<String>>() {
+            @Override
+            public void onSuccess(List<String> data, String message) {
+                statusAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,data);
+                statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(statusAdapter);
             }
 
             @Override
@@ -185,63 +211,80 @@ periorityViewModel.getList(new ResponseCallback<List<Periority>>() {
         if (bundle != null) {
 
             id = bundle.getString("Id");
+apiTaskViewModel.getSingleTask(id, new ApiTaskRepository.TaskCallBack() {
+    @Override
+    public void OnSuccess(JsonObject jsonReader) {
+        Log.e("API", "OnSuccess: "+jsonReader );
+
+        JsonObject array = jsonReader.getAsJsonObject("data");
+String titl=array.get("title").getAsString();
+String discrip=array.get("description").getAsString();
+
+title.setText(titl);
+discript.setText(discrip);
+
+    }
+    @Override
+    public void Onerror(String message) {
+        Log.e("API", "Onerror: "+message );
+    }
+});
+
+         //   taskViewModel.getSingleTask(id, new ResponseCallback<Task>() {
+
+           //     @Override
+             //   public void onSuccess(Task data, String message) {
+               //      title.setText(data.getTitle());
+                 //    discript.setText(data.getDiscription());
+
+                //    Timestamp time=data.getTimes_tamp();
+                  //  Date date1=time.toDate();
+                //    SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                //    date.setText("Date : "+sdf.format(date1));
+               //  statusId=data.getStatusId();
+               //   categoryID=data.getCategoryId();
+                 //         periorityId= data.getPeriorityId();
+                   //       setSelectedStatus();
+                     //     setSelectedCategory();
+                       //   setSelectedPeriority();
+
+              //      if (data.getSelectedImges() != null) {
+                //        customImage.hideLoader();
+                  //      customImage.uriList.clear();
+                    //    customImage.uriList.addAll(data.getSelectedImges());
+                      //  customImage.imageAdpter.notifyDataSetChanged();
+                 //   }
+
+                   // if (data.getSelecteduser() != null) {
+                     //   customUser.hideLoader();
+                       // customUser.showUsersByIds(data.getSelecteduser());
+                  //  }
+
+             //   }
+
+               // @Override
+           //     public void onError(String message) {
+
+             //   }
+          //  });
 
 
-            taskViewModel.getSingleTask(id, new ResponseCallback<Task>() {
 
-                @Override
-                public void onSuccess(Task data, String message) {
-                     title.setText(data.getTitle());
-                     discript.setText(data.getDiscription());
+//            commentsViewModel.getList(id, new ResponseCallback<List<Comment>>() {
 
-                    Timestamp time=data.getTimes_tamp();
-                    Date date1=time.toDate();
-                    SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    date.setText("Date : "+sdf.format(date1));
-                 statusId=data.getStatusId();
-                  categoryID=data.getCategoryId();
-                          periorityId= data.getPeriorityId();
-                          setSelectedStatus();
-                          setSelectedCategory();
-                          setSelectedPeriority();
+  //              @Override
+    //            public void onSuccess(List<Comment> data, String message) {
 
-                    if (data.getSelectedImges() != null) {
-                        customImage.hideLoader();
-                        customImage.uriList.clear();
-                        customImage.uriList.addAll(data.getSelectedImges());
-                        customImage.imageAdpter.notifyDataSetChanged();
-                    }
+      //              commentList.clear();
+        //            commentList.addAll(data);
+          //          commentsAdapter.notifyDataSetChanged();
+            //    }
 
-                    if (data.getSelecteduser() != null) {
-                        customUser.hideLoader();
-                        customUser.showUsersByIds(data.getSelecteduser());
-                    }
+              //  @Override
+                //public void onError(String message) {
 
-                }
-
-                @Override
-                public void onError(String message) {
-
-                }
-            });
-
-
-
-            commentsViewModel.getList(id, new ResponseCallback<List<Comment>>() {
-
-                @Override
-                public void onSuccess(List<Comment> data, String message) {
-
-                    commentList.clear();
-                    commentList.addAll(data);
-                    commentsAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onError(String message) {
-
-                }
-            });
+              //  }
+          //  });
 
             taskViewModel.getTaskActivity(id, new ResponseCallback<List<TaskActivity>>() {
 

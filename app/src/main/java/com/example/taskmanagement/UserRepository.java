@@ -37,7 +37,7 @@ public class UserRepository {
                 User user = new User();
                 user.setName(name);
                 user.setEmail(email);
-                user.setUuid(uid);
+                user.setId(uid);
                 user.setAddress(address);
                 user.setPassword(password);
                 db.collection("User").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -11,4 +11,9 @@
     <color name="Completed">#DCFCE7</color>
     <color name="blue">#00c3ff</color>
     <color name="status">#9fa4d1</color>
+    <color name="brightRed">#E30613</color>
+    <color name="deepBlue">#001424</color>
+    <color name="midnightBlue">#202D3D</color>
+    <color name="softBlue">#5C7FE3</color>
+    <color name="lightGreen">#6AC788</color>
 </resources>

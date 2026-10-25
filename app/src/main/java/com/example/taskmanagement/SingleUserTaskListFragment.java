@@ -278,7 +278,7 @@ applybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(int position) {
                 Task task = taskList.get(position);
-                String id = task.getUid();
+                String id = task.getId();
                 TaskDisplayFragment fragment = new TaskDisplayFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("Id", id);

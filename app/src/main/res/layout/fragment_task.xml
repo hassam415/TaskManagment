@@ -76,7 +76,7 @@
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="10dp">
 
-                <Spinner
+              <!--  <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -84,8 +84,15 @@
                     android:spinnerMode="dropdown"
                     android:paddingStart="8dp"
                     android:paddingEnd="24dp"/>
-
-
+-->
+<Spinner
+    android:id="@+id/team"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/spinner_bg"
+    android:spinnerMode="dropdown"
+    android:paddingStart="8dp"
+    android:paddingEnd="24dp"/>
 
             </FrameLayout>
             <FrameLayout
@@ -139,6 +146,76 @@
            android:layout_height="wrap_content">
 
        </com.example.taskmanagement.CustomUserView>
+        <TextView
+            android:text="ESTIMATE HOURS"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:id="@+id/hours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+
+            android:hint="e.g.16.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:paddingStart="40dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:text="START DATE"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+            android:hint="dd/mm/yyyy"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/startDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="40dp"
+              android:drawableEnd="@drawable/outline_calendar_month_24" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:textStyle="bold"
+            android:text="DUE DATE"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+
+            android:hint="dd/mm/yyyy">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dueDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="40dp"
+                android:drawableEnd="@drawable/outline_calendar_month_24"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/savebtn"
             android:textColor="@color/white"

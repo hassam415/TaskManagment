@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="68dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="2dp">
 
-    <data>
-
-    </data>
+    <CheckBox
+        android:id="@+id/assigneeCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="#718096"
+        android:padding="2dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_margin="8sp">
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                android:gravity="center"
-                android:layout_margin="8sp">
-                <TextView
-                    android:id="@+id/user"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-                <ImageView
-                    android:id="@+id/imgbtn"
-                    android:src="@drawable/baseline_delete_24"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"/>
-            </LinearLayout>
-       <View
-           android:layout_width="wrap_content"
-           android:layout_height="1dp"
-           android:background="#E0E0E0"/>
+        <TextView
+            android:id="@+id/assigneeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#26344D"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
-
+        <TextView
+            android:id="@+id/assigneeJob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#8A9BB8"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
     </LinearLayout>
-</layout>
+
+</LinearLayout>

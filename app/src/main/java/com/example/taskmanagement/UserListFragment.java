@@ -14,6 +14,10 @@ import android.widget.LinearLayout;
 
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,7 @@ FloatingActionButton userbtn;
     UserAdapter userAdapter;
     List<User> userList=new ArrayList<>();
 LinearLayout loader;
+AuthViewModel authViewModel;
 
     public UserListFragment() {
         // Required empty public constructor
@@ -42,6 +47,7 @@ userrecyler.setHasFixedSize(true);
 userrecyler.setLayoutManager(new LinearLayoutManager(getContext()));
 userAdapter=new UserAdapter(getContext(),userList);
 userrecyler.setAdapter(userAdapter);
+authViewModel=new AuthViewModel(new AuthRepository());
         ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
         filterBtn.setVisibility(View.GONE);
 loader.setVisibility(View.VISIBLE);
@@ -49,7 +55,7 @@ userAdapter.setOnUserClick(new UserAdapter.OnUserClick() {
     @Override
     public void OnClick(int position) {
         User user=userList.get(position);
-        String id=user.getUuid();
+        String id=user.getId();
         UserDetailFragment userDetailFragment=new UserDetailFragment();
         Bundle bundle=new Bundle();
         bundle.putString("Id",id);
@@ -63,19 +69,38 @@ userbtn.setOnClickListener(new View.OnClickListener() {
         getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new UserFragment()).addToBackStack(null).commit();
     }
 });
-uSerViewModel=new USerViewModel(new UserRepository());
-        uSerViewModel.getUser(new ResponseCallback<List<User>>() {
+//uSerViewModel=new USerViewModel(new UserRepository());
+  //      uSerViewModel.getUser(new ResponseCallback<List<User>>() {
+    //        @Override
+      //      public void onSuccess(List<User> data, String message) {
+        //        loader.setVisibility(View.GONE);
+          //      userList.clear();
+            //    userList.addAll(data);
+              //  userAdapter.notifyDataSetChanged();
+         //   }
+
+         //   @Override
+           // public void onError(String message) {
+             //   loader.setVisibility(View.GONE);
+          //  }
+      //  });
+        authViewModel.getUserList(new AuthRepository.TaskCallBack() {
             @Override
-            public void onSuccess(List<User> data, String message) {
+            public void OnSuccess(JsonObject jsonReader) {
                 loader.setVisibility(View.GONE);
                 userList.clear();
-                userList.addAll(data);
+                JsonArray array=jsonReader.getAsJsonArray("data");
+                for (JsonElement jsonElement:array){
+                    User user=new Gson().fromJson(jsonElement,User.class);
+                    userList.add(user);
+                }
+
                 userAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onError(String message) {
-                loader.setVisibility(View.GONE);
+            public void Onerror(String message) {
+
             }
         });
         return view;

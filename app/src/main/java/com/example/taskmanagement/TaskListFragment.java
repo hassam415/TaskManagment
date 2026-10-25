@@ -3,6 +3,7 @@ package com.example.taskmanagement;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,6 +32,12 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.Timestamp;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,6 +80,7 @@ TextView selectDate;
     List<String> periorityName = new ArrayList<>();
     ArrayAdapter<String> periorityAdapter;
     PeriorityViewModel periorityViewModel;
+    ApiTaskViewModel apiTaskViewModel;
 
     public TaskListFragment() {
         // Required empty public constructor
@@ -91,7 +99,7 @@ TextView selectDate;
         Loader = view.findViewById(R.id.Loader);
         applybtn = view.findViewById(R.id.applybtn);
 
-
+apiTaskViewModel=new ApiTaskViewModel(new ApiTaskRepository());
         categoryspiner = view.findViewById(R.id.categoryspiner);
         periorityspiner = view.findViewById(R.id.periorityspiner);
         spinner = view.findViewById(R.id.spinner);
@@ -154,7 +162,23 @@ filterBtn.setVisibility(View.VISIBLE);
                 Log.e("StatusList", message);
             }
         });
+taskAdapter.setOnDeletBtnClick(new TaskAdapter.OnDeletBtnClick() {
+    @Override
+    public void onClick(String taskID, int position) {
+        apiTaskViewModel.delettask(taskID, new ApiTaskRepository.TaskCallBack() {
+            @Override
+            public void OnSuccess(JsonObject jsonReader) {
+                taskList.remove(jsonReader);
+                taskAdapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void Onerror(String message) {
+
+            }
+        });
+    }
+});
 
         categoryName.clear();
         categoryName.add("Category");
@@ -360,7 +384,7 @@ if (endDate!=null){
             Task task = taskList.get(position);
 
             Bundle taskBundle = new Bundle();
-            taskBundle.putString("Id", task.getUid());
+            taskBundle.putString("Id", task.getId());
 
             TaskDisplayFragment fragment = new TaskDisplayFragment();
             fragment.setArguments(taskBundle);
@@ -443,28 +467,47 @@ if (endDate!=null){
         } else {
 
             taskbtn.setVisibility(View.VISIBLE);
+apiTaskViewModel.getTask(new ApiTaskRepository.TaskCallBack() {
+    @Override
+    public void OnSuccess(JsonObject jsonReader) {
 
-            taskViewModel.getTask(
-                    new ResponseCallback<List<Task>>() {
-                        @Override
-                        public void onSuccess(List<Task> data, String message) {
-                            if (!isAdded()) return;
+                                  Loader.setVisibility(View.GONE);
+                               taskList.clear();
+        JsonArray array= jsonReader.getAsJsonArray("data");
+        for (JsonElement jsonElement :array){
+            Task task=new Gson().fromJson(jsonElement,Task.class);
+            taskList.add(task);
+        }
 
-                            Loader.setVisibility(View.GONE);
-                            taskList.clear();
-                            taskList.addAll(data);
-                            taskAdapter.notifyDataSetChanged();
-                        }
+                           taskAdapter.notifyDataSetChanged();
+    }
 
-                        @Override
-                        public void onError(String message) {
-                            if (!isAdded()) return;
+    @Override
+    public void Onerror(String message) {
+        Log.e("API Task", "Onerror: "+message );
+    }
+});
+         //   taskViewModel.getTask(
+           //         new ResponseCallback<List<Task>>() {
+             //           @Override
+               //         public void onSuccess(List<Task> data, String message) {
+                 //           if (!isAdded()) return;
+//
+   //                          Loader.setVisibility(View.GONE);
+     //                       taskList.clear();
+       //                     taskList.addAll(data);
+         //                   taskAdapter.notifyDataSetChanged();
+           //             }
+//
+   //                      @Override
+     //                   public void onError(String message) {
+       //                     if (!isAdded()) return;
 
-                            Loader.setVisibility(View.GONE);
-                            Toast.makeText(requireContext(),
-                                    message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+         //                   Loader.setVisibility(View.GONE);
+           //                 Toast.makeText(requireContext(),
+             //                       message, Toast.LENGTH_SHORT).show();
+               //         }
+                 //   });
         }
     }
 }

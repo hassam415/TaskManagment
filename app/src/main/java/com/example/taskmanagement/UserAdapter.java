@@ -41,8 +41,8 @@ OnUserClick onUserClick;
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user=userList.get(position);
         holder.binding.name.setText(user.getName());
-        holder.binding.address.setText(user.getAddress());
-        holder.binding.email.setText(user.getEmail());
+        holder.binding.address.setText(user.getRole());
+        holder.binding.email.setText(user.getJob_title());
 holder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {

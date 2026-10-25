@@ -142,7 +142,7 @@ task.setTimes_tamp(Timestamp.now());
 
         String taskid = documentReference.getId();
 
-        task.setUid(taskid);
+        task.setId(taskid);
 
         documentReference.set(task)
                 .addOnSuccessListener(unused -> {
