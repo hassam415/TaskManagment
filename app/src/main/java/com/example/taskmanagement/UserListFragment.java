@@ -55,10 +55,10 @@ userAdapter.setOnUserClick(new UserAdapter.OnUserClick() {
     @Override
     public void OnClick(int position) {
         User user=userList.get(position);
-        String id=user.getId();
+        int id=user.getId();
         UserDetailFragment userDetailFragment=new UserDetailFragment();
         Bundle bundle=new Bundle();
-        bundle.putString("Id",id);
+        bundle.putInt("Id",id);
         userDetailFragment.setArguments(bundle);
         getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,userDetailFragment).addToBackStack(null).commit();
     }

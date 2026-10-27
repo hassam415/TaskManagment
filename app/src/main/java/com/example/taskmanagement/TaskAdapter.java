@@ -22,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -112,7 +113,15 @@ OnDeletBtnClick onDeletBtnClick;
                                 bundle.putString("priority",task.getPriority().getValue());
                                 bundle.putString("taskId",task.getId());
                                 bundle.putString("hourss",task.getEstimated_hours());
-bundle.putString("team",task.getTeam().name);
+                                bundle.putInt("reviewrID",task.getReviewer().getId());
+                                bundle.putString("team",task.getTeam().name);
+                                ArrayList<Integer>integers=new ArrayList<>();
+                                for (User user:task.getAssignees()){
+                                    integers.add(user.getId());
+                                }
+                                   bundle.putIntegerArrayList("assignessId",integers);
+                                bundle.putString("startDate",task.getStart_date());
+                                bundle.putString("dueDate",task.getDue_date());
 taskFragment.setArguments(bundle);
                                 fragmentManager.beginTransaction().replace(R.id.fragmentContainer, taskFragment).addToBackStack(null).commit();
                             }

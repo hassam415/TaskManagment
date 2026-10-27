@@ -107,12 +107,12 @@ public class taskitemAdapter extends RecyclerView.Adapter<TaskItemViewHolder> {
     }
 
     private boolean isSelected(User user) {
-        if (user == null || user.getId() == null) {
+        if (user == null || user.getId()  <=0) {
             return false;
         }
 
         for (User selected : selecteduser) {
-            if (selected != null && selected.getId() != null
+            if (selected != null && selected.getId() != 0
                     && String.valueOf(selected.getId())
                     .equals(String.valueOf(user.getId()))) {
                 return true;
@@ -123,14 +123,14 @@ public class taskitemAdapter extends RecyclerView.Adapter<TaskItemViewHolder> {
     }
 
     private void removeSelectedUser(User user) {
-        if (user == null || user.getId() == null) {
+        if (user == null || user.getId() <=0) {
             return;
         }
 
         for (int i = selecteduser.size() - 1; i >= 0; i--) {
             User selected = selecteduser.get(i);
 
-            if (selected != null && selected.getId() != null
+            if (selected != null && selected.getId() != 0
                     && String.valueOf(selected.getId())
                     .equals(String.valueOf(user.getId()))) {
                 selecteduser.remove(i);
@@ -149,6 +149,42 @@ public class taskitemAdapter extends RecyclerView.Adapter<TaskItemViewHolder> {
 
         Log.d("ASSIGNEE_ADAPTER",
                 "Adapter item count: " + stringList.size());
+    }
+    public void setSelectedUsers(List<User> users) {
+        selecteduser.clear();
+
+        if (users != null) {
+            selecteduser.addAll(users);
+        }
+
+        notifyDataSetChanged();
+
+        Log.d("ASSIGNEE_ADAPTER",
+                "Preselected users count: " + selecteduser.size());
+    }
+    public void setSelectedUserIds(List<Integer> selectedIds) {
+        selecteduser.clear();
+
+        if (selectedIds != null && stringList != null) {
+            for (User user : stringList) {
+                if (user == null) continue;
+
+                for (Integer id : selectedIds) {
+                    if (id != null && user.getId() == id) {
+                        selecteduser.add(user);
+                        break;
+                    }
+                }
+            }
+        }
+
+        notifyDataSetChanged();
+
+        Log.d("ASSIGNEE_ADAPTER",
+                "Received IDs: " + selectedIds);
+
+        Log.d("ASSIGNEE_ADAPTER",
+                "Matched selected users: " + selecteduser.size());
     }
 
     @Override

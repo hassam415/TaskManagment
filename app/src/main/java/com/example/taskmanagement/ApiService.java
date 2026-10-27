@@ -48,7 +48,7 @@ Call<JsonObject> getSingleTask(
     Call<JsonObject>updateTask(
             @Header("Authorization") String token,
 @Path("id") String taskID,
-            @Body JsonObject jsonObject
+            @Body UpdateTask updateTask
 );
 @GET("teams")
     Call<JsonObject>getTeam(

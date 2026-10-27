@@ -85,7 +85,7 @@ public class CustomUserView extends LinearLayout {
                 selecteduser
         );
         recylerView.setAdapter(taskitemAdapter);
-        recylerView.setAdapter(taskitemAdapter);
+
 
     }
 
@@ -124,27 +124,9 @@ public class CustomUserView extends LinearLayout {
         return new ArrayList<>(selecteduser);
     }
 
-    public List<Integer> getSelectedUserIds() {
-        List<Integer> ids = new ArrayList<>();
 
-        for (User user : selecteduser) {
-            if (user == null || user.getId() == null) {
-                continue;
-            }
 
-            try {
-                int id = Integer.parseInt(String.valueOf(user.getId()));
 
-                if (id > 0) {
-                    ids.add(id);
-                }
-            } catch (NumberFormatException e) {
-                Log.e("ASSIGNEE", "Invalid API user ID: " + user.getId());
-            }
-        }
-
-        return ids;
-    }
 
     public void clearSelection() {
         selecteduser.clear();
@@ -184,5 +166,38 @@ public class CustomUserView extends LinearLayout {
         }
 
 
+    }
+    public void setSelectedUserIds(List<Integer> selectedIds) {
+        selecteduser.clear();
+
+        if (selectedIds != null) {
+            for (User user : userList) {
+                if (user == null) continue;
+
+                for (Integer id : selectedIds) {
+                    if (id != null && user.getId() == id) {
+                        selecteduser.add(user);
+                        break;
+                    }
+                }
+            }
+        }
+
+        taskitemAdapter.setSelectedUsers(new ArrayList<>(selecteduser));
+
+        Log.d("ASSIGNEE_EDIT",
+                "Selected IDs after matching: " + getSelectedUserIds());
+    }
+
+    public List<Integer> getSelectedUserIds() {
+        List<Integer> ids = new ArrayList<>();
+
+        for (User user : selecteduser) {
+            if (user != null && user.getId() > 0) {
+                ids.add(user.getId());
+            }
+        }
+
+        return ids;
     }
 }

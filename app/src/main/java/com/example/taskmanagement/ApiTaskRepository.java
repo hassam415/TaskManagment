@@ -61,7 +61,7 @@ request.addProperty("team_id", task.getTeamId());
                 && !task.getDiscription().trim().isEmpty()) {
             request.addProperty("description", task.getDiscription().trim());
         }
-
+request.addProperty("reviewer_id",task.getReviewer_id());
         if (task.getCategory() != null
                 && !task.getCategory().trim().isEmpty()) {
             request.addProperty("category", task.getCategory().trim());
@@ -197,9 +197,9 @@ taskCallBack.Onerror(throwable.getMessage());
         });
 
     }
-    public void updateTask(String id ,JsonObject request,TaskCallBack taskCallBack){
+    public void updateTask(String id ,UpdateTask task,TaskCallBack taskCallBack){
         String token=ApiSesson.getAccess_Token();
-        apiService.updateTask("Bearer " + token,id,request).enqueue(new Callback<JsonObject>() {
+        apiService.updateTask("Bearer " + token,id,task).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 taskCallBack.OnSuccess(response.body());

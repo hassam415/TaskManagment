@@ -35,6 +35,7 @@
             android:id="@+id/Loader"
             android:orientation="vertical"
             android:layout_width="match_parent"
+           android:layout_gravity="center"
             android:visibility="gone"
             android:layout_height="wrap_content">
             <ProgressBar
@@ -46,6 +47,7 @@
                 android:gravity="center"
                 android:text="Loading.."
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -65,16 +67,75 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:paddingStart="6dp"
-            android:paddingEnd="6dp">
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="10dp">
+            android:orientation="vertical"
+
+          >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="SELECT TEAM"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="14dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="SELECT CATEGORY"
+                    android:layout_gravity="end"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="4dp">
+                <Spinner
+                    android:id="@+id/team"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dropdown"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="24dp"/>
+            </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="4dp">
+
+                    <Spinner
+                        android:id="@+id/categoryspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/spinner_bg"
+                        android:spinnerMode="dropdown"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="24dp"/>
+
+
+
+                </FrameLayout>
+            </LinearLayout>
+
 
               <!--  <Spinner
                     android:id="@+id/spinner"
@@ -85,62 +146,86 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="24dp"/>
 -->
-<Spinner
-    android:id="@+id/team"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/spinner_bg"
-    android:spinnerMode="dropdown"
-    android:paddingStart="8dp"
-    android:paddingEnd="24dp"/>
-
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="10dp">
-
-                <Spinner
-                    android:id="@+id/categoryspinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="24dp"/>
 
 
 
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="10dp">
-
-                <Spinner
-                    android:id="@+id/periorityspinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="24dp"/>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="SELECT PRIORITY"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="DESIGINATED REVIEWERS"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="4dp">
 
-            </FrameLayout>
+                    <Spinner
+                        android:id="@+id/periorityspinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/spinner_bg"
+                        android:spinnerMode="dropdown"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="24dp"/>
+
+
+
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="4dp">
+
+                    <Spinner
+                        android:id="@+id/revierSpiner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/spinner_bg"
+                        android:spinnerMode="dropdown"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="24dp"/>
+
+
+
+                </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
-        <com.example.taskmanagement.CustomImagView
+     <!--   <com.example.taskmanagement.CustomImagView
             android:id="@+id/customImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </com.example.taskmanagement.CustomImagView>
-       <com.example.taskmanagement.CustomUserView
+       </com.example.taskmanagement.CustomImagView>
+  -->
+        <com.example.taskmanagement.CustomUserView
            android:id="@+id/customUser"
            android:layout_width="match_parent"
            android:layout_height="wrap_content">
@@ -158,8 +243,7 @@
             android:id="@+id/hours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-
+            android:layout_margin="10dp"
             android:hint="e.g.16.0">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -181,8 +265,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
             android:hint="dd/mm/yyyy"
+            android:layout_margin="10dp"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -196,6 +280,7 @@
             android:textStyle="bold"
             android:text="DUE DATE"
             android:textColor="@color/black"
+
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -204,7 +289,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_margin="10dp"
 
             android:hint="dd/mm/yyyy">
 

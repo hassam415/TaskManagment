@@ -27,8 +27,8 @@ public void getSingleTask(String taskId,ApiTaskRepository.TaskCallBack taskCallB
 public void delettask(String taskId, ApiTaskRepository.TaskCallBack taskCallBack){
         apiTaskRepository.DeleteTask(taskId,taskCallBack);
 }
-public void updateTask(String id, JsonObject request, ApiTaskRepository.TaskCallBack taskCallBack){
-        apiTaskRepository.updateTask(id,request,taskCallBack);
+public void updateTask(String id, UpdateTask task, ApiTaskRepository.TaskCallBack taskCallBack){
+        apiTaskRepository.updateTask(id,task,taskCallBack);
 }
 public void getTeam(ApiTaskRepository.TaskCallBack taskCallBack){
         apiTaskRepository.getTeams(taskCallBack);

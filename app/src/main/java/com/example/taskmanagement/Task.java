@@ -30,11 +30,21 @@ public class Task {
     private String progress_percentage;
 
     public String assignee_ids;
+    public int reviewer_id;
 
     // API priority object
     @SerializedName("priority")
     private TaskDetail priority;
+    @SerializedName("reviewer")
+    private User reviewer;
 
+    public User getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(User reviewer) {
+        this.reviewer = reviewer;
+    }
     // API status object
     private TaskDetail status;
 
@@ -45,6 +55,16 @@ public class Task {
     // API team ID used when creating/updating a task
     @SerializedName("team_id")
     private int team_id;
+    @SerializedName("assignees")
+    private List<User> assignees;
+
+    public List<User> getAssignees() {
+        return assignees;
+    }
+
+    public void setAssignees(List<User> assignees) {
+        this.assignees = assignees;
+    }
 
     public Task() {
         // Required by Gson and Firebase
@@ -66,7 +86,8 @@ public class Task {
             List<String> selectedImges,
             String id,
             Timestamp times_tamp,
-            String assignee_ids) {
+            String assignee_ids
+    ,int reviewer_id) {
 
         this.title = title;
         this.discription = discription;
@@ -83,8 +104,16 @@ public class Task {
         this.id = id;
         this.assignee_ids = assignee_ids;
         this.times_tamp = times_tamp;
-
+this.reviewer_id=reviewer_id;
         setPeriority(periorityId);
+    }
+
+    public int getReviewer_id() {
+        return reviewer_id;
+    }
+
+    public void setReviewer_id(int reviewer_id) {
+        this.reviewer_id = reviewer_id;
     }
 
     // Nested class for API priority and status objects

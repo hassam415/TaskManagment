@@ -1,15 +1,16 @@
 package com.example.taskmanagement;
 
 public class User {
-    String name ,password,email,address , id;
+    String name ,password,email,address ;
+    int id;
 String job_title,role;
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public User(String name, String password, String email, String address, String id, String role, String job_title) {
+    public User(String name, String password, String email, String address, int id, String role, String job_title) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -19,7 +20,7 @@ String job_title,role;
         this.job_title = job_title;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

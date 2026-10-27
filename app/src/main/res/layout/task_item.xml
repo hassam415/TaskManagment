@@ -48,19 +48,16 @@
                         android:id="@+id/periority"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-                    <TextView
-
+                    <com.example.taskmanagement.CustomTextView
+                        android:layout_marginLeft="3dp"
                         android:id="@+id/date"
                         android:layout_weight="0.8"
-                        android:gravity="end"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:textSize="12sp" />
+                        android:layout_height="wrap_content"/>
                     <ImageView
                         android:id="@+id/updatebtn"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/options"
                         android:layout_weight="0.2"/>
 
