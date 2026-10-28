@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.response.PaginateResponse;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -56,15 +57,15 @@ public class TaskListFragment extends Fragment {
     TaskViewModel taskViewModel;
     String status;
     String id;
-TextView selectDate;
+    TextView selectDate;
     LinearLayout Loader;
     DrawerLayout filterDrawer;
 
     Spinner spinner, categoryspiner, periorityspiner;
     Button applybtn;
 
-  String startDate;
-  String endDate;
+    String startDate;
+    String endDate;
 
     ArrayAdapter<String> statusAdapter;
     List<Status> statusList = new ArrayList<>();
@@ -99,7 +100,7 @@ TextView selectDate;
         Loader = view.findViewById(R.id.Loader);
         applybtn = view.findViewById(R.id.applybtn);
 
-apiTaskViewModel=new ApiTaskViewModel(new ApiTaskRepository());
+        apiTaskViewModel = new ApiTaskViewModel(new ApiTaskRepository());
         categoryspiner = view.findViewById(R.id.categoryspiner);
         periorityspiner = view.findViewById(R.id.periorityspiner);
         spinner = view.findViewById(R.id.spinner);
@@ -121,7 +122,7 @@ apiTaskViewModel=new ApiTaskViewModel(new ApiTaskRepository());
         taskrecycler.setAdapter(taskAdapter);
 
         Loader.setVisibility(View.VISIBLE);
-filterBtn.setVisibility(View.VISIBLE);
+        filterBtn.setVisibility(View.VISIBLE);
         Bundle bundle = getArguments();
 
         if (bundle != null) {
@@ -162,23 +163,23 @@ filterBtn.setVisibility(View.VISIBLE);
                 Log.e("StatusList", message);
             }
         });
-taskAdapter.setOnDeletBtnClick(new TaskAdapter.OnDeletBtnClick() {
-    @Override
-    public void onClick(String taskID, int position) {
-        apiTaskViewModel.delettask(taskID, new ApiTaskRepository.TaskCallBack() {
+        taskAdapter.setOnDeletBtnClick(new TaskAdapter.OnDeletBtnClick() {
             @Override
-            public void OnSuccess(JsonObject jsonReader) {
-                taskList.remove(jsonReader);
-                taskAdapter.notifyDataSetChanged();
-            }
+            public void onClick(String taskID, int position) {
+                apiTaskViewModel.delettask(taskID, new ApiTaskRepository.TaskCallBack() {
+                    @Override
+                    public void OnSuccess(JsonObject jsonReader) {
+                        taskList.remove(jsonReader);
+                        taskAdapter.notifyDataSetChanged();
+                    }
 
-            @Override
-            public void Onerror(String message) {
+                    @Override
+                    public void Onerror(String message) {
 
+                    }
+                });
             }
         });
-    }
-});
 
         categoryName.clear();
         categoryName.add("Category");
@@ -257,29 +258,29 @@ taskAdapter.setOnDeletBtnClick(new TaskAdapter.OnDeletBtnClick() {
 
         filterBtn.setOnClickListener(v -> {
 
-                filterDrawer.openDrawer(GravityCompat.END);
+            filterDrawer.openDrawer(GravityCompat.END);
 
         });
 
 
-selectDate.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        MaterialDatePicker<Pair<Long, Long>> materialDatePicker=MaterialDatePicker.Builder.dateRangePicker().build();
-materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
-    @Override
-    public void onPositiveButtonClick(Pair<Long, Long> longLongPair) {
-Long firstDate=longLongPair.first;
-Long lastDate=longLongPair.second;
-        SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault());
-         startDate= (sdf.format(new Date(firstDate)));
-         endDate= (sdf.format(new Date(lastDate)));
-        selectDate.setText(startDate+"  "+endDate);
-    }
-});
-materialDatePicker.show(getParentFragmentManager(),"");
-    }
-});
+        selectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().build();
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+                    @Override
+                    public void onPositiveButtonClick(Pair<Long, Long> longLongPair) {
+                        Long firstDate = longLongPair.first;
+                        Long lastDate = longLongPair.second;
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        startDate = (sdf.format(new Date(firstDate)));
+                        endDate = (sdf.format(new Date(lastDate)));
+                        selectDate.setText(startDate + "  " + endDate);
+                    }
+                });
+                materialDatePicker.show(getParentFragmentManager(), "");
+            }
+        });
 
 
         applybtn.setOnClickListener(v -> {
@@ -334,11 +335,11 @@ materialDatePicker.show(getParentFragmentManager(),"");
 
             if (startDate != null) {
 
-                startTimestamp=new Timestamp(new Date(startDate));
+                startTimestamp = new Timestamp(new Date(startDate));
             }
-if (endDate!=null){
-    endTimestamp=new Timestamp(new Date(endDate));
-}
+            if (endDate != null) {
+                endTimestamp = new Timestamp(new Date(endDate));
+            }
 
             Loader.setVisibility(View.VISIBLE);
 
@@ -467,47 +468,48 @@ if (endDate!=null){
         } else {
 
             taskbtn.setVisibility(View.VISIBLE);
-apiTaskViewModel.getTask(new ApiTaskRepository.TaskCallBack() {
-    @Override
-    public void OnSuccess(JsonObject jsonReader) {
+            apiTaskViewModel.getTask(new ResponseCallback<>() {
+                @Override
+                public void onSuccess(PaginateResponse<Task> data, String message) {
 
-                                  Loader.setVisibility(View.GONE);
-                               taskList.clear();
-        JsonArray array= jsonReader.getAsJsonArray("data");
-        for (JsonElement jsonElement :array){
-            Task task=new Gson().fromJson(jsonElement,Task.class);
-            taskList.add(task);
-        }
+                    Loader.setVisibility(View.GONE);
+                    taskList.clear();
+//                    JsonArray array = jsonReader.getAsJsonArray("data");
+//                    for (JsonElement jsonElement : array) {
+//                        Task task = new Gson().fromJson(jsonElement, Task.class);
+//                        taskList.add(task);
+//                    }
+                    taskList.addAll(data.getData());
 
-                           taskAdapter.notifyDataSetChanged();
-    }
+                    taskAdapter.notifyDataSetChanged();
+                }
 
-    @Override
-    public void Onerror(String message) {
-        Log.e("API Task", "Onerror: "+message );
-    }
-});
-         //   taskViewModel.getTask(
-           //         new ResponseCallback<List<Task>>() {
-             //           @Override
-               //         public void onSuccess(List<Task> data, String message) {
-                 //           if (!isAdded()) return;
+                @Override
+                public void onError(String message) {
+
+                }
+            });
+            //   taskViewModel.getTask(
+            //         new ResponseCallback<List<Task>>() {
+            //           @Override
+            //         public void onSuccess(List<Task> data, String message) {
+            //           if (!isAdded()) return;
 //
-   //                          Loader.setVisibility(View.GONE);
-     //                       taskList.clear();
-       //                     taskList.addAll(data);
-         //                   taskAdapter.notifyDataSetChanged();
-           //             }
+            //                          Loader.setVisibility(View.GONE);
+            //                       taskList.clear();
+            //                     taskList.addAll(data);
+            //                   taskAdapter.notifyDataSetChanged();
+            //             }
 //
-   //                      @Override
-     //                   public void onError(String message) {
-       //                     if (!isAdded()) return;
+            //                      @Override
+            //                   public void onError(String message) {
+            //                     if (!isAdded()) return;
 
-         //                   Loader.setVisibility(View.GONE);
-           //                 Toast.makeText(requireContext(),
-             //                       message, Toast.LENGTH_SHORT).show();
-               //         }
-                 //   });
+            //                   Loader.setVisibility(View.GONE);
+            //                 Toast.makeText(requireContext(),
+            //                       message, Toast.LENGTH_SHORT).show();
+            //         }
+            //   });
         }
     }
 }

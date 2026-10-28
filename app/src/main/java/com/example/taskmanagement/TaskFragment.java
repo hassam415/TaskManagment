@@ -35,89 +35,87 @@ import java.util.Locale;
 
 public class TaskFragment extends Fragment {
 
-TextInputLayout title,discription,hours;
-Button savebtn;
-TextInputEditText startDate,dueDate;
-TaskViewModel taskViewModel;
-LinearLayout Loader;
-USerViewModel uSerViewModel;
-List<User>userList=new ArrayList<>();
+    TextInputLayout title, discription, hours;
+    Button savebtn;
+    TextInputEditText startDate, dueDate;
+    TaskViewModel taskViewModel;
+    LinearLayout Loader;
+    USerViewModel uSerViewModel;
+    List<User> userList = new ArrayList<>();
 
     String selectedDate;
-private ActivityResultLauncher<String>gallerLauncher;
-private ActivityResultLauncher<Uri> cameraLauncher;
-private Uri cameraUri;
-CustomImagView customImagView;
-CustomUserView customUser;
-AuthViewModel authViewModel;
-    List<String>userListspinner=new ArrayList<>();
-    List<Integer>userID=new ArrayList<>();
-ArrayAdapter<String>reiverAdpater;
+    private ActivityResultLauncher<String> gallerLauncher;
+    private ActivityResultLauncher<Uri> cameraLauncher;
+    private Uri cameraUri;
+    CustomImagView customImagView;
+    CustomUserView customUser;
+    AuthViewModel authViewModel;
+    List<String> userListspinner = new ArrayList<>();
+    List<Integer> userID = new ArrayList<>();
+    ArrayAdapter<String> reiverAdpater;
 
     List<Team> teamList = new ArrayList<>();
     ArrayAdapter<Team> teamAdapter;
-    Spinner spinner,categoryspinner,periorityspinner,team,revierSpiner;
-    ArrayAdapter<String>statusAdapter;
-    List<Status>statusList=new ArrayList<>();
+    Spinner spinner, categoryspinner, periorityspinner, team, revierSpiner;
+    ArrayAdapter<String> statusAdapter;
+    List<Status> statusList = new ArrayList<>();
     StatusViewModel statusViewModel;
-    List<String>statusName=new ArrayList<>();
-    List<Category>categories=new ArrayList<>();
-    List<String>categoryName=new ArrayList<>();
+    List<String> statusName = new ArrayList<>();
+    List<Category> categories = new ArrayList<>();
+    List<String> categoryName = new ArrayList<>();
 
     ArrayAdapter<String> categoryAdapter;
     CategoryViewModel categoryViewModel;
-    List<Periority>periorities=new ArrayList<>();
-    List<String>periorityName=new ArrayList<>();
-    ArrayAdapter<String>periorityAdapter;
+    List<Periority> periorities = new ArrayList<>();
+    List<String> periorityName = new ArrayList<>();
+    ArrayAdapter<String> periorityAdapter;
     PeriorityViewModel periorityViewModel;
     ApiTaskViewModel apiTaskViewModel;
 
     StatusApiRepository statusApiRepository;
-    PriorityRepository priorityRepository ;
+    PriorityRepository priorityRepository;
     CategoryApiRepository categoryApiRepository;
-    String Due_Date ;
+    String Due_Date;
     String editCategory;
     String editPriority;
     String editTeam;
     int editReview;
     String id;
-    private  ArrayList<Integer>selectedUserAssignes=new ArrayList<>();
+    private ArrayList<Integer> selectedUserAssignes = new ArrayList<>();
+
     public TaskFragment() {
 
     }
 
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_task,container,false);
-        spinner=view.findViewById(R.id.spinner);
-        categoryspinner=view.findViewById(R.id.categoryspinner);
-        hours=view.findViewById(R.id.hours);
-        startDate=view.findViewById(R.id.startDate);
-        revierSpiner=view.findViewById(R.id.revierSpiner);
-        team=view.findViewById(R.id.team);
-        dueDate=view.findViewById(R.id.dueDate);
-        periorityspinner=view.findViewById(R.id.periorityspinner);
-        title=view.findViewById(R.id.title);
-        Loader=view.findViewById(R.id.Loader);
-        authViewModel=new AuthViewModel(new AuthRepository());
-        discription=view.findViewById(R.id.discription);
+        View view = inflater.inflate(R.layout.fragment_task, container, false);
+        spinner = view.findViewById(R.id.spinner);
+        categoryspinner = view.findViewById(R.id.categoryspinner);
+        hours = view.findViewById(R.id.hours);
+        startDate = view.findViewById(R.id.startDate);
+        revierSpiner = view.findViewById(R.id.revierSpiner);
+        team = view.findViewById(R.id.team);
+        dueDate = view.findViewById(R.id.dueDate);
+        periorityspinner = view.findViewById(R.id.periorityspinner);
+        title = view.findViewById(R.id.title);
+        Loader = view.findViewById(R.id.Loader);
+        authViewModel = new AuthViewModel(new AuthRepository());
+        discription = view.findViewById(R.id.discription);
 //customImagView=view.findViewById(R.id.customImageView);
-        customUser=view.findViewById(R.id.customUser);
-        statusApiRepository=new StatusApiRepository();
-        priorityRepository=new PriorityRepository();
-        categoryApiRepository=new CategoryApiRepository();
-        savebtn=view.findViewById(R.id.savebtn);
-        categoryViewModel=new CategoryViewModel(new CategoryRepository());
-        periorityViewModel=new PeriorityViewModel(new PeriorityRepository());
-        statusViewModel=new StatusViewModel(new StatusRepository());
-        taskViewModel=new TaskViewModel(new TaskRepository());
-        uSerViewModel=new USerViewModel(new UserRepository());
-        apiTaskViewModel=new ApiTaskViewModel(new ApiTaskRepository());
+        customUser = view.findViewById(R.id.customUser);
+        statusApiRepository = new StatusApiRepository();
+        priorityRepository = new PriorityRepository();
+        categoryApiRepository = new CategoryApiRepository();
+        savebtn = view.findViewById(R.id.savebtn);
+        categoryViewModel = new CategoryViewModel(new CategoryRepository());
+        periorityViewModel = new PeriorityViewModel(new PeriorityRepository());
+        statusViewModel = new StatusViewModel(new StatusRepository());
+        taskViewModel = new TaskViewModel(new TaskRepository());
+        uSerViewModel = new USerViewModel(new UserRepository());
+        apiTaskViewModel = new ApiTaskViewModel(new ApiTaskRepository());
         startDate.setFocusable(false);
         startDate.setClickable(true);
 
@@ -127,105 +125,105 @@ ArrayAdapter<String>reiverAdpater;
         startDate.setOnClickListener(v -> openDatePicker(true));
 
         dueDate.setOnClickListener(v -> openDatePicker(false));
-      Bundle bundle=getArguments();
-      if (bundle!=null){
-           id=bundle.getString("taskId");
-          if (id!=null){
-              String titl1e=bundle.getString("title");
-              String discrip=bundle.getString("discription");
-              editCategory=bundle.getString("category");
-              String hourqs=bundle.getString("hourss");
-              String startDatee=bundle.getString("startDate");
-              String dueDatee=bundle.getString("dueDate");
-              editReview=bundle.getInt("reviewrID",0);
-              Log.d("REVIEWER_API", "Bundle reviewer: " + editReview);
-              editPriority=bundle.getString("priority");
-              editTeam=bundle.getString("team");
-              selectedUserAssignes =
-                      bundle.getIntegerArrayList("assignessId");
-              title.getEditText().setText(titl1e);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            id = bundle.getString("taskId");
+            if (id != null) {
+                String titl1e = bundle.getString("title");
+                String discrip = bundle.getString("discription");
+                editCategory = bundle.getString("category");
+                String hourqs = bundle.getString("hourss");
+                String startDatee = bundle.getString("startDate");
+                String dueDatee = bundle.getString("dueDate");
+                editReview = bundle.getInt("reviewrID", 0);
+                Log.d("REVIEWER_API", "Bundle reviewer: " + editReview);
+                editPriority = bundle.getString("priority");
+                editTeam = bundle.getString("team");
+                selectedUserAssignes =
+                        bundle.getIntegerArrayList("assignessId");
+                title.getEditText().setText(titl1e);
 
-              discription.getEditText().setText(discrip);
-              hours.getEditText().setText(hourqs);
-             startDate.setText(startDatee);
-             dueDate.setText(dueDatee);
-          }
-      }
-        reiverAdpater=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,userListspinner);
-      reiverAdpater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-      revierSpiner.setAdapter(reiverAdpater);
-authViewModel.getUserList(new AuthRepository.TaskCallBack() {
-    @Override
-    public void OnSuccess(JsonObject jsonReader) {
-
-
-        JsonArray array=jsonReader.getAsJsonArray("data");
-        for (JsonElement jsonElement:array){
-            JsonObject user=jsonElement.getAsJsonObject();
-            String name=user.get("name").getAsString();
-            int id=user.get("id").getAsInt();
-            userID.add(id);
-            userListspinner.add(name);
+                discription.getEditText().setText(discrip);
+                hours.getEditText().setText(hourqs);
+                startDate.setText(startDatee);
+                dueDate.setText(dueDatee);
+            }
         }
-        reiverAdpater.notifyDataSetChanged();
+        reiverAdpater = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, userListspinner);
+        reiverAdpater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        revierSpiner.setAdapter(reiverAdpater);
+        authViewModel.getUserList(new AuthRepository.TaskCallBack() {
+            @Override
+            public void OnSuccess(JsonObject jsonReader) {
 
-        if (editReview != 0) {
 
-            boolean found = false;
+                JsonArray array = jsonReader.getAsJsonArray("data");
+                for (JsonElement jsonElement : array) {
+                    JsonObject user = jsonElement.getAsJsonObject();
+                    String name = user.get("name").getAsString();
+                    int id = user.get("id").getAsInt();
+                    userID.add(id);
+                    userListspinner.add(name);
+                }
+                reiverAdpater.notifyDataSetChanged();
 
-            for (int i = 0; i < userID.size(); i++) {
+                if (editReview != 0) {
 
-                if (userID.get(i) == editReview) {
+                    boolean found = false;
 
-                    revierSpiner.setSelection(i);
-                    found = true;
+                    for (int i = 0; i < userID.size(); i++) {
 
-                    Log.d("REVIEWER_API",
-                            "Selected reviewer: "
-                                    + userListspinner.get(i)
-                                    + ", ID: " + userID.get(i));
+                        if (userID.get(i) == editReview) {
 
-                    break;
+                            revierSpiner.setSelection(i);
+                            found = true;
+
+                            Log.d("REVIEWER_API",
+                                    "Selected reviewer: "
+                                            + userListspinner.get(i)
+                                            + ", ID: " + userID.get(i));
+
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        Log.e("REVIEWER_API",
+                                "Reviewer ID users list mein nahi mili: "
+                                        + editReview);
+                    }
                 }
             }
 
-            if (!found) {
-                Log.e("REVIEWER_API",
-                        "Reviewer ID users list mein nahi mili: "
-                                + editReview);
+            @Override
+            public void Onerror(String message) {
+
             }
-        }
-    }
+        });
+        //    statusName.add("Status");
+        //  statusAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,statusName);
+        // statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //  spinner.setAdapter(statusAdapter);
 
-    @Override
-    public void Onerror(String message) {
+        //   statusViewModel.getList(new ResponseCallback<List<Status>>() {
+        //     @Override
+        //   public void onSuccess(List<Status> data, String message) {
+        //     statusList.clear();
+        //   statusList.addAll(data);
+        // statusName.clear();
+        //   statusName.add("Status");
+        // for (Status status:data){
+        //   statusName.add(status.getName());
 
-    }
-});
-    //    statusName.add("Status");
-      //  statusAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,statusName);
-       // statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-      //  spinner.setAdapter(statusAdapter);
+        //   }
+        //   statusAdapter.notifyDataSetChanged();
+        //  }
 
-     //   statusViewModel.getList(new ResponseCallback<List<Status>>() {
-       //     @Override
-         //   public void onSuccess(List<Status> data, String message) {
-           //     statusList.clear();
-             //   statusList.addAll(data);
-               // statusName.clear();
-             //   statusName.add("Status");
-               // for (Status status:data){
-                 //   statusName.add(status.getName());
+        //  @Override
+        //  public void onError(String message) {
 
-             //   }
-             //   statusAdapter.notifyDataSetChanged();
-          //  }
-
-          //  @Override
-          //  public void onError(String message) {
-
-           // }
-       // });
+        // }
+        // });
         teamList = new ArrayList<>();
 
         teamList.add(new Team(-1, "Select Team"));
@@ -272,10 +270,10 @@ authViewModel.getUserList(new AuthRepository.TaskCallBack() {
                 }
 
                 teamAdapter.notifyDataSetChanged();
-                if (editTeam!=null){
+                if (editTeam != null) {
                     for (int i = 0; i < teamList.size(); i++) {
-                        Team item=teamList.get(i);
-                        if (item!=null){
+                        Team item = teamList.get(i);
+                        if (item != null) {
                             team.setSelection(i);
                         }
 
@@ -289,20 +287,20 @@ authViewModel.getUserList(new AuthRepository.TaskCallBack() {
                 Log.e("TEAM_API", "Error: " + message);
             }
         });
-      //  statusApiRepository.getStatusList(new ResponseCallback<List<String>>() {
+        //  statusApiRepository.getStatusList(new ResponseCallback<List<String>>() {
         //    @Override
-          //  public void onSuccess(List<String> data, String message) {
+        //  public void onSuccess(List<String> data, String message) {
 
-            //    statusAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,data);
-              //   statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                //  spinner.setAdapter(statusAdapter);
-         //   }
+        //    statusAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,data);
+        //   statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //  spinner.setAdapter(statusAdapter);
+        //   }
 
-         //   @Override
-           // public void onError(String message) {
+        //   @Override
+        // public void onError(String message) {
 
-          //  }
-       // });
+        //  }
+        // });
         categoryApiRepository.getCategoryList(new ResponseCallback<List<String>>() {
 
             @Override
@@ -356,63 +354,63 @@ authViewModel.getUserList(new AuthRepository.TaskCallBack() {
             }
         });
 //        categoryName.add("Category");
-  //      categoryAdapter=new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,categoryName);
-    //    categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-      //  categoryspinner.setAdapter(categoryAdapter);
-     //   categoryViewModel.getList(new ResponseCallback<List<Category>>() {
-       //     @Override
-         //   public void onSuccess(List<Category> data, String message) {
-           //     categories.clear();
-             //   categories.addAll(data);
-               // for (Category category:data){
-                 //   categoryName.add(category.getName());
+        //      categoryAdapter=new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,categoryName);
+        //    categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //  categoryspinner.setAdapter(categoryAdapter);
+        //   categoryViewModel.getList(new ResponseCallback<List<Category>>() {
+        //     @Override
+        //   public void onSuccess(List<Category> data, String message) {
+        //     categories.clear();
+        //   categories.addAll(data);
+        // for (Category category:data){
+        //   categoryName.add(category.getName());
 
-            //    }
-              //  categoryAdapter.notifyDataSetChanged();
-         //   }
+        //    }
+        //  categoryAdapter.notifyDataSetChanged();
+        //   }
 
-           // @Override
-          //  public void onError(String message) {
+        // @Override
+        //  public void onError(String message) {
 
-          //  }
-      //  });
+        //  }
+        //  });
 
-    //    periorityName.add("Periority");
-      //  periorityAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,periorityName);
-     //   periorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       // periorityspinner.setAdapter(periorityAdapter);
-      //  periorityViewModel.getList(new ResponseCallback<List<Periority>>() {
+        //    periorityName.add("Periority");
+        //  periorityAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,periorityName);
+        //   periorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // periorityspinner.setAdapter(periorityAdapter);
+        //  periorityViewModel.getList(new ResponseCallback<List<Periority>>() {
         //    @Override
-          //  public void onSuccess(List<Periority> data, String message) {
-            //    periorities.clear();
-              //  periorities.addAll(data);
-                //for (Periority periority:data){
-                  //  periorityName.add(periority.getName());
-             //   }
-              //  periorityAdapter.notifyDataSetChanged();
-          //  }
+        //  public void onSuccess(List<Periority> data, String message) {
+        //    periorities.clear();
+        //  periorities.addAll(data);
+        //for (Periority periority:data){
+        //  periorityName.add(periority.getName());
+        //   }
+        //  periorityAdapter.notifyDataSetChanged();
+        //  }
 
-          //  @Override
-            //public void onError(String message) {
+        //  @Override
+        //public void onError(String message) {
 
-          //  }
-       // });
+        //  }
+        // });
         priorityRepository.getPriority(new ResponseCallback<List<String>>() {
             @Override
             public void onSuccess(List<String> data, String message) {
-                  periorityAdapter=new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,data);
-                   periorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                 periorityspinner.setAdapter(periorityAdapter);
-                 if (editPriority!=null){
-                     for (int i = 0; i < data.size(); i++) {
-                         String item = data.get(i);
-                         if (item != null &&
-                                 item.trim().equalsIgnoreCase(editPriority.trim())) {
+                periorityAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, data);
+                periorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                periorityspinner.setAdapter(periorityAdapter);
+                if (editPriority != null) {
+                    for (int i = 0; i < data.size(); i++) {
+                        String item = data.get(i);
+                        if (item != null &&
+                                item.trim().equalsIgnoreCase(editPriority.trim())) {
 
-                             periorityspinner.setSelection(i);
-                         }
-                     }
-                 }
+                            periorityspinner.setSelection(i);
+                        }
+                    }
+                }
             }
 
             @Override
@@ -420,72 +418,72 @@ authViewModel.getUserList(new AuthRepository.TaskCallBack() {
 
             }
         });
-        cameraLauncher=registerForActivityResult(new ActivityResultContracts.TakePicture(),result ->{
-            if (result&&cameraUri!=null){
+        cameraLauncher = registerForActivityResult(new ActivityResultContracts.TakePicture(), result -> {
+            if (result && cameraUri != null) {
                 customImagView.uriList.add(cameraUri.toString());
                 customImagView.imageAdpter.notifyDataSetChanged();
             }
-        } );
-   //     customImagView.setOnCameraClick(() -> {
+        });
+        //     customImagView.setOnCameraClick(() -> {
 
-     //       ContentValues values = new ContentValues();
+        //       ContentValues values = new ContentValues();
 
-       //     values.put(
-         //           MediaStore.Images.Media.DISPLAY_NAME,
-           //         "task_" + System.currentTimeMillis() + ".jpg"
-         //   );
+        //     values.put(
+        //           MediaStore.Images.Media.DISPLAY_NAME,
+        //         "task_" + System.currentTimeMillis() + ".jpg"
+        //   );
 
-          //  values.put(
-            //        MediaStore.Images.Media.MIME_TYPE,
-              //      "image/jpeg"
-         //   );
+        //  values.put(
+        //        MediaStore.Images.Media.MIME_TYPE,
+        //      "image/jpeg"
+        //   );
 
-           // cameraUri = requireContext()
-             //       .getContentResolver()
-               //     .insert(
-                 //           MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                   //         values
-                  //  );
+        // cameraUri = requireContext()
+        //       .getContentResolver()
+        //     .insert(
+        //           MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+        //         values
+        //  );
 
-          //  if (cameraUri != null) {
-            //    cameraLauncher.launch(cameraUri);
-          //  }
-      //  });
+        //  if (cameraUri != null) {
+        //    cameraLauncher.launch(cameraUri);
+        //  }
+        //  });
         //gallerLauncher = registerForActivityResult(
-          //      new ActivityResultContracts.GetMultipleContents(),
-            //    uris -> {
+        //      new ActivityResultContracts.GetMultipleContents(),
+        //    uris -> {
 
-              //      if (uris != null) {
+        //      if (uris != null) {
 
-                //        customImagView.uriList.clear();
-                  //      for (Uri uri:uris){
-                    //        customImagView.uriList.add(uri.toString());
-                      //  }
+        //        customImagView.uriList.clear();
+        //      for (Uri uri:uris){
+        //        customImagView.uriList.add(uri.toString());
+        //  }
 
 
-                        //customImagView.imageAdpter.notifyDataSetChanged();
-                  //  }
-              //  }
-      //  );
+        //customImagView.imageAdpter.notifyDataSetChanged();
+        //  }
+        //  }
+        //  );
         //customImagView.setOnGallerClick(new CustomImagView.OnGallerClick() {
-          //  @Override
-            //public void onClick() {
-              //  gallerLauncher.launch("image/*");
-          //  }
-       // });
-       // uSerViewModel.getUser(new ResponseCallback<List<User>>() {
-         //   @Override
-           // public void onSuccess(List<User> data, String message) {
-             //   userList.clear();
-               // customUser.userList.addAll(data);
+        //  @Override
+        //public void onClick() {
+        //  gallerLauncher.launch("image/*");
+        //  }
+        // });
+        // uSerViewModel.getUser(new ResponseCallback<List<User>>() {
+        //   @Override
+        // public void onSuccess(List<User> data, String message) {
+        //   userList.clear();
+        // customUser.userList.addAll(data);
 
-          //  }
+        //  }
 
-          //  @Override
-            //public void onError(String message) {
+        //  @Override
+        //public void onError(String message) {
 
-           //  }
-       // });
+        //  }
+        // });
 
 
         authViewModel.getUserList(new AuthRepository.TaskCallBack() {
@@ -539,18 +537,17 @@ authViewModel.getUserList(new AuthRepository.TaskCallBack() {
         });
 
 
-
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title1=title.getEditText().getText().toString();
-                String discpt=discription.getEditText().getText().toString();
+                String title1 = title.getEditText().getText().toString();
+                String discpt = discription.getEditText().getText().toString();
 
-                if (title1.isEmpty()){
+                if (title1.isEmpty()) {
                     Toast.makeText(getContext(), " Please Create title ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (discpt.isEmpty()){
+                if (discpt.isEmpty()) {
                     Toast.makeText(getContext(), " Please Create discription ", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -559,24 +556,24 @@ authViewModel.getUserList(new AuthRepository.TaskCallBack() {
                 String categoryPosition = categoryspinner.getSelectedItem().toString();
                 String periorityPosition = periorityspinner.getSelectedItem().toString();
 
-           //     if (statusPosition <= 0) {
-             //       Toast.makeText(getContext(), "Please Select Status", Toast.LENGTH_SHORT).show();
-               //     return;
-             //   }
+                //     if (statusPosition <= 0) {
+                //       Toast.makeText(getContext(), "Please Select Status", Toast.LENGTH_SHORT).show();
+                //     return;
+                //   }
 
-               // if (categoryPosition <= 0) {
-                 //   Toast.makeText(getContext(), "Please Select Category", Toast.LENGTH_SHORT).show();
-                   // return;
-           //     }
+                // if (categoryPosition <= 0) {
+                //   Toast.makeText(getContext(), "Please Select Category", Toast.LENGTH_SHORT).show();
+                // return;
+                //     }
 
-             //   if (periorityPosition <= 0) {
-               //     Toast.makeText(getContext(), "Please Select Periority", Toast.LENGTH_SHORT).show();
+                //   if (periorityPosition <= 0) {
+                //     Toast.makeText(getContext(), "Please Select Periority", Toast.LENGTH_SHORT).show();
                 //    return;
-             //   }
+                //   }
 
 //                String statusId = statusList.get(statusPosition - 1).getId();
-  //              String categoryId = categories.get(categoryPosition - 1).getId();
-    //            String periorityId = periorities.get(periorityPosition - 1).getId();
+                //              String categoryId = categories.get(categoryPosition - 1).getId();
+                //            String periorityId = periorities.get(periorityPosition - 1).getId();
 
                 Team selectedTeam = (Team) team.getSelectedItem();
 
@@ -588,30 +585,30 @@ authViewModel.getUserList(new AuthRepository.TaskCallBack() {
                 }
 
                 int selectedTeamId = selectedTeam.getId();
-int selectedRevier=revierSpiner.getSelectedItemPosition();
-int reviwerID=userID.get(selectedRevier);
+                int selectedRevier = revierSpiner.getSelectedItemPosition();
+                int reviwerID = userID.get(selectedRevier);
                 Log.d("TEAM_API", "Selected Team ID = " + selectedTeamId);
                 Log.d("TEAM_API", "Selected Team Name = " + selectedTeam.getName());
 
 
-                String estimatTime=hours.getEditText().getText().toString().trim();
-                Log.e("API TASK", "onClick: "+estimatTime );
+                String estimatTime = hours.getEditText().getText().toString().trim();
+                Log.e("API TASK", "onClick: " + estimatTime);
                 Loader.setVisibility(View.VISIBLE);
                 selectedDate = startDate.getText().toString().trim();
                 Due_Date = dueDate.getText().toString().trim();
 
                 Log.d("TASK_DATE", "Start date before API = " + selectedDate);
                 Log.d("TASK_DATE", "Due date before API = " + Due_Date);
-                Task taskReq=new Task();
-             taskReq.setTitle(title1);
-             taskReq.setEstimated_hours(estimatTime);
-             taskReq.setDiscription(discpt);
-             taskReq.setTeamId(selectedTeamId);
-             taskReq.setPeriority(periorityPosition);
-taskReq.setCategory(categoryPosition);
-taskReq.setReviewer_id(reviwerID);
-taskReq.setStart_date(selectedDate);
-taskReq.setDue_date(Due_Date);
+                Task taskReq = new Task();
+                taskReq.setTitle(title1);
+                taskReq.setEstimated_hours(estimatTime);
+                taskReq.setDiscription(discpt);
+                taskReq.setTeamId(selectedTeamId);
+                taskReq.setPeriority(periorityPosition);
+                taskReq.setCategory(categoryPosition);
+                taskReq.setReviewer_id(reviwerID);
+                taskReq.setStart_date(selectedDate);
+                taskReq.setDue_date(Due_Date);
 
                 Log.d("TASK_API", "Selected priority: "
                         + periorityspinner.getSelectedItem());
@@ -620,9 +617,6 @@ taskReq.setDue_date(Due_Date);
                         + taskReq.getPeriority());
 
                 List<Integer> selectedUser = customUser.getSelectedUserIds();
-
-
-
 
 
                 String titleValue =
@@ -636,39 +630,40 @@ taskReq.setDue_date(Due_Date);
 
                 String dueDateValue =
                         dueDate.getText().toString().trim();
-                String startDateValue=startDate.getText().toString().trim();
+                String startDateValue = startDate.getText().toString().trim();
                 Loader.setVisibility(View.VISIBLE);
-                UpdateTask request=new UpdateTask(titleValue,descriptionValue,categoryPosition,priorityValue,selectedTeamId,estimatTime,startDateValue,dueDateValue,reviwerID,selectedUser);
-                if (id!=null) {
+                UpdateTask request = new UpdateTask(titleValue, descriptionValue, categoryPosition, priorityValue, selectedTeamId, estimatTime, startDateValue, dueDateValue, reviwerID, selectedUser);
+                if (id != null) {
 
                     // Existing task ko update karo
-                    apiTaskViewModel.updateTask(id, request, new ApiTaskRepository.TaskCallBack() {
+                    apiTaskViewModel.updateTask(id, request, new ResponseCallback<Task>() {
                         @Override
-                        public void OnSuccess(JsonObject jsonReader) {
+                        public void onSuccess(Task data, String message) {
+
                             Loader.setVisibility(View.GONE);
-                            Log.e("API TASK", "OnSuccess: "+jsonReader );
+//                            Log.e("API TASK", "OnSuccess: " + jsonReader);
                             Toast.makeText(getContext(), "Task Updated", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
-                        public void Onerror(String message) {
+                        public void onError(String message) {
                             Loader.setVisibility(View.GONE);
+
                         }
                     });
 
                 } else {
 
                     // Naya task create karo
-                    apiTaskViewModel.creatTask(taskReq, selectedUser, new ApiTaskRepository.TaskCallBack() {
+                    apiTaskViewModel.creatTask(taskReq, selectedUser, new ResponseCallback<Task>() {
                         @Override
-                        public void OnSuccess(JsonObject jsonReader) {
+                        public void onSuccess(Task data, String message) {
                             Loader.setVisibility(View.GONE);
                             Toast.makeText(getContext(), "Task Created", Toast.LENGTH_SHORT).show();
-                            Log.e("API TASK", "OnSuccess: "+jsonReader );
                         }
 
                         @Override
-                        public void Onerror(String message) {
+                        public void onError(String message) {
                             Loader.setVisibility(View.GONE);
 
                         }
@@ -676,22 +671,22 @@ taskReq.setDue_date(Due_Date);
                 }
                 //  taskViewModel.saveData(title1, discpt,statusId,categoryId,periorityId,  customUser.list,customImagView.uriList,new ResponseCallback<Task>() {
                 //    @Override
-                  //  public void onSuccess(Task data, String message) {
-                    //    Loader.setVisibility(View.GONE);
-                      //  title.getEditText().setText("");
-                    //    discription.getEditText().setText("");
-                      //  customUser.selecteduser.clear();
-                    //    customImagView.uriList.clear();
-                      //  Toast.makeText(getContext(), "Task is Created", Toast.LENGTH_SHORT).show();
+                //  public void onSuccess(Task data, String message) {
+                //    Loader.setVisibility(View.GONE);
+                //  title.getEditText().setText("");
+                //    discription.getEditText().setText("");
+                //  customUser.selecteduser.clear();
+                //    customImagView.uriList.clear();
+                //  Toast.makeText(getContext(), "Task is Created", Toast.LENGTH_SHORT).show();
 
                 //    }
 
-                  //  @Override
+                //  @Override
                 //    public void onError(String message) {
-                  //      Loader.setVisibility(View.GONE);
-                 //   }
-              //  });
-                  }
+                //      Loader.setVisibility(View.GONE);
+                //   }
+                //  });
+            }
         });
         return view;
 

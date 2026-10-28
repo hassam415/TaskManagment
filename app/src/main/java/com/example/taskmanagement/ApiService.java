@@ -1,6 +1,9 @@
 package com.example.taskmanagement;
 
+import com.example.taskmanagement.response.PaginateResponse;
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,13 +18,13 @@ public interface ApiService {
     Call<LoginResponse> login(@Body LoginRequest request);
 
     @POST("tasks")
-    Call<JsonObject> createTask(@Body JsonObject request);
+    Call<Task> createTask(@Body JsonObject request);
 
     @GET("tasks")
-    Call<JsonObject> getTasks();
+    Call<PaginateResponse<Task>> getTasks();
 
     @GET("tasks/{id}")
-    Call<JsonObject> getSingleTask(@Path("id") String taskid);
+    Call<Task> getSingleTask(@Path("id") String taskid);
 
     @GET("users/assignable")
     Call<JsonObject> getUsers();
@@ -30,7 +33,7 @@ public interface ApiService {
     Call<JsonObject> deletTask(@Path("id") String taskId);
 
     @PUT("tasks/{id}")
-    Call<JsonObject> updateTask(
+    Call<Task> updateTask(
             @Path("id") String taskID,
             @Body UpdateTask updateTask
     );

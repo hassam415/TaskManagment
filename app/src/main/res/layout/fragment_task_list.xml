@@ -5,61 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!-- Main Task List -->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
-
-    <FrameLayout
+    <!-- Main Task List -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/taskrecycler"
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/taskrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
 
-        <LinearLayout
-            android:id="@+id/Loader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:visibility="gone">
-
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/Loader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Loading..."
-                android:textSize="14sp"/>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-        </LinearLayout>
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-    </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Loading..."
+                    android:textSize="14sp" />
 
-    <!-- Add Task Button -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/taskbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-app:tint="@color/white"
-        android:backgroundTint="@color/darknavey"
-        android:src="@drawable/baseline_add_24"
-        android:layout_margin="16dp"/>
+            </LinearLayout>
 
-</LinearLayout>
+        </FrameLayout>
+
+        <!-- Add Task Button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/taskbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/darknavey"
+            android:src="@drawable/baseline_add_24"
+            app:tint="@color/white" />
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -67,9 +66,9 @@ app:tint="@color/white"
         android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
+        android:background="#F7F8FC"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:background="#F7F8FC">
+        android:padding="20dp">
 
         <!-- Header -->
         <LinearLayout
@@ -82,17 +81,17 @@ app:tint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Filter Tasks"
+                android:textColor="@color/darknavey"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/darknavey"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Find tasks using the filters below"
-                android:textSize="13sp"
-                android:textColor="#777E8C"/>
+                android:textColor="#777E8C"
+                android:textSize="13sp" />
 
         </LinearLayout>
 
@@ -101,9 +100,9 @@ app:tint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,11 +113,11 @@ app:tint="@color/white"
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="STATUS"
                     android:layout_marginLeft="2dp"
+                    android:text="STATUS"
                     android:textColor="@color/darknavey"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinner"
@@ -126,9 +125,9 @@ app:tint="@color/white"
                     android:layout_height="48dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown"
                     android:paddingStart="10dp"
-                    android:paddingEnd="10dp"/>
+                    android:paddingEnd="10dp"
+                    android:spinnerMode="dropdown" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -138,25 +137,24 @@ app:tint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="4dp"
-               >
+                android:padding="4dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="CATEGORY"
                     android:layout_marginLeft="2dp"
+                    android:text="CATEGORY"
                     android:textColor="@color/darknavey"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/categoryspiner"
@@ -164,9 +162,9 @@ app:tint="@color/white"
                     android:layout_height="48dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown"
                     android:paddingStart="10dp"
-                    android:paddingEnd="10dp"/>
+                    android:paddingEnd="10dp"
+                    android:spinnerMode="dropdown" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -176,9 +174,9 @@ app:tint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -187,13 +185,13 @@ app:tint="@color/white"
                 android:padding="4dp">
 
                 <TextView
-                    android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
                     android:text="PRIORITY"
                     android:textColor="@color/darknavey"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/periorityspiner"
@@ -201,9 +199,9 @@ app:tint="@color/white"
                     android:layout_height="48dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown"
                     android:paddingStart="10dp"
-                    android:paddingEnd="10dp"/>
+                    android:paddingEnd="10dp"
+                    android:spinnerMode="dropdown" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -213,9 +211,9 @@ app:tint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -226,24 +224,24 @@ app:tint="@color/white"
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="DATE RANGE"
                     android:layout_marginLeft="7dp"
+                    android:text="DATE RANGE"
                     android:textColor="@color/darknavey"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:id="@+id/selectDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
                     android:minHeight="48dp"
                     android:text="Select Date"
                     app:cornerRadius="8dp"
 
 
-                   />
+                    />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -253,16 +251,16 @@ app:tint="@color/white"
             android:id="@+id/applybtn"
             android:layout_width="match_parent"
             android:layout_height="52dp"
+            android:backgroundTint="@color/darknavey"
             android:text="Apply Filters"
             android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textSize="15sp"
             android:textColor="@android:color/white"
-            android:backgroundTint="@color/darknavey"
+            android:textSize="15sp"
+            android:textStyle="bold"
             app:cornerRadius="10dp"
             app:icon="@drawable/outline_check_24"
             app:iconGravity="textStart"
-            app:iconTint="@android:color/white"/>
+            app:iconTint="@android:color/white" />
 
     </LinearLayout>
 

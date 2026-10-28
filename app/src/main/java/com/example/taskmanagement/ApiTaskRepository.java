@@ -3,6 +3,8 @@ package com.example.taskmanagement;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.response.PaginateResponse;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -18,34 +20,36 @@ public class ApiTaskRepository {
     private ApiService apiService;
 
     public ApiTaskRepository() {
-        apiService=ApiClient.getRetrofit().create(ApiService.class);
+        apiService = ApiClient.getRetrofit().create(ApiService.class);
     }
-    public interface TaskCallBack{
+
+    public interface TaskCallBack {
         void OnSuccess(JsonObject jsonReader);
+
         void Onerror(String message);
     }
 
     public void creatTask(
             Task task,
             List<Integer> selectedUserIds,
-            TaskCallBack callback) {
+            ResponseCallback<Task> callback) {
 
         String token = ApiSesson.getAccess_Token();
 
         if (token == null || token.trim().isEmpty()) {
-            callback.Onerror("Access token nahi mila. Dobara login karo.");
+            callback.onError("Access token nahi mila. Dobara login karo.");
             return;
         }
 
         if (task.getTitle() == null || task.getTitle().trim().isEmpty()) {
-            callback.Onerror("Task title required hai.");
+            callback.onError("Task title required hai.");
             return;
         }
 
         String priority = task.getPeriority();
 
         if (priority == null || priority.trim().isEmpty()) {
-            callback.Onerror("Priority select karo.");
+            callback.onError("Priority select karo.");
             return;
         }
 
@@ -56,18 +60,18 @@ public class ApiTaskRepository {
                 "priority",
                 priority.trim().toLowerCase(java.util.Locale.ROOT)
         );
-request.addProperty("team_id", task.getTeamId());
+        request.addProperty("team_id", task.getTeamId());
         if (task.getDiscription() != null
                 && !task.getDiscription().trim().isEmpty()) {
             request.addProperty("description", task.getDiscription().trim());
         }
-request.addProperty("reviewer_id",task.getReviewer_id());
+        request.addProperty("reviewer_id", task.getReviewer_id());
         if (task.getCategory() != null
                 && !task.getCategory().trim().isEmpty()) {
             request.addProperty("category", task.getCategory().trim());
         }
-        if (task.getEstimated_hours()!=null&& !task.getEstimated_hours().trim().isEmpty()){
-            request.addProperty("estimated_hours",task.getEstimated_hours().trim());
+        if (task.getEstimated_hours() != null && !task.getEstimated_hours().trim().isEmpty()) {
+            request.addProperty("estimated_hours", task.getEstimated_hours().trim());
         }
 
         // Selected users ki integer IDs
@@ -112,18 +116,18 @@ request.addProperty("reviewer_id",task.getReviewer_id());
         Log.d("TASK_API", "Request JSON: " + request);
 
         apiService.createTask(request)
-                .enqueue(new Callback<JsonObject>() {
+                .enqueue(new Callback<Task>() {
 
                     @Override
                     public void onResponse(
-                            Call<JsonObject> call,
-                            Response<JsonObject> response) {
+                            Call<Task> call,
+                            Response<Task> response) {
 
                         Log.d("TASK_API", "HTTP Code: " + response.code());
 
                         if (response.isSuccessful() && response.body() != null) {
                             Log.d("TASK_API", "Task created: " + response.body());
-                            callback.OnSuccess(response.body());
+                            callback.onSuccess(response.body(), "");
 
                         } else {
                             String error = "HTTP " + response.code();
@@ -137,15 +141,15 @@ request.addProperty("reviewer_id",task.getReviewer_id());
                             }
 
                             Log.e("TASK_API", error);
-                            callback.Onerror(error);
+                            callback.onError(error);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                    public void onFailure(Call<Task> call, Throwable t) {
                         Log.e("TASK_API", "Network error", t);
 
-                        callback.Onerror(
+                        callback.onError(
                                 t.getMessage() != null
                                         ? t.getMessage()
                                         : "Network error"
@@ -154,64 +158,70 @@ request.addProperty("reviewer_id",task.getReviewer_id());
                 });
     }
 
-    public void getTask(TaskCallBack taskCallBack){
-        apiService.getTasks().enqueue(new Callback<JsonObject>() {
+    public void getTask(ResponseCallback<PaginateResponse<Task>> taskCallBack) {
+        apiService.getTasks().enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                taskCallBack.OnSuccess(response.body());
+            public void onResponse(Call<PaginateResponse<Task>> call, Response<PaginateResponse<Task>> response) {
+                taskCallBack.onSuccess(response.body(), "");
+
+                Log.e("onSuccess: ", response.message() + "");
+
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable throwable) {
-                taskCallBack.Onerror(throwable.getMessage());
+            public void onFailure(Call<PaginateResponse<Task>> call, Throwable throwable) {
+                taskCallBack.onError(throwable.getMessage());
+                Log.e("onFailure: ", throwable.getLocalizedMessage() + "");
+
+            }
+        });
+//        Response<Task>
+    }
+
+    public void getSingleTask(String taskId, ResponseCallback<Task> taskCallBack) {
+        apiService.getSingleTask(taskId).enqueue(new Callback<Task>() {
+            @Override
+            public void onResponse(Call<Task> call, Response<Task> response) {
+                taskCallBack.onSuccess(response.body(), "");
+            }
+
+            @Override
+            public void onFailure(Call<Task> call, Throwable throwable) {
+                taskCallBack.onError(throwable.getMessage());
             }
         });
     }
 
-    public void getSingleTask(String taskId,TaskCallBack taskCallBack){
-        apiService.getSingleTask(taskId).enqueue(new Callback<JsonObject>() {
+    public void DeleteTask(String id, TaskCallBack taskCallBack) {
+//        apiService.deletTask(id).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                taskCallBack.OnSuccess(response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+//                taskCallBack.Onerror(throwable.getMessage());
+//            }
+//        });
+
+    }
+
+    public void updateTask(String id, UpdateTask task, ResponseCallback<Task> taskCallBack) {
+        apiService.updateTask(id, task).enqueue(new Callback<Task>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                taskCallBack.OnSuccess(response.body());
+            public void onResponse(Call<Task> call, Response<Task> response) {
+                taskCallBack.onSuccess(response.body(), "");
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable throwable) {
-                taskCallBack.Onerror(throwable.getMessage());
+            public void onFailure(Call<Task> call, Throwable throwable) {
+                taskCallBack.onError(throwable.getMessage());
             }
         });
     }
 
-    public void DeleteTask(String id,TaskCallBack taskCallBack){
-        apiService.deletTask(id).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                taskCallBack.OnSuccess(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable throwable) {
-                taskCallBack.Onerror(throwable.getMessage());
-            }
-        });
-
-    }
-
-    public void updateTask(String id ,UpdateTask task,TaskCallBack taskCallBack){
-        apiService.updateTask(id,task).enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                taskCallBack.OnSuccess(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable throwable) {
-                taskCallBack.Onerror(throwable.getMessage());
-            }
-        });
-    }
-
-    public void getTeams(TaskCallBack taskCallBack){
+    public void getTeams(TaskCallBack taskCallBack) {
         apiService.getTeam().enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

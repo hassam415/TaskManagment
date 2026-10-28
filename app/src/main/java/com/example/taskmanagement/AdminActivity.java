@@ -28,8 +28,7 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
 
     ActionBarDrawerToggle toggle;
     ActivityMainBinding binding;
-FirebaseAuth mauth;
-
+    FirebaseAuth mauth;
 
 
     @Override
@@ -39,54 +38,54 @@ FirebaseAuth mauth;
 
     @Override
     public View getView() {
-        mauth=FirebaseAuth.getInstance();
-        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        mauth = FirebaseAuth.getInstance();
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         binding.navigation.setNavigationItemSelectedListener(this);
         super.binding.filterBtn.setVisibility(View.GONE);
-        toggle=new ActionBarDrawerToggle(this,binding.drawerLayout,super.binding.toolbar,R.string.open,R.string.close);
+        toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, super.binding.toolbar, R.string.open, R.string.close);
         binding.drawerLayout.addDrawerListener(toggle);
-        toggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this,R.color.white));
+        toggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
         toggle.syncState();
-getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new DashboardFragment()).commit();
-setToolbarText("DashBoard");
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).commit();
+        setToolbarText("DashBoard");
         return binding.getRoot();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        int id=menuItem.getItemId();
-        if (id ==R.id.user){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new UserListFragment()).commit();
-setToolbarText("User");
+        int id = menuItem.getItemId();
+        if (id == R.id.user) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new UserListFragment()).commit();
+            setToolbarText("User");
 
         }
-        if (id ==R.id.task){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new TaskListFragment()).addToBackStack(null).commit();
-setToolbarText("Task");
+        if (id == R.id.task) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new TaskListFragment()).addToBackStack(null).commit();
+            setToolbarText("Task");
 
         }
-        if (id ==R.id.dashboard){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new DashboardFragment()).addToBackStack(null).commit();
-setToolbarText("DashBoard");
+        if (id == R.id.dashboard) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).addToBackStack(null).commit();
+            setToolbarText("DashBoard");
         }
-        if (id==R.id.logout){
+        if (id == R.id.logout) {
             mauth.signOut();
             Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
-            Intent  intent=new Intent(AdminActivity.this,LoginActivity.class);
+            Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
 
             startActivity(intent);
             finish();
         }
-        if (id ==R.id.periorities){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new PeriorityFragment()).commit();
+        if (id == R.id.periorities) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PeriorityFragment()).commit();
             setToolbarText("Periority");
         }
-        if (id ==R.id.status){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new StatusFragment()).commit();
+        if (id == R.id.status) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new StatusFragment()).commit();
             setToolbarText("Status");
         }
-        if (id ==R.id.category){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new CategoryFragment()).commit();
+        if (id == R.id.category) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new CategoryFragment()).commit();
             setToolbarText("Category");
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START);
