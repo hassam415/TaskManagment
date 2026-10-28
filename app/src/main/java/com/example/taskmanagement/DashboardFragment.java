@@ -46,69 +46,69 @@ StatusViewModel statusViewModel;
         fragmentDashboardBinding=FragmentDashboardBinding.inflate(inflater,container,false);
 
         ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
-fragmentDashboardBinding.dashboardrecyler.setHasFixedSize(true);
-fragmentDashboardBinding.dashboardrecyler.setLayoutManager(new GridLayoutManager(getContext(),2));
-dashboardAdapter=new DashboardAdapter(getContext(),statusList);
-fragmentDashboardBinding.dashboardrecyler.setAdapter(dashboardAdapter);
-statusViewModel=new StatusViewModel(new StatusRepository());
-filterBtn.setVisibility(View.GONE);
-       dashboardViewModel=new DashboardViewModel(new DashboardRepository());
-       dashboardViewModel.getTotalTask(new ResponseCallback<Integer>() {
-           @Override
-           public void onSuccess(Integer data, String message) {
-               fragmentDashboardBinding.taskcount.setText(String.valueOf(data));
-           }
+//fragmentDashboardBinding.dashboardrecyler.setHasFixedSize(true);
+//fragmentDashboardBinding.dashboardrecyler.setLayoutManager(new GridLayoutManager(getContext(),2));
+//dashboardAdapter=new DashboardAdapter(getContext(),statusList);
+//fragmentDashboardBinding.dashboardrecyler.setAdapter(dashboardAdapter);
+//statusViewModel=new StatusViewModel(new StatusRepository());
+//filterBtn.setVisibility(View.GONE);
+  //     dashboardViewModel=new DashboardViewModel(new DashboardRepository());
+    //   dashboardViewModel.getTotalTask(new ResponseCallback<Integer>() {
+      //     @Override
+        //   public void onSuccess(Integer data, String message) {
+            //   fragmentDashboardBinding.taskcount.setText(String.valueOf(data));
+         //  }
 
-           @Override
-           public void onError(String message) {
+           //@Override
+         //  public void onError(String message) {
 
-           }
-       });
-       dashboardViewModel.getTotalUser(new ResponseCallback<Integer>() {
-           @Override
-           public void onSuccess(Integer data, String message) {
-               fragmentDashboardBinding.usercount.setText(String.valueOf(data));
-           }
+         //  }
+     //  });
+      // dashboardViewModel.getTotalUser(new ResponseCallback<Integer>() {
+        //   @Override
+          // public void onSuccess(Integer data, String message) {
+              // fragmentDashboardBinding.usercount.setText(String.valueOf(data));
+          // }
 
-           @Override
-           public void onError(String message) {
+         //  @Override
+         //  public void onError(String message) {
 
-           }
-       });
+         //  }
+      // });
 
 
-        statusViewModel.getList(new ResponseCallback<List<Status>>() {
-            @Override
-            public void onSuccess(List<Status> data, String message) {
+      //  statusViewModel.getList(new ResponseCallback<List<Status>>() {
+        //    @Override
+          //  public void onSuccess(List<Status> data, String message) {
 
-                statusList.clear();
-                statusList.addAll(data);
-                dashboardAdapter.notifyDataSetChanged();
+            //    statusList.clear();
+              //  statusList.addAll(data);
+                //dashboardAdapter.notifyDataSetChanged();
 
-                for (Status status : data) {
+               // for (Status status : data) {
 
-                    dashboardViewModel.getStatus(
-                            status.getId(),
-                            new ResponseCallback<Integer>() {
-                                @Override
-                                public void onSuccess(Integer count, String message) {
+               //     dashboardViewModel.getStatus(
+                 //           status.getId(),
+                   //         new ResponseCallback<Integer>() {
+                     //           @Override
+                       //         public void onSuccess(Integer count, String message) {
 
-                                    dashboardAdapter.setTaskCount(status.getId(), count);
-                                }
+                         //           dashboardAdapter.setTaskCount(status.getId(), count);
+                           //     }
 
-                                @Override
-                                public void onError(String message) {
+                             //   @Override
+                               // public void onError(String message) {
 
-                                }
-                            }
-                    );
-                }
-            }
+                             //   }
+                          //  }
+                 //   );
+              //  }
+            //}
 
-            @Override
-            public void onError(String message) {
-            }
-        });
+       //     @Override
+         //   public void onError(String message) {
+           // }
+       // });
 
 
         return fragmentDashboardBinding.getRoot();
