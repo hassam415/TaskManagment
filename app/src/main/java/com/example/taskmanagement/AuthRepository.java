@@ -26,7 +26,7 @@ public class AuthRepository {
 
         LoginRequest request = new LoginRequest(email, password);
 
-        apiService.login(request).enqueue(new Callback<LoginResponse>() {
+        apiService.login(request).enqueue(new Callback<>() {
 
             @Override
             public void onResponse(
@@ -58,11 +58,10 @@ public class AuthRepository {
         });
     }
     public void getUser(TaskCallBack loginCallBack){
-        String token=ApiSesson.getAccess_Token();
-        apiService.getUsers("Bearer " + token).enqueue(new Callback<JsonObject>() {
+        apiService.getUsers().enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                JsonObject reuslt=response.body();
+                JsonObject reuslt = response.body();
                 loginCallBack.OnSuccess(reuslt);
             }
 

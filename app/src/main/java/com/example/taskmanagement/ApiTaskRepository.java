@@ -111,7 +111,7 @@ request.addProperty("reviewer_id",task.getReviewer_id());
 
         Log.d("TASK_API", "Request JSON: " + request);
 
-        apiService.createTask("Bearer " + token, request)
+        apiService.createTask(request)
                 .enqueue(new Callback<JsonObject>() {
 
                     @Override
@@ -155,22 +155,21 @@ request.addProperty("reviewer_id",task.getReviewer_id());
     }
 
     public void getTask(TaskCallBack taskCallBack){
-        String token=ApiSesson.getAccess_Token();
-        apiService.getTasks("Bearer " + token).enqueue(new Callback<JsonObject>() {
+        apiService.getTasks().enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-taskCallBack.OnSuccess(response.body());
+                taskCallBack.OnSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
-taskCallBack.Onerror(throwable.getMessage());
+                taskCallBack.Onerror(throwable.getMessage());
             }
         });
     }
+
     public void getSingleTask(String taskId,TaskCallBack taskCallBack){
-        String token=ApiSesson.getAccess_Token();
-        apiService.getSingleTask("Bearer " + token,taskId).enqueue(new Callback<JsonObject>() {
+        apiService.getSingleTask(taskId).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 taskCallBack.OnSuccess(response.body());
@@ -178,13 +177,13 @@ taskCallBack.Onerror(throwable.getMessage());
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
-taskCallBack.Onerror(throwable.getMessage());
+                taskCallBack.Onerror(throwable.getMessage());
             }
         });
     }
+
     public void DeleteTask(String id,TaskCallBack taskCallBack){
-        String token=ApiSesson.getAccess_Token();
-        apiService.deletTask("Bearer " + token,id).enqueue(new Callback<JsonObject>() {
+        apiService.deletTask(id).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 taskCallBack.OnSuccess(response.body());
@@ -192,14 +191,14 @@ taskCallBack.Onerror(throwable.getMessage());
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
-taskCallBack.Onerror(throwable.getMessage());
+                taskCallBack.Onerror(throwable.getMessage());
             }
         });
 
     }
+
     public void updateTask(String id ,UpdateTask task,TaskCallBack taskCallBack){
-        String token=ApiSesson.getAccess_Token();
-        apiService.updateTask("Bearer " + token,id,task).enqueue(new Callback<JsonObject>() {
+        apiService.updateTask(id,task).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 taskCallBack.OnSuccess(response.body());
@@ -207,13 +206,13 @@ taskCallBack.Onerror(throwable.getMessage());
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
-taskCallBack.Onerror(throwable.getMessage());
+                taskCallBack.Onerror(throwable.getMessage());
             }
         });
     }
+
     public void getTeams(TaskCallBack taskCallBack){
-        String token=ApiSesson.getAccess_Token();
-        apiService.getTeam("Bearer " +token).enqueue(new Callback<JsonObject>() {
+        apiService.getTeam().enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 taskCallBack.OnSuccess(response.body());
@@ -221,7 +220,7 @@ taskCallBack.Onerror(throwable.getMessage());
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
-taskCallBack.Onerror(throwable.getMessage());
+                taskCallBack.Onerror(throwable.getMessage());
             }
         });
     }

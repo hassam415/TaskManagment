@@ -41,19 +41,16 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         }else {
             String user=mauth.getUid();
-            ff.collection("User").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    String role=documentSnapshot.getString("role");
-                    if ("Admin".equals(role)){
-                        Intent intent=new Intent(SplashActivity.this, AdminActivity.class);
-                        startActivity(intent);
-                    }else {
-                        Intent intent=new Intent(SplashActivity.this,UserDashBoardActivity.class);
-                        startActivity(intent);
-                    }
-                    finish();
+            ff.collection("User").document(user).get().addOnSuccessListener(documentSnapshot -> {
+                String role=documentSnapshot.getString("role");
+                if ("Admin".equals(role)){
+                    Intent intent=new Intent(SplashActivity.this, AdminActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent=new Intent(SplashActivity.this,UserDashBoardActivity.class);
+                    startActivity(intent);
                 }
+                finish();
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
