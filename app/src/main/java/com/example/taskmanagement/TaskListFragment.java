@@ -18,14 +18,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 import androidx.core.view.GravityCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.databinding.FragmentTaskListBinding;
 import com.example.taskmanagement.response.PaginateResponse;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -91,8 +94,9 @@ public class TaskListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(
-                R.layout.fragment_task_list, container, false);
+
+        FragmentTaskListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_task_list, container, false);
+
 
         selectDate = view.findViewById(R.id.selectDate);
         taskrecycler = view.findViewById(R.id.taskrecycler);
@@ -405,7 +409,7 @@ public class TaskListFragment extends Fragment {
                     .commit();
         });
 
-        return view;
+        return binding.getRoot();
     }
 
     private void loadTasks() {
@@ -453,6 +457,13 @@ public class TaskListFragment extends Fragment {
                             taskList.clear();
                             taskList.addAll(data);
                             taskAdapter.notifyDataSetChanged();
+
+                            taskrecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                                @Override
+                                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                                    super.onScrolled(recyclerView, dx, dy);
+                                }
+                            });
                         }
 
                         @Override

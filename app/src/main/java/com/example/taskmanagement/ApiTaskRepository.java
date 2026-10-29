@@ -159,7 +159,7 @@ public class ApiTaskRepository {
     }
 
     public void getTask(ResponseCallback<PaginateResponse<Task>> taskCallBack) {
-        apiService.getTasks().enqueue(new Callback<>() {
+        apiService.getTasks(1).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<PaginateResponse<Task>> call, Response<PaginateResponse<Task>> response) {
                 taskCallBack.onSuccess(response.body(), "");

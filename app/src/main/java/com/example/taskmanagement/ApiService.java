@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
     @POST("auth/login")
@@ -21,7 +22,7 @@ public interface ApiService {
     Call<Task> createTask(@Body JsonObject request);
 
     @GET("tasks")
-    Call<PaginateResponse<Task>> getTasks();
+    Call<PaginateResponse<Task>> getTasks(@Query("page") int page);
 
     @GET("tasks/{id}")
     Call<Task> getSingleTask(@Path("id") String taskid);

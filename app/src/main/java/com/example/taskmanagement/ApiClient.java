@@ -123,6 +123,9 @@ public class ApiClient {
 
             // Log Request Headers
             Headers requestHeaders = request.headers();
+
+
+
             if (requestHeaders.size() > 0) {
                 Log.d(TAG, "--> Headers:");
                 for (int i = 0; i < requestHeaders.size(); i++) {
