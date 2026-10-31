@@ -23,7 +23,8 @@ public interface ApiService {
 
     @GET("tasks")
     Call<PaginateResponse<Task>> getTasks(@Query("page") int page);
-
+@GET("dashboard")
+Call<ResponseDashBoard>getDashboard();
     @GET("tasks/{id}")
     Call<Task> getSingleTask(@Path("id") String taskid);
 

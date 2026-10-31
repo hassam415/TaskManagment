@@ -52,20 +52,16 @@ import java.util.Locale;
 
 public class TaskListFragment extends Fragment {
 
-    RecyclerView taskrecycler;
-    FloatingActionButton taskbtn;
+
+
     TaskAdapter taskAdapter;
     List<Task> taskList = new ArrayList<>();
 
     TaskViewModel taskViewModel;
     String status;
     String id;
-    TextView selectDate;
-    LinearLayout Loader;
-    DrawerLayout filterDrawer;
 
-    Spinner spinner, categoryspiner, periorityspiner;
-    Button applybtn;
+
 
     String startDate;
     String endDate;
@@ -85,6 +81,7 @@ public class TaskListFragment extends Fragment {
     ArrayAdapter<String> periorityAdapter;
     PeriorityViewModel periorityViewModel;
     ApiTaskViewModel apiTaskViewModel;
+    FragmentTaskListBinding binding;
 
     public TaskListFragment() {
         // Required empty public constructor
@@ -95,21 +92,11 @@ public class TaskListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        FragmentTaskListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_task_list, container, false);
+        binding= DataBindingUtil.inflate(inflater, R.layout.fragment_task_list, container, false);
 
-
-        selectDate = view.findViewById(R.id.selectDate);
-        taskrecycler = view.findViewById(R.id.taskrecycler);
-        taskbtn = view.findViewById(R.id.taskbtn);
-        Loader = view.findViewById(R.id.Loader);
-        applybtn = view.findViewById(R.id.applybtn);
 
         apiTaskViewModel = new ApiTaskViewModel(new ApiTaskRepository());
-        categoryspiner = view.findViewById(R.id.categoryspiner);
-        periorityspiner = view.findViewById(R.id.periorityspiner);
-        spinner = view.findViewById(R.id.spinner);
 
-        filterDrawer = view.findViewById(R.id.filterDrawer);
 
         ImageView filterBtn = requireActivity().findViewById(R.id.filterBtn);
 
@@ -120,12 +107,12 @@ public class TaskListFragment extends Fragment {
 
         taskAdapter = new TaskAdapter(requireContext(), taskList);
 
-        taskrecycler.setHasFixedSize(true);
-        taskrecycler.setLayoutManager(
+        binding.taskrecycler.setHasFixedSize(true);
+        binding.taskrecycler.setLayoutManager(
                 new LinearLayoutManager(requireContext()));
-        taskrecycler.setAdapter(taskAdapter);
+        binding.taskrecycler.setAdapter(taskAdapter);
 
-        Loader.setVisibility(View.VISIBLE);
+        binding.Loader.setVisibility(View.VISIBLE);
         filterBtn.setVisibility(View.VISIBLE);
         Bundle bundle = getArguments();
 
@@ -142,7 +129,7 @@ public class TaskListFragment extends Fragment {
         statusAdapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
 
-        spinner.setAdapter(statusAdapter);
+        binding.spinner.setAdapter(statusAdapter);
 
         statusViewModel.getList(new ResponseCallback<List<Status>>() {
             @Override
@@ -196,7 +183,7 @@ public class TaskListFragment extends Fragment {
         categoryAdapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
 
-        categoryspiner.setAdapter(categoryAdapter);
+        binding.categoryspiner.setAdapter(categoryAdapter);
 
         categoryViewModel.getList(new ResponseCallback<List<Category>>() {
             @Override
@@ -233,7 +220,7 @@ public class TaskListFragment extends Fragment {
         periorityAdapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
 
-        periorityspiner.setAdapter(periorityAdapter);
+        binding.periorityspiner.setAdapter(periorityAdapter);
 
         periorityViewModel.getList(new ResponseCallback<List<Periority>>() {
             @Override
@@ -262,12 +249,12 @@ public class TaskListFragment extends Fragment {
 
         filterBtn.setOnClickListener(v -> {
 
-            filterDrawer.openDrawer(GravityCompat.END);
+            binding.filterDrawer.openDrawer(GravityCompat.END);
 
         });
 
 
-        selectDate.setOnClickListener(new View.OnClickListener() {
+        binding.selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().build();
@@ -279,7 +266,7 @@ public class TaskListFragment extends Fragment {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                         startDate = (sdf.format(new Date(firstDate)));
                         endDate = (sdf.format(new Date(lastDate)));
-                        selectDate.setText(startDate + "  " + endDate);
+                        binding.selectDate.setText(startDate + "  " + endDate);
                     }
                 });
                 materialDatePicker.show(getParentFragmentManager(), "");
@@ -287,15 +274,15 @@ public class TaskListFragment extends Fragment {
         });
 
 
-        applybtn.setOnClickListener(v -> {
+        binding.applybtn.setOnClickListener(v -> {
 
             String statusId = null;
             String categoryId = null;
             String periorityId = null;
 
 
-            if (spinner.getSelectedItemPosition() > 0) {
-                String selectedStatus = spinner.getSelectedItem().toString();
+            if (binding.spinner.getSelectedItemPosition() > 0) {
+                String selectedStatus = binding.spinner.getSelectedItem().toString();
 
                 for (Status item : statusList) {
                     if (selectedStatus.equals(item.getName())) {
@@ -309,9 +296,9 @@ public class TaskListFragment extends Fragment {
             }
 
 
-            if (categoryspiner.getSelectedItemPosition() > 0) {
+            if (binding.categoryspiner.getSelectedItemPosition() > 0) {
                 String selectedCategory =
-                        categoryspiner.getSelectedItem().toString();
+                        binding.categoryspiner.getSelectedItem().toString();
 
                 for (Category item : categories) {
                     if (selectedCategory.equals(item.getName())) {
@@ -321,9 +308,9 @@ public class TaskListFragment extends Fragment {
                 }
             }
 
-            if (periorityspiner.getSelectedItemPosition() > 0) {
+            if (binding.periorityspiner.getSelectedItemPosition() > 0) {
                 String selectedPriority =
-                        periorityspiner.getSelectedItem().toString();
+                        binding.periorityspiner.getSelectedItem().toString();
 
                 for (Periority item : periorities) {
                     if (selectedPriority.equals(item.getName())) {
@@ -345,7 +332,7 @@ public class TaskListFragment extends Fragment {
                 endTimestamp = new Timestamp(new Date(endDate));
             }
 
-            Loader.setVisibility(View.VISIBLE);
+            binding.Loader.setVisibility(View.VISIBLE);
 
             taskViewModel.getTaskByFilter(
                     statusId,
@@ -358,20 +345,20 @@ public class TaskListFragment extends Fragment {
                         public void onSuccess(List<Task> data, String message) {
                             if (!isAdded()) return;
 
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
 
                             taskList.clear();
                             taskList.addAll(data);
                             taskAdapter.notifyDataSetChanged();
 
-                            filterDrawer.closeDrawer(GravityCompat.END);
+                            binding.filterDrawer.closeDrawer(GravityCompat.END);
                         }
 
                         @Override
                         public void onError(String message) {
                             if (!isAdded()) return;
 
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
 
                             Toast.makeText(requireContext(),
                                     message, Toast.LENGTH_SHORT).show();
@@ -401,7 +388,7 @@ public class TaskListFragment extends Fragment {
                     .commit();
         });
 
-        taskbtn.setOnClickListener(v -> {
+        binding.taskbtn.setOnClickListener(v -> {
             getParentFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentContainer, new TaskFragment())
@@ -409,13 +396,14 @@ public class TaskListFragment extends Fragment {
                     .commit();
         });
 
+
         return binding.getRoot();
     }
 
     private void loadTasks() {
         if (id != null && !id.isEmpty()) {
 
-            taskbtn.setVisibility(View.GONE);
+            binding.taskbtn.setVisibility(View.GONE);
 
             taskViewModel.getTaskByStatus(
                     id,
@@ -424,7 +412,7 @@ public class TaskListFragment extends Fragment {
                         public void onSuccess(List<Task> data, String message) {
                             if (!isAdded()) return;
 
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
                             taskList.clear();
                             taskList.addAll(data);
                             taskAdapter.notifyDataSetChanged();
@@ -434,7 +422,7 @@ public class TaskListFragment extends Fragment {
                         public void onError(String message) {
                             if (!isAdded()) return;
 
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
                             Log.e("getTaskByStatus", message);
 
                             Toast.makeText(requireContext(),
@@ -444,7 +432,7 @@ public class TaskListFragment extends Fragment {
 
         } else if (status != null && !status.isEmpty()) {
 
-            taskbtn.setVisibility(View.GONE);
+            binding.taskbtn.setVisibility(View.GONE);
 
             taskViewModel.getTaskByStatus(
                     status,
@@ -453,12 +441,12 @@ public class TaskListFragment extends Fragment {
                         public void onSuccess(List<Task> data, String message) {
                             if (!isAdded()) return;
 
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
                             taskList.clear();
                             taskList.addAll(data);
                             taskAdapter.notifyDataSetChanged();
 
-                            taskrecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                            binding.taskrecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
                                 @Override
                                 public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                                     super.onScrolled(recyclerView, dx, dy);
@@ -470,7 +458,7 @@ public class TaskListFragment extends Fragment {
                         public void onError(String message) {
                             if (!isAdded()) return;
 
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
                             Toast.makeText(requireContext(),
                                     message, Toast.LENGTH_SHORT).show();
                         }
@@ -478,12 +466,12 @@ public class TaskListFragment extends Fragment {
 
         } else {
 
-            taskbtn.setVisibility(View.VISIBLE);
+            binding.taskbtn.setVisibility(View.VISIBLE);
             apiTaskViewModel.getTask(new ResponseCallback<>() {
                 @Override
                 public void onSuccess(PaginateResponse<Task> data, String message) {
 
-                    Loader.setVisibility(View.GONE);
+                    binding.Loader.setVisibility(View.GONE);
                     taskList.clear();
 //                    JsonArray array = jsonReader.getAsJsonArray("data");
 //                    for (JsonElement jsonElement : array) {

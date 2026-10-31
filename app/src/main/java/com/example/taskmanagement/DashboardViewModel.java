@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.taskmanagement.callback.ResponseCallback;
 
+import java.util.List;
+
 public class DashboardViewModel extends ViewModel {
     public DashboardRepository dashboardRepository;
 
@@ -22,5 +24,8 @@ public void getStatus(String statusId,ResponseCallback<Integer>callback){
 }
 public void getSingleTaskStatus(String statusId,String id,ResponseCallback<Integer>callback ){
         dashboardRepository.getSingleUserTask(statusId,id,callback);
+}
+public void getTaskByApi(ResponseCallback<ResponseDashBoard>callback){
+        dashboardRepository.getTaskApi(callback);
 }
 }

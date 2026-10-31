@@ -9,10 +9,22 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DashboardRepository {
     FirebaseFirestore fb;
+    public ApiService apiService;
     public DashboardRepository() {
-  fb=FirebaseFirestore.getInstance();  }
+  fb=FirebaseFirestore.getInstance();
+    apiService=ApiClient.getRetrofit().create(ApiService.class);}
+    public interface DashBoardResponse{
+        void OnSuccess(ResponseDashBoard responseDashBoard);
+        void OnError(String message);
+    }
     public void getTask(ResponseCallback<Integer> callback){
         fb.collection("Task").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -70,5 +82,35 @@ fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("status
 });
   }
 
+    public void getTaskApi(ResponseCallback<ResponseDashBoard> callback) {
 
+        String token = ApiSesson.getAccess_Token();
+
+        apiService.getDashboard()
+                .enqueue(new Callback<ResponseDashBoard>() {
+
+                    @Override
+                    public void onResponse(
+                            Call<ResponseDashBoard> call,
+                            Response<ResponseDashBoard> response) {
+
+                        if (response.isSuccessful()
+                                && response.body() != null) {
+
+                            callback.onSuccess(response.body(), "Success");
+
+                        } else {
+                            callback.onError("API Error: " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(
+                            Call<ResponseDashBoard> call,
+                            Throwable throwable) {
+
+                        callback.onError(throwable.getMessage());
+                    }
+                });
+    }
 }

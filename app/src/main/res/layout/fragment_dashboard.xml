@@ -7,7 +7,7 @@
 
     </data>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -149,6 +149,7 @@
                                 android:weightSum="2">
 
                                 <TextView
+                                    android:id="@+id/completionRate"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="12sp"
@@ -455,7 +456,6 @@
                             android:layout_marginLeft="10dp"
                             android:text="Task Status Distribution"
                             android:textColor="@color/black"
-
                             android:textSize="18dp"
                             android:textStyle="bold" />
 
@@ -476,48 +476,56 @@
                         android:orientation="horizontal">
 
                         <View
+                            android:id="@+id/draftview"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="#94A3B8" />
 
                         <View
+                            android:id="@+id/assigneview"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:background="#4D9DFF" />
 
                         <View
+                            android:id="@+id/inprogressView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
                             android:background="#FFB800" />
 
                         <View
+                            android:id="@+id/onHoldView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="#FF8500" />
 
                         <View
+                            android:id="@+id/InReviewView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="#B640F5" />
 
                         <View
+                            android:id="@+id/requestView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
                             android:background="#FF5B87" />
 
                         <View
+                            android:id="@+id/completView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:background="#00B982" />
 
                         <View
+                            android:id="@+id/cancelledView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -558,7 +566,7 @@
                                 android:id="@+id/draftCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2"
+
                                 android:textColor="#0F172A"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -588,7 +596,7 @@
                                 android:id="@+id/assignedCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="6"
+
                                 android:textColor="#0F172A"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -618,7 +626,7 @@
                                 android:id="@+id/inProgressCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="4"
+
                                 android:textColor="#0F172A"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -648,7 +656,7 @@
                                 android:id="@+id/onHoldCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2"
+
                                 android:textColor="#0F172A"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -678,7 +686,7 @@
                                 android:id="@+id/inReviewCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2"
+
                                 android:textColor="#0F172A"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -708,7 +716,7 @@
                                 android:id="@+id/changesRequestedCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1"
+
                                 android:textColor="#0F172A"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -737,7 +745,7 @@
                                 android:id="@+id/completedStatusCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="6"
+
                                 android:textColor="#0F172A"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -766,7 +774,7 @@
                                 android:id="@+id/cancelledCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2"
+
                                 android:textColor="#0F172A"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -836,8 +844,10 @@
                             android:text="Low" />
 
                         <TextView
+                            android:id="@+id/lowTaskCount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="end"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -865,8 +875,10 @@
                             android:text="Normal" />
 
                         <TextView
+                            android:id="@+id/normaltaskcount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="end"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -897,6 +909,7 @@
                             android:id="@+id/highcount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="end"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -927,6 +940,7 @@
                             android:id="@+id/urgentcount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="end"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -948,7 +962,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -958,6 +973,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -985,14 +1001,16 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/deadlineList"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="12dp" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1002,18 +1020,179 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
-                            android:layout_weight="1"
                             android:src="@drawable/view" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Deliverables Awaiting Review"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/pendingreview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/review_text"
+                            android:gravity="center"
+                            android:textColor="@color/dark_slate_blue" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="12dp"
+                        android:background="#E0E0E0" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/reviewrecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/useraccount" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="6dp"
+                            android:text="Team Workload &amp; Resource Allocation "
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Member capacity tracking,active task count,and workload health across projects" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#E0E0E0" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="12dp"
+                        android:background="#E0E0E0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:background="@color/light_grey"
+                        android:orientation="horizontal"
+                        android:weightSum="6">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.8"
+                            android:text="TEAM MEMBER"
+                            android:textSize="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.8"
+
+                            android:text="ACTIVE TASK"
+                            android:textSize="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.1"
+                            android:text="COMPLETED"
+                            android:textSize="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_weight="1.1"
+                            android:text="OVERDUE"
+                            android:textSize="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.1"
+                            android:text="ALLOCATED HOURS"
+                            android:textSize="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.1"
+                            android:text="CAPACITY STATE"
+                            android:textSize="10dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E0E0E0" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/teamrecyler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"></androidx.recyclerview.widget.RecyclerView>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>
