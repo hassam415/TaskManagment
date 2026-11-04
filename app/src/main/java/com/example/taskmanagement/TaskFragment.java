@@ -196,16 +196,35 @@ List<Project>projectList=new ArrayList<>();
         projectViewModel.getProjectList(new ResponseCallback<List<Project>>() {
             @Override
             public void onSuccess(List<Project> data, String message) {
+
                 projectList.clear();
                 projectList.addAll(data);
-                ArrayAdapter<Project>arrayAdapter=new ArrayAdapter<>(requireContext(),R.layout.dropdown,data);
-                binding.projectSpinner.setAdapter(arrayAdapter);
-               for (Project project:projectList){
-                   if (project.getId()==getProjecctID){
-                       binding.projectSpinner.setText(project.getName());
-                   }
-               }
 
+                for (Project project : projectList) {
+                    Log.d("PROJECT_CHECK",
+                            "Project Name: " + project.getName()
+                                    + " | Project ID: " + project.getId());
+                }
+
+                ArrayAdapter<Project> arrayAdapter = new ArrayAdapter<>(
+                        requireContext(),
+                        R.layout.dropdown,
+                        projectList
+                );
+
+                binding.projectSpinner.setAdapter(arrayAdapter);
+
+                for (Project project : projectList) {
+                    if (project.getId() == getProjecctID) {
+                        binding.projectSpinner.setText(project.getName(), false);
+
+                        Log.d("PROJECT_CHECK",
+                                "EDIT PROJECT FOUND: "
+                                        + project.getName()
+                                        + " | ID: " + project.getId());
+                        break;
+                    }
+                }
             }
 
             @Override
@@ -626,7 +645,7 @@ List<Project>projectList=new ArrayList<>();
                 Task taskReq = new Task();
                 taskReq.setTitle(title1);
                 taskReq.setEstimated_hours(estimatTime);
-                taskReq.setDiscription(discpt);
+                taskReq.setDescription(discpt);
                 taskReq.setTeamId(selectedTeamId);
                 taskReq.setPeriority(periorityPosition);
                 taskReq.setCategory(categoryPosition);

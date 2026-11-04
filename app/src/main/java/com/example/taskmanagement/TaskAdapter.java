@@ -110,7 +110,7 @@ OnDeletBtnClick onDeletBtnClick;
                                 Bundle bundle=new Bundle();
                                 bundle.putInt("projectId",task.getProject_id());
                                 bundle.putString("title",task.getTitle());
-                                bundle.putString("discription",task.getDiscription());
+                                bundle.putString("discription",task.getDescription());
                                 bundle.putString("category",task.getCategory());
                                 bundle.putString("priority",task.getPriority().getValue());
                                 bundle.putString("taskId",task.getId());

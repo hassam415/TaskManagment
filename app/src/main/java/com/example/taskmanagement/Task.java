@@ -11,7 +11,7 @@ public class Task {
 
     // Existing Firebase fields
     private String title;
-    private String discription;
+
     private String statusId;
     private String periorityId;
     private String categoryId;
@@ -86,13 +86,21 @@ public class Task {
         return project_id;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setProject_id(int project_id) {
         this.project_id = project_id;
     }
 // Existing constructor preserved
 
-    public Task(String discription, String title, String statusId, String periorityId, String categoryId, List<String> selecteduser, List<String> selectedImges, String id, Timestamp times_tamp, String description, String category, String estimated_hours, String start_date, String due_date, String reference_code, String progress_percentage, String assignee_ids, int reviewer_id, int project_id, TaskDetail priority, User reviewer, TaskDetail status, Team team, int team_id, List<User> assignees) {
-        this.discription = discription;
+
+    public Task(String title, String statusId, String periorityId, String categoryId, List<String> selecteduser, List<String> selectedImges, String id, Timestamp times_tamp, String description, String category, String estimated_hours, String start_date, String due_date, String reference_code, String progress_percentage, String assignee_ids, int reviewer_id, Project projects, int project_id, TaskDetail priority, User reviewer, TaskDetail status, Team team, int team_id, List<User> assignees) {
         this.title = title;
         this.statusId = statusId;
         this.periorityId = periorityId;
@@ -110,6 +118,7 @@ public class Task {
         this.progress_percentage = progress_percentage;
         this.assignee_ids = assignee_ids;
         this.reviewer_id = reviewer_id;
+        this.projects = projects;
         this.project_id = project_id;
         this.priority = priority;
         this.reviewer = reviewer;
@@ -190,22 +199,6 @@ public class Task {
     }
 
     // Firebase description
-    public String getDiscription() {
-        return discription;
-    }
-
-    public void setDiscription(String discription) {
-        this.discription = discription;
-    }
-
-    // API description with Firebase fallback
-    public String getDescription() {
-        return description != null ? description : discription;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     // API priority object
     public TaskDetail getPriority() {

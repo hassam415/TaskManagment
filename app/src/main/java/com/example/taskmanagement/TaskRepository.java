@@ -130,7 +130,7 @@ public class TaskRepository {
         Task task = new Task();
 
         task.setTitle(title);
-        task.setDiscription(discription);
+        task.setDescription(discription);
         task.setSelecteduser(selecteduser);
         task.setStatusId(status);
         task.setSelectedImges(imagurl);

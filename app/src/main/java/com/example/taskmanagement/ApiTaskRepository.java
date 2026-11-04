@@ -59,10 +59,8 @@ public class ApiTaskRepository {
         );
         request.addProperty("project_id",task.getProject_id());
         request.addProperty("team_id", task.getTeamId());
-        if (task.getDiscription() != null
-                && !task.getDiscription().trim().isEmpty()) {
-            request.addProperty("description", task.getDiscription().trim());
-        }
+
+            request.addProperty("description", task.getDescription().trim());
         request.addProperty("reviewer_id", task.getReviewer_id());
         if (task.getCategory() != null
                 && !task.getCategory().trim().isEmpty()) {

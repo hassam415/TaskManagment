@@ -34,7 +34,7 @@ public class UserTasksAdapter extends RecyclerView.Adapter<UserTasksViewHolder> 
     public void onBindViewHolder(@NonNull UserTasksViewHolder holder, int position) {
 Task  task=taskList.get(position);
 holder.binding.title.setText("Title :"+task.getTitle());
-holder.binding.discription.setText("Discription :"+task.getDiscription());
+holder.binding.discription.setText("Discription :"+task.getDescription());
     }
 
     @Override

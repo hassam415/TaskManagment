@@ -60,7 +60,7 @@ List<Comment>commentList=new ArrayList<>();
          public void onSuccess(Task data, String message) {
              loader.setVisibility(View.GONE);
          title.setText("Title :"+data.getTitle());
-         discription.setText("Discription :"+data.getDiscription());
+         discription.setText("Discription :"+data.getDescription());
 
          customimg.uriList.clear();
          customimg.uriList.addAll(data.getSelectedImges());

@@ -32,7 +32,7 @@ public class TaskDetailAdapter extends RecyclerView.Adapter<TaskDetailViewHolder
     public void onBindViewHolder(@NonNull TaskDetailViewHolder holder, int position) {
 Task task=taskList.get(position);
 holder.binding.title.setText(task.getTitle());
-holder.binding.discription.setText(task.getDiscription());
+holder.binding.discription.setText(task.getDescription());
     }
 
     @Override
