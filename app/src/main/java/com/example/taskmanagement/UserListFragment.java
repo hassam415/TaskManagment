@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,18 +52,18 @@ authViewModel=new AuthViewModel(new AuthRepository());
         ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
         filterBtn.setVisibility(View.GONE);
 loader.setVisibility(View.VISIBLE);
-userAdapter.setOnUserClick(new UserAdapter.OnUserClick() {
-    @Override
-    public void OnClick(int position) {
-        User user=userList.get(position);
-        int id=user.getId();
-        UserDetailFragment userDetailFragment=new UserDetailFragment();
-        Bundle bundle=new Bundle();
-        bundle.putInt("Id",id);
-        userDetailFragment.setArguments(bundle);
-        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,userDetailFragment).addToBackStack(null).commit();
-    }
-});
+//userAdapter.setOnUserClick(new UserAdapter.OnUserClick() {
+  //  @Override
+    //public void OnClick(int position) {
+      //  User user=userList.get(position);
+        //int id=user.getId();
+       // UserDetailFragment userDetailFragment=new UserDetailFragment();
+      //  Bundle bundle=new Bundle();
+        //bundle.putInt("Id",id);
+       // userDetailFragment.setArguments(bundle);
+      //  getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,userDetailFragment).addToBackStack(null).commit();
+  //  }
+//});
 userbtn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -84,25 +85,57 @@ userbtn.setOnClickListener(new View.OnClickListener() {
              //   loader.setVisibility(View.GONE);
           //  }
       //  });
-        authViewModel.getUserList(new AuthRepository.TaskCallBack() {
+        userAdapter.setOnDelectClick(new UserAdapter.OnDelectClick() {
             @Override
-            public void OnSuccess(JsonObject jsonReader) {
-                loader.setVisibility(View.GONE);
-                userList.clear();
-                JsonArray array=jsonReader.getAsJsonArray("data");
-                for (JsonElement jsonElement:array){
-                    User user=new Gson().fromJson(jsonElement,User.class);
-                    userList.add(user);
-                }
+            public void OnClick(int Userid, int position) {
+authViewModel.deleteUser(Userid, new ResponseCallback() {
+    @Override
+    public void onSuccess(Object data, String message) {
+        userList.remove(data);
+        userAdapter.notifyDataSetChanged();
+        Toast.makeText(getContext(), "User Removed SucessFully ", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onError(String message) {
+
+    }
+});
+            }
+        });
+        authViewModel.getCurrentUser(new ResponseCallback<List<User>>() {
+            @Override
+            public void onSuccess(List<User> data, String message) {
+                userList.clear();
+                userList.addAll(data);
                 userAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void Onerror(String message) {
+            public void onError(String message) {
 
             }
         });
+
+      //  authViewModel.getUserList(new AuthRepository.TaskCallBack() {
+          //  @Override
+        //    public void OnSuccess(JsonObject jsonReader) {
+
+
+            //    JsonArray array=jsonReader.getAsJsonArray("data");
+              //  for (JsonElement jsonElement:array){
+                //    User user=new Gson().fromJson(jsonElement,User.class);
+                  //  userList.add(user);
+              //  }
+
+                //userAdapter.notifyDataSetChanged();
+          //  }
+
+           // @Override
+           // public void Onerror(String message) {
+
+           // }
+       // });
         return view;
     }
 }

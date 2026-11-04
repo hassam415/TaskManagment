@@ -11,6 +11,7 @@
         android:text="TASK ASSIGNEES"
         android:textStyle="bold"
         android:textSize="14sp"
+        android:textColor="@color/black"
         android:paddingBottom="8dp" />
 
     <ProgressBar

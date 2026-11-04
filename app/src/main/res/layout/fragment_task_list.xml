@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
@@ -26,7 +26,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/taskrecycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/taskbtn"/>
 
 
                 <LinearLayout
@@ -50,19 +51,21 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
-
-            </FrameLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/taskbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="16dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:backgroundTint="@color/darknavey"
+                    android:src="@drawable/baseline_add_24"
+                    app:tint="@color/white" />
+            </RelativeLayout>
 
             <!-- Add Task Button -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/taskbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/darknavey"
-                android:src="@drawable/baseline_add_24"
-                app:tint="@color/white" />
+
 
         </LinearLayout>
 

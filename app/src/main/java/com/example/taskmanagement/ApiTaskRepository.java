@@ -29,10 +29,7 @@ public class ApiTaskRepository {
         void Onerror(String message);
     }
 
-    public void creatTask(
-            Task task,
-            List<Integer> selectedUserIds,
-            ResponseCallback<Task> callback) {
+    public void creatTask(Task task, List<Integer> selectedUserIds, ResponseCallback<Task> callback) {
 
         String token = ApiSesson.getAccess_Token();
 
@@ -60,6 +57,7 @@ public class ApiTaskRepository {
                 "priority",
                 priority.trim().toLowerCase(java.util.Locale.ROOT)
         );
+        request.addProperty("project_id",task.getProject_id());
         request.addProperty("team_id", task.getTeamId());
         if (task.getDiscription() != null
                 && !task.getDiscription().trim().isEmpty()) {
@@ -193,17 +191,17 @@ public class ApiTaskRepository {
     }
 
     public void DeleteTask(String id, TaskCallBack taskCallBack) {
-//        apiService.deletTask(id).enqueue(new Callback<JsonObject>() {
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                taskCallBack.OnSuccess(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable throwable) {
-//                taskCallBack.Onerror(throwable.getMessage());
-//            }
-//        });
+        apiService.deletTask(id).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                taskCallBack.OnSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                taskCallBack.Onerror(throwable.getMessage());
+            }
+        });
 
     }
 
@@ -231,6 +229,71 @@ public class ApiTaskRepository {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
                 taskCallBack.Onerror(throwable.getMessage());
+            }
+        });
+    }
+    public void getteam(ResponseCallback responseCallback){
+        apiService.getteam().enqueue(new Callback<TeamResponse>() {
+            @Override
+            public void onResponse(Call<TeamResponse> call, Response<TeamResponse> response) {
+                List<Team> teams=response.body().getData();
+                responseCallback.onSuccess(teams,"Suesses");
+            }
+
+            @Override
+            public void onFailure(Call<TeamResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void getRole(ResponseCallback<List<Role>> responseCallback) {
+
+        apiService.getRole().enqueue(new Callback<RoleResponse>() {
+
+            @Override
+            public void onResponse(Call<RoleResponse> call,
+                                   Response<RoleResponse> response) {
+
+                Log.d("ROLE_API", "URL: " + call.request().url());
+                Log.d("ROLE_API", "HTTP CODE: " + response.code());
+
+                if (response.isSuccessful() && response.body() != null) {
+
+                    // API ka complete parsed response
+                    String json = new com.google.gson.Gson()
+                            .toJson(response.body());
+
+                    Log.d("ROLE_API", "RESPONSE: " + json);
+
+                    List<Role> roles = response.body().getData();
+
+                    if (roles != null && !roles.isEmpty()) {
+                        Log.d("ROLE_API", "Role count: " + roles.size());
+                        responseCallback.onSuccess(roles, "Successfully loaded");
+                    } else {
+                        Log.e("ROLE_API", "Data is null or empty");
+                        responseCallback.onError("Role list is empty");
+                    }
+
+                } else {
+
+                    try {
+                        Log.e("ROLE_API", "ERROR BODY: " +
+                                (response.errorBody() != null
+                                        ? response.errorBody().string()
+                                        : "No error body"));
+                    } catch (Exception e) {
+                        Log.e("ROLE_API", "Error reading response", e);
+                    }
+
+                    responseCallback.onError("API Error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RoleResponse> call, Throwable t) {
+                Log.e("ROLE_API", "Request failed", t);
+                responseCallback.onError(t.getMessage());
             }
         });
     }

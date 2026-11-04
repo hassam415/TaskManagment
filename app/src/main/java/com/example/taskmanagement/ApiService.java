@@ -1,5 +1,6 @@
 package com.example.taskmanagement;
 
+import com.example.taskmanagement.response.APIResponse;
 import com.example.taskmanagement.response.PaginateResponse;
 import com.google.gson.JsonObject;
 
@@ -23,8 +24,10 @@ public interface ApiService {
 
     @GET("tasks")
     Call<PaginateResponse<Task>> getTasks(@Query("page") int page);
-@GET("dashboard")
-Call<ResponseDashBoard>getDashboard();
+
+    @GET("dashboard")
+    Call<ResponseDashBoard> getDashboard();
+
     @GET("tasks/{id}")
     Call<Task> getSingleTask(@Path("id") String taskid);
 
@@ -42,4 +45,35 @@ Call<ResponseDashBoard>getDashboard();
 
     @GET("teams")
     Call<JsonObject> getTeam();
+
+    @GET("roles")
+    Call<RoleResponse> getRole();
+
+    @GET("teams")
+    Call<TeamResponse> getteam();
+
+    @POST("users")
+    Call<RequestUser> creatUser(@Body RequestUser userRequest);
+
+    @GET("users")
+    Call<UserResponse> getUser();
+
+    @DELETE("users/{id}")
+    Call<RequestUser> delete(@Path("id") int id);
+
+    @PUT("users/{id}")
+    Call<User> updateUser(@Path("id") int id,
+                          @Body RequestUser requestUser);
+
+    @POST("projects")
+    Call<ProjectResponse> creatProject(@Body ProjectRequest requestProject);
+
+    @GET("projects")
+    Call<APIResponse<Project>> getProject();
+
+    @DELETE("projects/{id}")
+    Call<Project> deleteProject(@Path("id") int id);
+    @PUT("projects/{id}")
+    Call<Project>updateProject(@Path("id") int id,
+                               @Body ProjectRequest  projectRequest);
 }

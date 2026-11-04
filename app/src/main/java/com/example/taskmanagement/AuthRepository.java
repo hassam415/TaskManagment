@@ -1,6 +1,9 @@
 package com.example.taskmanagement;
 
+import com.example.taskmanagement.callback.ResponseCallback;
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,6 +70,58 @@ public class AuthRepository {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
+
+            }
+        });
+    }
+    public void creatUser(RequestUser requestUser, ResponseCallback responseCallback){
+        apiService.creatUser(requestUser).enqueue(new Callback<RequestUser>() {
+            @Override
+            public void onResponse(Call<RequestUser> call, Response<RequestUser> response) {
+                responseCallback.onSuccess(response.body(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<RequestUser> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void delete( int Id,ResponseCallback responseCallback){
+        apiService.delete(Id).enqueue(new Callback<RequestUser>() {
+            @Override
+            public void onResponse(Call<RequestUser> call, Response<RequestUser> response) {
+                responseCallback.onSuccess(response.body(),"Deleted SuccessFully");
+            }
+
+            @Override
+            public void onFailure(Call<RequestUser> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void getListUser(ResponseCallback<List<User>> responseCallback){
+        apiService.getUser().enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                responseCallback.onSuccess(response.body().getData(),"Sucess");
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable throwable) {
+
+            }
+        });
+    }
+    public  void updateUser(int userID,RequestUser requestUser,ResponseCallback responseCallback){
+        apiService.updateUser(userID,requestUser).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                responseCallback.onSuccess(response.body(),"Updated SuccessFully");
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable throwable) {
 
             }
         });

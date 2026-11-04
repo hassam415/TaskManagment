@@ -32,7 +32,19 @@ public class Task {
     public String assignee_ids;
     public int reviewer_id;
 
+    public Project getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Project projects) {
+        this.projects = projects;
+    }
+
     // API priority object
+    @SerializedName("project")
+    private Project projects;
+    @SerializedName("project_id")
+    private  int project_id;
     @SerializedName("priority")
     private TaskDetail priority;
     @SerializedName("reviewer")
@@ -70,42 +82,41 @@ public class Task {
         // Required by Gson and Firebase
     }
 
-    // Existing constructor preserved
-    public Task(
-            String title,
-            String discription,
-            String statusId,
-            String periorityId,
-            String categoryId,
-            String estimated_hours,
-            String start_date,
-            String due_date,
-            String reference_code,
-            String progress_percentage,
-            List<String> selecteduser,
-            List<String> selectedImges,
-            String id,
-            Timestamp times_tamp,
-            String assignee_ids
-    ,int reviewer_id) {
+    public int getProject_id() {
+        return project_id;
+    }
 
-        this.title = title;
+    public void setProject_id(int project_id) {
+        this.project_id = project_id;
+    }
+// Existing constructor preserved
+
+    public Task(String discription, String title, String statusId, String periorityId, String categoryId, List<String> selecteduser, List<String> selectedImges, String id, Timestamp times_tamp, String description, String category, String estimated_hours, String start_date, String due_date, String reference_code, String progress_percentage, String assignee_ids, int reviewer_id, int project_id, TaskDetail priority, User reviewer, TaskDetail status, Team team, int team_id, List<User> assignees) {
         this.discription = discription;
+        this.title = title;
         this.statusId = statusId;
         this.periorityId = periorityId;
         this.categoryId = categoryId;
+        this.selecteduser = selecteduser;
+        this.selectedImges = selectedImges;
+        this.id = id;
+        this.times_tamp = times_tamp;
+        this.description = description;
+        this.category = category;
         this.estimated_hours = estimated_hours;
         this.start_date = start_date;
         this.due_date = due_date;
         this.reference_code = reference_code;
         this.progress_percentage = progress_percentage;
-        this.selecteduser = selecteduser;
-        this.selectedImges = selectedImges;
-        this.id = id;
         this.assignee_ids = assignee_ids;
-        this.times_tamp = times_tamp;
-this.reviewer_id=reviewer_id;
-        setPeriority(periorityId);
+        this.reviewer_id = reviewer_id;
+        this.project_id = project_id;
+        this.priority = priority;
+        this.reviewer = reviewer;
+        this.status = status;
+        this.team = team;
+        this.team_id = team_id;
+        this.assignees = assignees;
     }
 
     public int getReviewer_id() {
@@ -403,4 +414,5 @@ this.reviewer_id=reviewer_id;
     public void setAssignee_ids(String assignee_ids) {
         this.assignee_ids = assignee_ids;
     }
+
 }

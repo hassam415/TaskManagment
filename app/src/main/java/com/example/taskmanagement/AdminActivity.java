@@ -88,6 +88,10 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new CategoryFragment()).commit();
             setToolbarText("Category");
         }
+if (id==R.id.project){
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProjectFragment()).commit();
+    setToolbarText("Project");
+}
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

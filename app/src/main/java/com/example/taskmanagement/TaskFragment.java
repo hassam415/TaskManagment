@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.databinding.FragmentTaskBinding;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -34,12 +35,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class TaskFragment extends Fragment {
+FragmentTaskBinding binding;
 
-    TextInputLayout title, discription, hours;
-    Button savebtn;
-    TextInputEditText startDate, dueDate;
+
     TaskViewModel taskViewModel;
-    LinearLayout Loader;
+
     USerViewModel uSerViewModel;
     List<User> userList = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class TaskFragment extends Fragment {
     private ActivityResultLauncher<Uri> cameraLauncher;
     private Uri cameraUri;
     CustomImagView customImagView;
-    CustomUserView customUser;
+
     AuthViewModel authViewModel;
     List<String> userListspinner = new ArrayList<>();
     List<Integer> userID = new ArrayList<>();
@@ -56,14 +56,13 @@ public class TaskFragment extends Fragment {
 
     List<Team> teamList = new ArrayList<>();
     ArrayAdapter<Team> teamAdapter;
-    Spinner spinner, categoryspinner, periorityspinner, team, revierSpiner;
     ArrayAdapter<String> statusAdapter;
     List<Status> statusList = new ArrayList<>();
     StatusViewModel statusViewModel;
     List<String> statusName = new ArrayList<>();
     List<Category> categories = new ArrayList<>();
     List<String> categoryName = new ArrayList<>();
-
+List<Project>projectList=new ArrayList<>();
     ArrayAdapter<String> categoryAdapter;
     CategoryViewModel categoryViewModel;
     List<Periority> periorities = new ArrayList<>();
@@ -79,9 +78,10 @@ public class TaskFragment extends Fragment {
     String editCategory;
     String editPriority;
     String editTeam;
-    int editReview;
+    int editReview ,selectedProjectId,getProjecctID;
     String id;
     private ArrayList<Integer> selectedUserAssignes = new ArrayList<>();
+    ProjectViewModel projectViewModel;
 
     public TaskFragment() {
 
@@ -91,40 +91,32 @@ public class TaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_task, container, false);
-        spinner = view.findViewById(R.id.spinner);
-        categoryspinner = view.findViewById(R.id.categoryspinner);
-        hours = view.findViewById(R.id.hours);
-        startDate = view.findViewById(R.id.startDate);
-        revierSpiner = view.findViewById(R.id.revierSpiner);
-        team = view.findViewById(R.id.team);
-        dueDate = view.findViewById(R.id.dueDate);
-        periorityspinner = view.findViewById(R.id.periorityspinner);
-        title = view.findViewById(R.id.title);
-        Loader = view.findViewById(R.id.Loader);
+        binding=FragmentTaskBinding.inflate(inflater,container,false);
+
+
         authViewModel = new AuthViewModel(new AuthRepository());
-        discription = view.findViewById(R.id.discription);
+
 //customImagView=view.findViewById(R.id.customImageView);
-        customUser = view.findViewById(R.id.customUser);
+
         statusApiRepository = new StatusApiRepository();
         priorityRepository = new PriorityRepository();
         categoryApiRepository = new CategoryApiRepository();
-        savebtn = view.findViewById(R.id.savebtn);
+        projectViewModel=new ProjectViewModel(new ProjectRepository());
         categoryViewModel = new CategoryViewModel(new CategoryRepository());
         periorityViewModel = new PeriorityViewModel(new PeriorityRepository());
         statusViewModel = new StatusViewModel(new StatusRepository());
         taskViewModel = new TaskViewModel(new TaskRepository());
         uSerViewModel = new USerViewModel(new UserRepository());
         apiTaskViewModel = new ApiTaskViewModel(new ApiTaskRepository());
-        startDate.setFocusable(false);
-        startDate.setClickable(true);
+        binding.startDate.setFocusable(false);
+        binding.startDate.setClickable(true);
 
-        dueDate.setFocusable(false);
-        dueDate.setClickable(true);
+        binding.dueDate.setFocusable(false);
+        binding.dueDate.setClickable(true);
 
-        startDate.setOnClickListener(v -> openDatePicker(true));
+        binding.startDate.setOnClickListener(v -> openDatePicker(true));
 
-        dueDate.setOnClickListener(v -> openDatePicker(false));
+        binding.dueDate.setOnClickListener(v -> openDatePicker(false));
         Bundle bundle = getArguments();
         if (bundle != null) {
             id = bundle.getString("taskId");
@@ -138,20 +130,21 @@ public class TaskFragment extends Fragment {
                 editReview = bundle.getInt("reviewrID", 0);
                 Log.d("REVIEWER_API", "Bundle reviewer: " + editReview);
                 editPriority = bundle.getString("priority");
+                getProjecctID=bundle.getInt("projectId");
                 editTeam = bundle.getString("team");
                 selectedUserAssignes =
                         bundle.getIntegerArrayList("assignessId");
-                title.getEditText().setText(titl1e);
+                binding.title.getEditText().setText(titl1e);
 
-                discription.getEditText().setText(discrip);
-                hours.getEditText().setText(hourqs);
-                startDate.setText(startDatee);
-                dueDate.setText(dueDatee);
+                binding.discription.getEditText().setText(discrip);
+                binding.hours.getEditText().setText(hourqs);
+                binding.startDate.setText(startDatee);
+                binding.dueDate.setText(dueDatee);
             }
         }
         reiverAdpater = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, userListspinner);
         reiverAdpater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        revierSpiner.setAdapter(reiverAdpater);
+        binding.revierSpiner.setAdapter(reiverAdpater);
         authViewModel.getUserList(new AuthRepository.TaskCallBack() {
             @Override
             public void OnSuccess(JsonObject jsonReader) {
@@ -175,7 +168,7 @@ public class TaskFragment extends Fragment {
 
                         if (userID.get(i) == editReview) {
 
-                            revierSpiner.setSelection(i);
+                            binding.revierSpiner.setSelection(i);
                             found = true;
 
                             Log.d("REVIEWER_API",
@@ -197,6 +190,26 @@ public class TaskFragment extends Fragment {
 
             @Override
             public void Onerror(String message) {
+
+            }
+        });
+        projectViewModel.getProjectList(new ResponseCallback<List<Project>>() {
+            @Override
+            public void onSuccess(List<Project> data, String message) {
+                projectList.clear();
+                projectList.addAll(data);
+                ArrayAdapter<Project>arrayAdapter=new ArrayAdapter<>(requireContext(),R.layout.dropdown,data);
+                binding.projectSpinner.setAdapter(arrayAdapter);
+               for (Project project:projectList){
+                   if (project.getId()==getProjecctID){
+                       binding.projectSpinner.setText(project.getName());
+                   }
+               }
+
+            }
+
+            @Override
+            public void onError(String message) {
 
             }
         });
@@ -238,7 +251,7 @@ public class TaskFragment extends Fragment {
                 android.R.layout.simple_spinner_dropdown_item
         );
 
-        team.setAdapter(teamAdapter);
+        binding.team.setAdapter(teamAdapter);
 
         apiTaskViewModel.getTeam(new ApiTaskRepository.TaskCallBack() {
             @Override
@@ -274,7 +287,7 @@ public class TaskFragment extends Fragment {
                     for (int i = 0; i < teamList.size(); i++) {
                         Team item = teamList.get(i);
                         if (item != null) {
-                            team.setSelection(i);
+                            binding.team.setSelection(i);
                         }
 
                     }
@@ -316,7 +329,7 @@ public class TaskFragment extends Fragment {
                         android.R.layout.simple_spinner_dropdown_item
                 );
 
-                categoryspinner.setAdapter(categoryAdapter);
+                binding.categoryspinner.setAdapter(categoryAdapter);
 
                 // Adapter load hone ke baad category select karo
                 if (editCategory != null) {
@@ -330,7 +343,7 @@ public class TaskFragment extends Fragment {
                         if (item != null &&
                                 item.trim().equalsIgnoreCase(editCategory.trim())) {
 
-                            categoryspinner.setSelection(i);
+                            binding.categoryspinner.setSelection(i);
                             found = true;
 
                             Log.d("EDIT_TASK",
@@ -400,14 +413,14 @@ public class TaskFragment extends Fragment {
             public void onSuccess(List<String> data, String message) {
                 periorityAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, data);
                 periorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                periorityspinner.setAdapter(periorityAdapter);
+                binding.periorityspinner.setAdapter(periorityAdapter);
                 if (editPriority != null) {
                     for (int i = 0; i < data.size(); i++) {
                         String item = data.get(i);
                         if (item != null &&
                                 item.trim().equalsIgnoreCase(editPriority.trim())) {
 
-                            periorityspinner.setSelection(i);
+                            binding.periorityspinner.setSelection(i);
                         }
                     }
                 }
@@ -515,7 +528,7 @@ public class TaskFragment extends Fragment {
 
                 Log.d("ASSIGNEE_API",
                         "Parsed users count: " + users.size());
-                customUser.setUsers(users);
+                binding.customUser.setUsers(users);
 
                 if (selectedUserAssignes == null) {
                     selectedUserAssignes = new ArrayList<>();
@@ -524,7 +537,7 @@ public class TaskFragment extends Fragment {
                 Log.d("ASSIGNEE_EDIT",
                         "IDs from TaskAdapter: " + selectedUserAssignes);
 
-                customUser.setSelectedUserIds(selectedUserAssignes);
+                binding.customUser.setSelectedUserIds(selectedUserAssignes);
 
                 Log.d("ASSIGNEE_API",
                         "setUsers() called with: " + users.size());
@@ -537,13 +550,24 @@ public class TaskFragment extends Fragment {
         });
 
 
-        savebtn.setOnClickListener(new View.OnClickListener() {
+        binding.savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title1 = title.getEditText().getText().toString();
-                String discpt = discription.getEditText().getText().toString();
+                String title1 = binding.title.getEditText().getText().toString();
+                String discpt = binding.discription.getEditText().getText().toString();
+                String projectname = binding.projectSpinner.getText().toString().trim();
 
-                if (title1.isEmpty()) {
+                selectedProjectId = 0;
+
+                for (Project project : projectList) {
+
+                    if (project.getName().equalsIgnoreCase(projectname)) {
+
+                        selectedProjectId = project.getId();
+
+                    }
+                }
+                        if (title1.isEmpty()) {
                     Toast.makeText(getContext(), " Please Create title ", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -553,8 +577,8 @@ public class TaskFragment extends Fragment {
                 }
 
 //                String statusPosition = spinner.getSelectedItem().toString();
-                String categoryPosition = categoryspinner.getSelectedItem().toString();
-                String periorityPosition = periorityspinner.getSelectedItem().toString();
+                String categoryPosition = binding.categoryspinner.getSelectedItem().toString();
+                String periorityPosition = binding.periorityspinner.getSelectedItem().toString();
 
                 //     if (statusPosition <= 0) {
                 //       Toast.makeText(getContext(), "Please Select Status", Toast.LENGTH_SHORT).show();
@@ -575,7 +599,7 @@ public class TaskFragment extends Fragment {
                 //              String categoryId = categories.get(categoryPosition - 1).getId();
                 //            String periorityId = periorities.get(periorityPosition - 1).getId();
 
-                Team selectedTeam = (Team) team.getSelectedItem();
+                Team selectedTeam = (Team) binding.team.getSelectedItem();
 
                 if (selectedTeam == null || selectedTeam.getId() == -1) {
                     Toast.makeText(requireContext(),
@@ -585,17 +609,17 @@ public class TaskFragment extends Fragment {
                 }
 
                 int selectedTeamId = selectedTeam.getId();
-                int selectedRevier = revierSpiner.getSelectedItemPosition();
+                int selectedRevier = binding.revierSpiner.getSelectedItemPosition();
                 int reviwerID = userID.get(selectedRevier);
                 Log.d("TEAM_API", "Selected Team ID = " + selectedTeamId);
                 Log.d("TEAM_API", "Selected Team Name = " + selectedTeam.getName());
 
 
-                String estimatTime = hours.getEditText().getText().toString().trim();
+                String estimatTime = binding.hours.getEditText().getText().toString().trim();
                 Log.e("API TASK", "onClick: " + estimatTime);
-                Loader.setVisibility(View.VISIBLE);
-                selectedDate = startDate.getText().toString().trim();
-                Due_Date = dueDate.getText().toString().trim();
+                binding.Loader.setVisibility(View.VISIBLE);
+                selectedDate = binding.startDate.getText().toString().trim();
+                Due_Date = binding.dueDate.getText().toString().trim();
 
                 Log.d("TASK_DATE", "Start date before API = " + selectedDate);
                 Log.d("TASK_DATE", "Due date before API = " + Due_Date);
@@ -609,29 +633,30 @@ public class TaskFragment extends Fragment {
                 taskReq.setReviewer_id(reviwerID);
                 taskReq.setStart_date(selectedDate);
                 taskReq.setDue_date(Due_Date);
+                taskReq.setProject_id(selectedProjectId);
 
                 Log.d("TASK_API", "Selected priority: "
-                        + periorityspinner.getSelectedItem());
+                        + binding.periorityspinner.getSelectedItem());
 
                 Log.d("TASK_API", "Priority value: "
                         + taskReq.getPeriority());
 
-                List<Integer> selectedUser = customUser.getSelectedUserIds();
+                List<Integer> selectedUser = binding.customUser.getSelectedUserIds();
 
 
                 String titleValue =
-                        title.getEditText().getText().toString().trim();
+                        binding.title.getEditText().getText().toString().trim();
 
                 String priorityValue =
-                        periorityspinner.getSelectedItem().toString().toLowerCase();
+                        binding.periorityspinner.getSelectedItem().toString().toLowerCase();
 
                 String descriptionValue =
-                        discription.getEditText().getText().toString().trim();
+                        binding.discription.getEditText().getText().toString().trim();
 
                 String dueDateValue =
-                        dueDate.getText().toString().trim();
-                String startDateValue = startDate.getText().toString().trim();
-                Loader.setVisibility(View.VISIBLE);
+                        binding.dueDate.getText().toString().trim();
+                String startDateValue = binding.startDate.getText().toString().trim();
+                binding.Loader.setVisibility(View.VISIBLE);
                 UpdateTask request = new UpdateTask(titleValue, descriptionValue, categoryPosition, priorityValue, selectedTeamId, estimatTime, startDateValue, dueDateValue, reviwerID, selectedUser);
                 if (id != null) {
 
@@ -640,14 +665,14 @@ public class TaskFragment extends Fragment {
                         @Override
                         public void onSuccess(Task data, String message) {
 
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
 //                            Log.e("API TASK", "OnSuccess: " + jsonReader);
                             Toast.makeText(getContext(), "Task Updated", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onError(String message) {
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
 
                         }
                     });
@@ -658,13 +683,13 @@ public class TaskFragment extends Fragment {
                     apiTaskViewModel.creatTask(taskReq, selectedUser, new ResponseCallback<Task>() {
                         @Override
                         public void onSuccess(Task data, String message) {
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
                             Toast.makeText(getContext(), "Task Created", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onError(String message) {
-                            Loader.setVisibility(View.GONE);
+                            binding.Loader.setVisibility(View.GONE);
 
                         }
                     });
@@ -688,7 +713,7 @@ public class TaskFragment extends Fragment {
                 //  });
             }
         });
-        return view;
+        return binding.getRoot();
 
     }
 
@@ -706,10 +731,10 @@ public class TaskFragment extends Fragment {
 
                     if (isStartDate) {
                         selectedDate = date;
-                        startDate.setText(date);
+                        binding.startDate.setText(date);
                     } else {
                         Due_Date = date;
-                        dueDate.setText(date);
+                        binding.dueDate.setText(date);
                     }
 
                     Log.d("TASK_DATE", "Start date = " + selectedDate);

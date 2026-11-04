@@ -40,4 +40,10 @@ public class ApiTaskViewModel {
     public void getTeam(ApiTaskRepository.TaskCallBack taskCallBack) {
         apiTaskRepository.getTeams(taskCallBack);
     }
+    public void getteam(ResponseCallback<List<Team>> responseCallback){
+        apiTaskRepository.getteam(responseCallback);
+    }
+   public void getRole(ResponseCallback<List<Role>> responseCallback){
+        apiTaskRepository.getRole(responseCallback);
+   }
 }

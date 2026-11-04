@@ -72,6 +72,7 @@ OnDeletBtnClick onDeletBtnClick;
         holder.binding.category.setText(task.getCategory());
         holder.binding.date.setText(task.getDue_date());
         holder.binding.periority.setText(task.getPriority().getLabel());
+        holder.binding.projectkey.setText(task.getProjects().getKey());
 
         String teamName = "No team assigned";
 
@@ -107,6 +108,7 @@ OnDeletBtnClick onDeletBtnClick;
                             if (item.getItemId() == R.id.update) {
                                 TaskFragment taskFragment=new TaskFragment();
                                 Bundle bundle=new Bundle();
+                                bundle.putInt("projectId",task.getProject_id());
                                 bundle.putString("title",task.getTitle());
                                 bundle.putString("discription",task.getDiscription());
                                 bundle.putString("category",task.getCategory());
@@ -122,12 +124,12 @@ OnDeletBtnClick onDeletBtnClick;
                                    bundle.putIntegerArrayList("assignessId",integers);
                                 bundle.putString("startDate",task.getStart_date());
                                 bundle.putString("dueDate",task.getDue_date());
-taskFragment.setArguments(bundle);
+                                 taskFragment.setArguments(bundle);
                                 fragmentManager.beginTransaction().replace(R.id.fragmentContainer, taskFragment).addToBackStack(null).commit();
                             }
                             if (item.getItemId()==R.id.delete){
                                 int currentpostion=holder.getPosition();
-onDeletBtnClick.onClick(task.getId(), currentpostion);
+                            onDeletBtnClick.onClick(task.getId(), currentpostion);
                             }
                             return true;
                         }

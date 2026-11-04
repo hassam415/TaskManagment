@@ -7,6 +7,11 @@
         android:icon="@drawable/outline_dashboard_24"
         />
     <item
+        android:id="@+id/project"
+        android:title="Projects"
+        android:icon="@drawable/outline_files_24"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/user"
         android:icon="@drawable/outline_person_24"
         android:title="User Management"
@@ -37,4 +42,5 @@
         android:title="Logout"
         android:icon="@drawable/baseline_logout_24"
         app:showAsAction="never" />
+
 </menu>

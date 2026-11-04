@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static final String TAG = "ApiClient";
-    private static final String Base_Url = "http://192.168.1.14:8005/api/v1/";
+    private static final String Base_Url = "https://beta-tasks.petelaj.com/api/v1/";
 
     private static Retrofit retrofit;
     private static ApiService apiService;

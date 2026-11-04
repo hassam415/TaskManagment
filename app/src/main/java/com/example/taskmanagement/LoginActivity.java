@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
             String email = binding.email.getEditText().getText().toString();
             String pass = binding.password.getEditText().getText().toString();
             binding.loader.setVisibility(View.VISIBLE);
-
+binding.loginbtn.setVisibility(View.GONE);
             loginmethod(email, pass);
         });
     }
@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void OnSuccess(LoginResponse loginResponse) {
                 binding.loader.setVisibility(View.GONE);
+                binding.loginbtn.setVisibility(View.VISIBLE);
                 String token = loginResponse.getAccess_token();
                 ApiSesson.setAccess_Token(token);
                 Toast.makeText(LoginActivity.this, "Login SuccessFull ", Toast.LENGTH_SHORT).show();
@@ -86,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void OnError(String message) {
                 binding.loader.setVisibility(View.GONE);
+                binding.loginbtn.setVisibility(View.VISIBLE);
                 Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
             }

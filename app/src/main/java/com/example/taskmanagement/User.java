@@ -1,5 +1,7 @@
 package com.example.taskmanagement;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class User {
@@ -8,6 +10,25 @@ public class User {
 String job_title,role;
 List<Integer>team_ids;
 
+List<Role>roles;
+@SerializedName("teams")
+List<Team>teams;
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public int getId() {
         return id;
@@ -122,5 +143,9 @@ List<Integer>team_ids;
 
     public void setRole(String role) {
         this.role = role;
+    }
+    @Override
+    public String toString() {
+        return name;
     }
 }
