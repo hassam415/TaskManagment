@@ -160,8 +160,8 @@ public class TaskListFragment extends Fragment {
                 apiTaskViewModel.delettask(taskID, new ApiTaskRepository.TaskCallBack() {
                     @Override
                     public void OnSuccess(JsonObject jsonReader) {
-                        taskList.remove(jsonReader);
-                        taskAdapter.notifyDataSetChanged();
+                        taskList.remove(position);
+                        taskAdapter.notifyItemRemoved(position);
                     }
 
                     @Override

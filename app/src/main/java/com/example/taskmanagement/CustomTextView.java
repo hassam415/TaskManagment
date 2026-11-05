@@ -29,7 +29,7 @@ public class CustomTextView extends TextView {
     }
 
     private void init() {
-        setTextSize(10);
+        setTextSize(8);
         setTextColor(android.graphics.Color.WHITE);
         setTypeface(getTypeface(), android.graphics.Typeface.BOLD);
         setGravity(android.view.Gravity.CENTER);

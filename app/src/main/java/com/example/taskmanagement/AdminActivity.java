@@ -92,6 +92,9 @@ if (id==R.id.project){
     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProjectFragment()).commit();
     setToolbarText("Project");
 }
+if (id==R.id.team){
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new TeamFragment()).commit();
+}
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

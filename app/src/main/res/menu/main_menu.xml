@@ -23,6 +23,11 @@
         android:icon="@drawable/outline_add_task_24"
         app:showAsAction="never" />
     <item
+        android:id="@+id/team"
+        android:title="Teams"
+        android:icon="@drawable/outline_display_group_24"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/status"
         android:title="Statuses"
         app:showAsAction="never"

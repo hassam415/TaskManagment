@@ -76,4 +76,16 @@ public interface ApiService {
     @PUT("projects/{id}")
     Call<Project>updateProject(@Path("id") int id,
                                @Body ProjectRequest  projectRequest);
+    @POST("teams")
+    Call<Team> creatTeam(@Body TeamRequest teamRequest);
+    @GET("teams")
+    Call<APIResponse<Team>> getTeamList();
+    @GET("departments")
+    Call<APIResponse<TeamDepartment>> getDepartment();
+    @DELETE("teams/{id}")
+    Call<Team> deletTeam(@Path("id") int id);
+    @PUT("teams/{id}")
+    Call<Team>updateTeam(@Path("id")int id,
+                         @Body TeamRequest
+teamRequest                         );
 }
