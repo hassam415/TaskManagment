@@ -766,4 +766,9 @@ List<Project>projectList=new ArrayList<>();
 
         dialog.show();
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AdminActivity) requireActivity()).setToolbarText("Create New Task");
+    }
 }

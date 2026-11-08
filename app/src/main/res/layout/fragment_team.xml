@@ -10,30 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TeamFragment">
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:text="Team &amp; Operational Squads "
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="24dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/teamRecyler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/teamAddBtn"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/Loader"
+    android:layout_centerInParent="true"
+    android:orientation="vertical">
+    <ProgressBar
+        android:layout_width="match_parent"
 
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Loading.."
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/teamAddBtn"
             android:layout_width="wrap_content"

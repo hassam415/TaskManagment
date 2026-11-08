@@ -76,7 +76,7 @@ binding.loginbtn.setVisibility(View.GONE);
             @Override
             public void OnSuccess(LoginResponse loginResponse) {
                 binding.loader.setVisibility(View.GONE);
-                binding.loginbtn.setVisibility(View.VISIBLE);
+
                 String token = loginResponse.getAccess_token();
                 ApiSesson.setAccess_Token(token);
                 Toast.makeText(LoginActivity.this, "Login SuccessFull ", Toast.LENGTH_SHORT).show();

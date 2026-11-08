@@ -39,9 +39,11 @@ List<Team>teamList=new ArrayList<>();
         binding.teamRecyler.setLayoutManager(new LinearLayoutManager(getContext()));
         teamAdapter=new TeamAdapter(getContext(),teamList);
         binding.teamRecyler.setAdapter(teamAdapter);
+        binding.Loader.setVisibility(View.VISIBLE);
         teamViewModel.getTeamList(new ResponseCallback<List<Team>>() {
             @Override
             public void onSuccess(List<Team> data, String message) {
+                binding.Loader.setVisibility(View.GONE);
                 teamList.clear();
                 teamList.addAll(data);
                 teamAdapter.notifyDataSetChanged();
@@ -49,7 +51,7 @@ List<Team>teamList=new ArrayList<>();
 
             @Override
             public void onError(String message) {
-
+                binding.Loader.setVisibility(View.GONE);
             }
         });
         teamAdapter.setOnDeletBtnClick(new TeamAdapter.OnDeletBtnClick() {
@@ -77,5 +79,10 @@ List<Team>teamList=new ArrayList<>();
             }
         });
         return binding.getRoot();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AdminActivity) requireActivity()).setToolbarText("Team Operational Squads");
     }
 }

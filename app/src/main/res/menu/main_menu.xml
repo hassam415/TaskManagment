@@ -28,6 +28,10 @@
         android:icon="@drawable/outline_display_group_24"
         app:showAsAction="never" />
     <item
+        android:id="@+id/calendar"
+        android:title="Calendar"
+        android:icon="@drawable/outline_calendar_month_24"/>
+    <item
         android:id="@+id/status"
         android:title="Statuses"
         app:showAsAction="never"

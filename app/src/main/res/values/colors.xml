@@ -20,6 +20,9 @@
     <color name="dark_slate_blue">#483D8B</color>
     <color name="light_grey">#D3D3D3</color>
     <color name="duk_blue">#00009c</color>
-
-
+<color name="yellow">#F59E0B</color>
+    <color name="totaltask">#344F7D</color>
+    <color name="completedTask">#168B78</color>
+<color name="pendingColour">#D99536
+</color>
 </resources>

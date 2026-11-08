@@ -86,6 +86,7 @@ public interface ApiService {
     Call<Team> deletTeam(@Path("id") int id);
     @PUT("teams/{id}")
     Call<Team>updateTeam(@Path("id")int id,
-                         @Body TeamRequest
-teamRequest                         );
+                         @Body TeamRequest teamRequest );
+    @GET("calendar/summary")
+    Call<CalenderResponse> getCalender(@Query("month")String month);
 }

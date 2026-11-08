@@ -113,7 +113,7 @@ public class TaskListFragment extends Fragment {
         binding.taskrecycler.setAdapter(taskAdapter);
 
         binding.Loader.setVisibility(View.VISIBLE);
-        filterBtn.setVisibility(View.VISIBLE);
+        //  filterBtn.setVisibility(View.VISIBLE);
         Bundle bundle = getArguments();
 
         if (bundle != null) {
@@ -247,11 +247,11 @@ public class TaskListFragment extends Fragment {
         });
 
 
-        filterBtn.setOnClickListener(v -> {
+      //  filterBtn.setOnClickListener(v -> {
 
-            binding.filterDrawer.openDrawer(GravityCompat.END);
+        //    binding.filterDrawer.openDrawer(GravityCompat.END);
 
-        });
+       // });
 
 
         binding.selectDate.setOnClickListener(new View.OnClickListener() {
@@ -510,5 +510,11 @@ public class TaskListFragment extends Fragment {
             //         }
             //   });
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AdminActivity) requireActivity()).setToolbarText("Task Managment");
     }
 }

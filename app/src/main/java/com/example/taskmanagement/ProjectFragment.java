@@ -36,9 +36,11 @@ List<Project>projects=new ArrayList<>();
         projectAdapter=new ProjectAdapter(getContext(),projects);
         binding.projectRecyler.setAdapter(projectAdapter);
         projectViewModel=new ProjectViewModel(new ProjectRepository());
+binding.loader.setVisibility(View.VISIBLE);
         projectViewModel.getProjectList(new ResponseCallback<List<Project>>() {
             @Override
             public void onSuccess(List<Project> data, String message) {
+                binding.loader.setVisibility(View.GONE);
                 projects.clear();
                 projects.addAll(data);
                 projectAdapter.notifyDataSetChanged();
@@ -47,6 +49,7 @@ List<Project>projects=new ArrayList<>();
 
             @Override
             public void onError(String message) {
+                binding.loader.setVisibility(View.GONE);
 
             }
         });
@@ -72,8 +75,16 @@ List<Project>projects=new ArrayList<>();
             @Override
             public void onClick(View v) {
 getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new AddProjectFragment()).addToBackStack(null).commit();
+
             }
         });
         return binding.getRoot();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ((AdminActivity) requireActivity())
+                .setToolbarText("Projects Workspace");
     }
 }

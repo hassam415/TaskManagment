@@ -161,6 +161,7 @@ binding.saveBtn.setOnClickListener(new View.OnClickListener() {
         String team = binding.teamSpinner.getEditableText().toString();
         String selectedStatus = binding.statusSpinner.getText().toString();
         integerList= binding.customteam.getSelectedUserIds();
+        binding.loader.setVisibility(View.VISIBLE);
         Log.d("PROJECT_MEMBERS", "Selected Member IDs: " + integerList);
         int position = arrayAdapter.getPosition(selectedStatus);
 
@@ -199,7 +200,7 @@ binding.saveBtn.setOnClickListener(new View.OnClickListener() {
         project.setTeam_id(teamid);
         project.setStatus(value);
         project.setMember_ids(integerList);
-        binding.loader.setVisibility(View.VISIBLE);
+
         binding.saveBtn.setVisibility(View.GONE);
 if (projectId!=0){
     projectViewModel.updateProject(projectId, project, new ResponseCallback<Project>() {
@@ -263,5 +264,12 @@ if (projectId!=0){
         );
 
         dialog.show();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ((AdminActivity) requireActivity())
+                .setToolbarText("Create New Project");
     }
 }

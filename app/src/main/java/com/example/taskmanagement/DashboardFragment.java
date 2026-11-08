@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.example.taskmanagement.databinding.FragmentDashboardBinding;
@@ -128,13 +129,14 @@ dashboardViewModel.getTaskByApi(new ResponseCallback<ResponseDashBoard>() {
         fragmentDashboardBinding.completionRate.setText(data.getData().getDashboardOverView().completion_rate + "%");
         fragmentDashboardBinding.taskCount.setText(data.getData().getDashboardOverView().getTotaltask());
         fragmentDashboardBinding.pendingCount.setText(data.getData().getDashboardOverView().getInreview());
-        fragmentDashboardBinding.completCount.setText(data.getData().getDashboardOverView().getComplete());
+        fragmentDashboardBinding.completcount.setText(data.getData().getDashboardOverView().getComplete());
         fragmentDashboardBinding.dueCount.setText(data.getData().getDashboardOverView().getOverDue());
         fragmentDashboardBinding.draftCount.setText(data.getData().getStatusDistribution().getDraft().count);
         fragmentDashboardBinding.assignedCount.setText(data.getData().getStatusDistribution().getAssigned().count);
         fragmentDashboardBinding.inProgressCount.setText(data.getData().getStatusDistribution().getInProgress().count);
         fragmentDashboardBinding.onHoldCount.setText(data.getData().getStatusDistribution().getOnHold().count);
         fragmentDashboardBinding.inReviewCount.setText(data.getData().getStatusDistribution().getInReview().count);
+        fragmentDashboardBinding.velocityCount.setText(data.getData().getDashboardOverView().getCompletion_rate()+"% velocity");
         fragmentDashboardBinding.changesRequestedCount.setText(data.getData().getStatusDistribution().getChangesRequested().count);
         fragmentDashboardBinding.completedStatusCount.setText(data.getData().getStatusDistribution().getCompleted().count);
         fragmentDashboardBinding.cancelledCount.setText(data.getData().getStatusDistribution().getCancelled().count);
@@ -143,6 +145,15 @@ dashboardViewModel.getTaskByApi(new ResponseCallback<ResponseDashBoard>() {
         fragmentDashboardBinding.highcount.setText(data.getData().getPriorityDistribution().getHigh().count + "tasks");
         fragmentDashboardBinding.urgentcount.setText(data.getData().getPriorityDistribution().getUrgent().count + "tasks");
         fragmentDashboardBinding.pendingreview.setText(data.getData().getDashboardOverView().getInreview()+"pending");
+        StatusDistribution status=data.getData().getStatusDistribution();
+        setStatusProgress( Integer.parseInt(status.getDraft().count),
+                Integer.parseInt(status.getAssigned().count),
+                Integer.parseInt(status.getInProgress().count),
+                Integer.parseInt(status.getOnHold().count),
+                Integer.parseInt(status.getInReview().count),
+                Integer.parseInt(status.getChangesRequested().count),
+                Integer.parseInt(status.getCompleted().count),
+                Integer.parseInt(status.getCancelled().count));
 int totaltask= Integer.parseInt(data.getData().getDashboardOverView().getTotaltask());
         Priority_Distribution priority = data.getData().priorityDistribution;
 
@@ -169,7 +180,58 @@ int totaltask= Integer.parseInt(data.getData().getDashboardOverView().getTotalta
 
     }
 
-        private void setPriorityProgress(Priority_Distribution priority,int totaltask) {
+    private void setStatusProgress(
+            int draft,
+            int assigned,
+            int inProgress,
+            int onHold,
+            int inReview,
+            int changesRequested,
+            int completed,
+            int cancelled) {
+
+        int[] counts = {
+                draft,
+                assigned,
+                inProgress,
+                onHold,
+                inReview,
+                changesRequested,
+                completed,
+                cancelled
+        };
+
+        View[] views = {
+                fragmentDashboardBinding.draftview,
+                fragmentDashboardBinding.assigneview,
+                fragmentDashboardBinding.inprogressView,
+                fragmentDashboardBinding.onHoldView,
+                fragmentDashboardBinding.InReviewView,
+                fragmentDashboardBinding.requestView,
+                fragmentDashboardBinding.completView,
+                fragmentDashboardBinding.cancelledView
+        };
+
+        int total = 0;
+
+        for (int count : counts) {
+            total += Math.max(count, 0);
+        }
+
+        for (int i = 0; i < counts.length; i++) {
+
+            LinearLayout.LayoutParams params =
+                    new LinearLayout.LayoutParams(
+                            0,
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            Math.max(counts[i], 0)
+                    );
+
+            views[i].setLayoutParams(params);
+        }
+    }
+
+    private void setPriorityProgress(Priority_Distribution priority,int totaltask) {
 
             int low = Integer.parseInt(priority.getLow().count);
             int normal = Integer.parseInt(priority.getNormal().count);

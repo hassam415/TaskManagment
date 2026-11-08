@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,6 @@ List<Integer>selectedIDs=new ArrayList<>();
                 ArrayAdapter<User>userArrayAdapter=new ArrayAdapter<>(requireContext(),R.layout.dropdown,data);
                 binding.teamleadSpinner.setAdapter(userArrayAdapter);
                 binding.customUsers.setUsers(data);
-
                 binding.customUsers.setSelectedUserIds(selectedIDs);
                 for (User user:userList){
                     if (user.getId()==selectedLeadId){
@@ -102,6 +102,7 @@ String name=binding.teamname.getEditableText().toString();
 String discription=binding.discription.getEditableText().toString();
 String departmentD=binding.departmentSpinner.getEditableText().toString();
 integerList=binding.customUsers.getSelectedUserIds();
+                Log.d("TEAM_MEMBERS", "Selected Members: " + integerList);
 for (TeamDepartment department:teamDepartments){
     if (department.getName().equals(departmentD)){
         departmentID=department.getId();
@@ -138,22 +139,31 @@ if (id!=0){
         }
     });
 }
-teamViewModel.creatTeam(team, new ResponseCallback<Team>() {
-    @Override
-    public void onSuccess(Team data, String message) {
-        binding.loader.setVisibility(View.GONE);
-        Toast.makeText(getContext(), "Team is Created", Toast.LENGTH_SHORT).show();
-    }
+else {
+    teamViewModel.creatTeam(team, new ResponseCallback<Team>() {
+        @Override
+        public void onSuccess(Team data, String message) {
+            binding.loader.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "Team is Created", Toast.LENGTH_SHORT).show();
+        }
 
-    @Override
-    public void onError(String message) {
-        Toast.makeText(getContext(), ""+message, Toast.LENGTH_SHORT).show();
-    }
-});
+        @Override
+        public void onError(String message) {
+            Toast.makeText(getContext(), ""+message, Toast.LENGTH_SHORT).show();
+        }
+    });
+}
+
 
             }
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AdminActivity) requireActivity()).setToolbarText("Creat New Team Squad");
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:orientation="vertical"
+    android:background="@drawable/calendar_cell_border">
+    <TextView
+        android:id="@+id/dayNumber"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="7"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#172B4D"/>
+
+    <TextView
+        android:id="@+id/taskCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+android:layout_margin="9dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+android:background="@drawable/badge_bg"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/taskChips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.example.taskmanagement;
 
+import android.util.Log;
+
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.example.taskmanagement.response.APIResponse;
 import com.google.common.reflect.TypeToken;
@@ -74,5 +76,22 @@ responseCallback.onError(throwable.getMessage());
             }
         });
     }
+    public void getCalender(String month,ResponseCallback<Calendar> responseCallback) {
+        apiService.getCalender(month).enqueue(new Callback<CalenderResponse>() {
+            @Override
+            public void onResponse(Call<CalenderResponse> call, Response<CalenderResponse> response) {
+                Calendar calendar=response.body().getData();
 
+                Log.d("CalendarAPI", "API Total = " + calendar.getTotal_tasks());
+                Log.d("CalendarAPI", "API Completed = " + calendar.getCompleted_tasks());
+                Log.d("CalendarAPI", "API Pending = " + calendar.getPending_tasks());
+                responseCallback.onSuccess(calendar,"Success");
+            }
+
+            @Override
+            public void onFailure(Call<CalenderResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
 }

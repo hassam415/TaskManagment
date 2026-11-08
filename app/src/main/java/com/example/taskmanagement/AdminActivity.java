@@ -56,17 +56,17 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
         int id = menuItem.getItemId();
         if (id == R.id.user) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new UserListFragment()).commit();
-            setToolbarText("User");
+            setToolbarText("User Managment & RBAC Governance");
 
         }
         if (id == R.id.task) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new TaskListFragment()).addToBackStack(null).commit();
-            setToolbarText("Task");
+            setToolbarText("Task Managment");
 
         }
         if (id == R.id.dashboard) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).addToBackStack(null).commit();
-            setToolbarText("DashBoard");
+            setToolbarText("Executive Oepration Dashboard");
         }
         if (id == R.id.logout) {
             mauth.signOut();
@@ -90,10 +90,15 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
         }
 if (id==R.id.project){
     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProjectFragment()).commit();
-    setToolbarText("Project");
+    setToolbarText("Projects Workspace");
 }
 if (id==R.id.team){
     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new TeamFragment()).commit();
+    setToolbarText("Team Operational Squads");
+}
+if (id==R.id.calendar){
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new CalendarFragment()).commit();
+    setToolbarText("Interactive Calendar Deadline");
 }
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         return true;

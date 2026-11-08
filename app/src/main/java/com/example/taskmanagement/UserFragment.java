@@ -246,4 +246,10 @@ private ActivityResultLauncher<String> cameraLaucnher;
         }
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AdminActivity) requireActivity()).setToolbarText("Create Organization User");
+    }
 }

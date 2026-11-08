@@ -23,4 +23,7 @@ public class ProjectViewModel {
     public void updateProject(int id,ProjectRequest projectRequest,ResponseCallback<Project>responseCallback){
         projectRepository.updateProject(id, projectRequest, responseCallback);
     }
+    public void getCalenderList( String month ,ResponseCallback<Calendar>responseCallback){
+        projectRepository.getCalender(month,responseCallback);
+    }
 }

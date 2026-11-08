@@ -106,6 +106,7 @@ authViewModel.deleteUser(Userid, new ResponseCallback() {
         authViewModel.getCurrentUser(new ResponseCallback<List<User>>() {
             @Override
             public void onSuccess(List<User> data, String message) {
+                loader.setVisibility(View.GONE);
                 userList.clear();
                 userList.addAll(data);
                 userAdapter.notifyDataSetChanged();
@@ -137,5 +138,10 @@ authViewModel.deleteUser(Userid, new ResponseCallback() {
            // }
        // });
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AdminActivity) requireActivity()).setToolbarText("User Managment & RBAC Governance");
     }
 }

@@ -19,50 +19,13 @@
             android:padding="16dp"
             tools:context=".DashboardFragment">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Executive &amp; Oepration Dashboard"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-
-                        <TextView
-                            android:id="@+id/kanban"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/calender"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
+                android:layout_marginTop="14dp"
                 android:backgroundTint="@color/midnightBlue"
                 app:cardCornerRadius="16dp">
 
@@ -160,10 +123,6 @@
                                     android:textSize="25dp"
                                     android:textStyle="bold" />
 
-                                <ProgressBar
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="6dp" />
                             </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -350,15 +309,31 @@
                                     android:layout_marginStart="8dp"
                                     android:src="@drawable/checked" />
                             </LinearLayout>
-
-                            <TextView
-                                android:id="@+id/completCount"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="0"
-                                android:textSize="28sp"
-                                android:textStyle="bold" />
+                                android:baselineAligned="true"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/completcount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textColor="@color/black"
+                                    android:textSize="28sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/velocityCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                
+                                    android:textColor="@color/lightGreen" />
+                            </LinearLayout>
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -479,56 +454,56 @@
                             android:id="@+id/draftview"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+
                             android:background="#94A3B8" />
 
                         <View
                             android:id="@+id/assigneview"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="3"
+
                             android:background="#4D9DFF" />
 
                         <View
                             android:id="@+id/inprogressView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="2"
+
                             android:background="#FFB800" />
 
                         <View
                             android:id="@+id/onHoldView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+
                             android:background="#FF8500" />
 
                         <View
                             android:id="@+id/InReviewView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+
                             android:background="#B640F5" />
 
                         <View
                             android:id="@+id/requestView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.5"
+
                             android:background="#FF5B87" />
 
                         <View
                             android:id="@+id/completView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="3"
+
                             android:background="#00B982" />
 
                         <View
                             android:id="@+id/cancelledView"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+
                             android:background="#CBD5E1" />
 
                     </LinearLayout>

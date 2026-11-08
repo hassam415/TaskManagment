@@ -17,24 +17,7 @@
             android:layout_height="wrap_content"
             tools:context=".AddProjectFragment"
             android:orientation="vertical">
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
 
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:textColor="@color/black"
-                        android:text="CreateNewProject"
-                        android:textStyle="bold"
-                        android:textSize="20dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,8 +123,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none"
+                            android:hint="Select Status"
                             android:textSize="16sp"
                             android:dropDownHeight="wrap_content"/>
+                        <LinearLayout
+                            android:id="@+id/projectLoader"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <ProgressBar
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:text="Loading.."
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
 
                     </com.google.android.material.textfield.TextInputLayout>
                     <TextView
