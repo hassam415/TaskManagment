@@ -47,6 +47,11 @@
         app:showAsAction="never"
         android:icon="@drawable/outline_flag_24"/>
     <item
+        android:id="@+id/report"
+        android:title="Report &amp; Analytics"
+        app:showAsAction="never"
+        android:icon="@drawable/outline_bar_chart_4_bars_24"/>
+    <item
         android:id="@+id/logout"
         android:title="Logout"
         android:icon="@drawable/baseline_logout_24"

@@ -72,6 +72,9 @@ binding.loginbtn.setVisibility(View.GONE);
         //      Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
         //    }
         //  });
+        binding.email.setVisibility(View.GONE);
+        binding.password.setVisibility(View.GONE);
+
         authViewModel.login(email, pass, new AuthRepository.LoginCallBack() {
             @Override
             public void OnSuccess(LoginResponse loginResponse) {
@@ -87,6 +90,8 @@ binding.loginbtn.setVisibility(View.GONE);
             @Override
             public void OnError(String message) {
                 binding.loader.setVisibility(View.GONE);
+                binding.email.setVisibility(View.VISIBLE);
+                binding.password.setVisibility(View.VISIBLE);
                 binding.loginbtn.setVisibility(View.VISIBLE);
                 Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 

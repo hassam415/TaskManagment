@@ -3,7 +3,9 @@ package com.example.taskmanagement;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.databinding.CalendertaskdialogueBinding;
 import com.example.taskmanagement.databinding.FragmentCalendarBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.kizitonwose.calendar.core.CalendarDay;
 import com.kizitonwose.calendar.core.DayPosition;
 import com.kizitonwose.calendar.view.MonthDayBinder;
@@ -57,8 +61,6 @@ public class CalendarFragment extends Fragment {
         selectedDate = LocalDate.now();
 
         setupCalendar();
-
-binding.calendarView.setOnTouchListener((v,event)->true);
         binding.previousMonth.setOnClickListener(v -> {
             currentMonth = currentMonth.minusMonths(1);
             Toast.makeText(getContext(), "Month Changed TO "+currentMonth, Toast.LENGTH_SHORT).show();
@@ -204,6 +206,35 @@ binding.calendarView.setOnTouchListener((v,event)->true);
         binding.calendarView.scrollToMonth(currentMonth);
     }
 
+    private void loadTask(String date) {
+        projectViewModel.getCalenderTask(date, "due_date", new ResponseCallback<List<Task>>() {
+            @Override
+            public void onSuccess(List<Task> data, String message) {
+                showdialogue( date,data);
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+    }
+
+    private void showdialogue(String date,List<Task> tasks) {
+        CalendertaskdialogueBinding calendertaskdialogueBinding=CalendertaskdialogueBinding.inflate(getLayoutInflater());
+       TaskAdapter calenderTaskAdapter=new TaskAdapter(getContext(),tasks);
+       calendertaskdialogueBinding.taskrecyler.setLayoutManager(new LinearLayoutManager(getContext()));
+       calendertaskdialogueBinding.taskrecyler.setAdapter(calenderTaskAdapter);
+        MaterialAlertDialogBuilder materialAlertDialogBuilder=new MaterialAlertDialogBuilder(requireContext(),R.style.RoundedDialogueTheme);
+
+calendertaskdialogueBinding.date.setText("Tasks / "+date);
+        materialAlertDialogBuilder.setView(calendertaskdialogueBinding.getRoot());
+        materialAlertDialogBuilder.setPositiveButton("Close", null);
+        AlertDialog dialog = materialAlertDialogBuilder.create();
+
+        dialog.show();
+    }
+
     class DayContainer extends ViewContainer {
 
         TextView dayNumber, taskCount;
@@ -219,10 +250,18 @@ binding.calendarView.setOnTouchListener((v,event)->true);
             taskChips = view.findViewById(R.id.taskChips);
 
             view.setOnClickListener(v -> {
+
                 if (day != null &&
                         day.getPosition() == DayPosition.MonthDate) {
 
                     selectedDate = day.getDate();
+
+                    String date = selectedDate.toString();
+
+                    Log.d("CalendarClick", "Clicked Date = " + date);
+
+                    loadTask(date);
+
                     binding.calendarView.notifyDateChanged(selectedDate);
                 }
             });

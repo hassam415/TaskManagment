@@ -31,6 +31,33 @@ public class Task {
 
     public String assignee_ids;
     public int reviewer_id;
+    private int task_number;
+    private double actual_hours;
+    private boolean is_overdue;
+
+    public int getTask_number() {
+        return task_number;
+    }
+
+    public void setTask_number(int task_number) {
+        this.task_number = task_number;
+    }
+
+    public double getActual_hours() {
+        return actual_hours;
+    }
+
+    public void setActual_hours(double actual_hours) {
+        this.actual_hours = actual_hours;
+    }
+
+    public boolean isIs_overdue() {
+        return is_overdue;
+    }
+
+    public void setIs_overdue(boolean is_overdue) {
+        this.is_overdue = is_overdue;
+    }
 
     public Project getProjects() {
         return projects;

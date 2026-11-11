@@ -94,4 +94,30 @@ responseCallback.onError(throwable.getMessage());
             }
         });
     }
+    public void getCalenderTask(String date,String dateType,ResponseCallback<List<Task>>responseCallback ){
+        apiService.getCalenderTasks(date,dateType).enqueue(new Callback<CalenderTask>() {
+            @Override
+            public void onResponse(Call<CalenderTask> call, Response<CalenderTask> response) {
+                responseCallback.onSuccess(response.body().getData(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<CalenderTask> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void getReport(ResponseCallback<Report>responseCallback){
+        apiService.getReport().enqueue(new Callback<ReportResponse>() {
+            @Override
+            public void onResponse(Call<ReportResponse> call, Response<ReportResponse> response) {
+                responseCallback.onSuccess(response.body().getData(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<ReportResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
 }

@@ -56,7 +56,7 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
         int id = menuItem.getItemId();
         if (id == R.id.user) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new UserListFragment()).commit();
-            setToolbarText("User Managment & RBAC Governance");
+            setToolbarText("User Managment ");
 
         }
         if (id == R.id.task) {
@@ -79,6 +79,10 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
         if (id == R.id.periorities) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PeriorityFragment()).commit();
             setToolbarText("Periority");
+        }
+        if (id==R.id.report){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ReportFragment()).commit();
+            setToolbarText("Reports");
         }
         if (id == R.id.status) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new StatusFragment()).commit();

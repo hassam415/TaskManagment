@@ -89,4 +89,9 @@ public interface ApiService {
                          @Body TeamRequest teamRequest );
     @GET("calendar/summary")
     Call<CalenderResponse> getCalender(@Query("month")String month);
+    @GET("calendar/tasks")
+    Call<CalenderTask> getCalenderTasks(@Query("date")String date,@Query("date_type")String dateType);
+    @GET("reports")
+    Call<ReportResponse>getReport();
+
 }

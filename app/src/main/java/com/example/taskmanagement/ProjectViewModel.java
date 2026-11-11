@@ -26,4 +26,10 @@ public class ProjectViewModel {
     public void getCalenderList( String month ,ResponseCallback<Calendar>responseCallback){
         projectRepository.getCalender(month,responseCallback);
     }
+    public void getCalenderTask(String date,String dateType,ResponseCallback<List<Task>> responseCallback){
+        projectRepository.getCalenderTask(date,dateType,responseCallback);
+    }
+    public void getReport(ResponseCallback<Report>responseCallback){
+        projectRepository.getReport(responseCallback);
+    }
 }
