@@ -80,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:text="Total Task"
+                        android:text="@string/Total_Task"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:gravity="center"
@@ -109,7 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:text="Completed Task"
+                        android:text="@string/Completed_Task"
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textStyle="bold"
@@ -138,7 +138,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:text="Pending Task"
+                        android:text="@string/Pending_Task"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:gravity="center"
@@ -158,13 +158,13 @@
                 android:gravity="center"
                 android:weightSum="7">
 
-                <TextView android:text="Sun" style="@style/CalendarWeekDay"/>
-                <TextView android:text="Mon" style="@style/CalendarWeekDay"/>
-                <TextView android:text="Tue" style="@style/CalendarWeekDay"/>
-                <TextView android:text="Wed" style="@style/CalendarWeekDay"/>
-                <TextView android:text="Thu" style="@style/CalendarWeekDay"/>
-                <TextView android:text="Fri" style="@style/CalendarWeekDay"/>
-                <TextView android:text="Sat" style="@style/CalendarWeekDay"/>
+                <TextView android:text="@string/Sun" style="@style/CalendarWeekDay"/>
+                <TextView android:text="@string/Mon" style="@style/CalendarWeekDay"/>
+                <TextView android:text="@string/Tue" style="@style/CalendarWeekDay"/>
+                <TextView android:text="@string/Wed" style="@style/CalendarWeekDay"/>
+                <TextView android:text="@string/Thu" style="@style/CalendarWeekDay"/>
+                <TextView android:text="@string/Fri" style="@style/CalendarWeekDay"/>
+                <TextView android:text="@string/Sat" style="@style/CalendarWeekDay"/>
 
             </LinearLayout>
             <com.kizitonwose.calendar.view.CalendarView

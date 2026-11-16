@@ -28,7 +28,7 @@
                     android:layout_margin="18dp"
                     android:orientation="vertical">
                     <TextView
-                        android:text="Project Detail (Jira-Style Workspace)"
+                        android:text="@string/Project_Detail_Jira_Style_Workspace"
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="18dp"
@@ -38,12 +38,12 @@
                         android:layout_marginTop="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Create a project container first .Every task in this project will be prefixed with the project key "/>
+                        android:text="@string/Create_a_project_container_first_Every_task_in_this_project_will_be_prefixed_with_the_project_key"/>
 
                     <TextView
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
-                        android:text="Project Name*"
+                        android:text="@string/Project_Name"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        android:hint="e.g. Payment Gateway Modernization">
+                        android:hint="@string/e_g_Payment_Gateway_Modernization">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/name"
@@ -64,7 +64,7 @@
                     <TextView
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
-                        android:text="Project Key*"
+                        android:text="@string/Project_Key"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        android:hint="E.G. PAY">
+                        android:hint="@string/E_G_PAY">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/key"
@@ -100,7 +100,7 @@
                     <TextView
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
-                        android:text="Status*"
+                        android:text="@string/Status"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -123,7 +123,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none"
-                            android:hint="Select Status"
+                            android:hint="@string/Select_Status"
                             android:textSize="16sp"
                             android:dropDownHeight="wrap_content"/>
                         <LinearLayout
@@ -146,7 +146,7 @@
                     <TextView
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
-                        android:text="Primary Team"
+                        android:text="@string/Primary_Team"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -169,7 +169,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none"
-                            android:hint="Select Team"
+                            android:hint="@string/SELECT_TEAM"
                             android:textSize="16sp"
                             android:dropDownHeight="wrap_content"/>
 
@@ -177,7 +177,7 @@
                     <TextView
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
-                        android:text="Project Lead"
+                        android:text="@string/Project_Lead"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -200,7 +200,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none"
-android:hint="Default"
+android:hint="@string/Default"
                             android:textSize="16sp"
                             android:dropDownHeight="wrap_content"/>
 
@@ -208,7 +208,7 @@ android:hint="Default"
                     <TextView
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
-                        android:text="Start Date"
+                        android:text="@string/START_DATE"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -232,7 +232,7 @@ android:hint="Default"
                     <TextView
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
-                        android:text="Completion Date"
+                        android:text="@string/Completion_Date"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -258,7 +258,7 @@ android:hint="Default"
                     <TextView
                         android:layout_marginTop="16dp"
                         android:textStyle="bold"
-                        android:text="PROJECT SCOP &amp; OBJECTIVE"
+                        android:text="@string/PROJECT_SCOP_OBJECTIVE"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -267,7 +267,7 @@ android:hint="Default"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        android:hint="Describe the project goals,milstones, and deliverable">
+                        android:hint="@string/Describe_the_project_goals_milstones_and_deliverable">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/discrpt"
@@ -278,7 +278,7 @@ android:hint="Default"
 
                     </com.google.android.material.textfield.TextInputLayout>
                     <Button
-                        android:text="Create"
+                        android:text="@string/Create"
                         android:id="@+id/saveBtn"
                         android:textColor="@color/white"
                         android:backgroundTint="@color/darknavey"

@@ -6,608 +6,746 @@
     <data>
 
     </data>
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/filterDrawer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".ReportFragment">
+        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:context=".ReportFragment">
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="6dp"
+                        android:layout_margin="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_margin="8dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/completed" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:src="@drawable/checked"
+                                    android:layout_height="20dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/completedCount"
+                                    android:textStyle="bold"
+                                    android:textSize="20dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+
+                                    />
+
+                                <TextView
+                                    android:id="@+id/velocitycount"
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/lightGreen"
+
+                                    />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0" />
+
+                            <LinearLayout
+                                android:layout_margin="8dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <TextView
+                                    android:id="@+id/remaintask"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="6dp"
+                        android:layout_margin="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_margin="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ON_TIME_SLA_RATE" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:src="@drawable/trend"
+                                    android:layout_height="20dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_margin="8dp">
+
+                                <TextView
+                                    android:id="@+id/slaRate"
+                                    android:textStyle="bold"
+                                    android:textSize="20dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/duk_blue"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/delivery_compliance"
+                                    android:textSize="10dp"
+
+
+                                    />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="6dp" />
+
+                            <TextView
+                                android:id="@+id/sladueTask"
+                                android:layout_margin="8dp"
+                                android:textSize="12dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="6dp"
+                        android:layout_margin="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_margin="8dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/AVG_LEAD_TIME" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:src="@drawable/clock"
+                                    android:layout_height="20dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/timeCount"
+                                    android:textStyle="bold"
+                                    android:textSize="20dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+
+                                    />
+
+                                <TextView
+                                    android:text="@string/days_per_task"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
+
+                                    />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_marginTop="6dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0" />
+
+                            <LinearLayout
+                                android:layout_margin="8dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:text="@string/From_start_to_completed_status"
+                                    android:layout_width="wrap_content"
+                                    android:textSize="10dp"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="6dp"
+                        android:layout_margin="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_margin="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/HOURS_ALLOCATED" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:src="@drawable/analitycs"
+                                    android:layout_height="20dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_margin="8dp">
+
+                                <TextView
+                                    android:id="@+id/allocatedhours"
+                                    android:textStyle="bold"
+                                    android:textSize="20dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/duk_blue"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="/196h est."
+                                    android:textSize="11dp"
+                                    android:layout_marginLeft="4dp"
+
+                                    />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="6dp" />
+
+                            <TextView
+
+                                android:layout_margin="8dp"
+                                android:textSize="11dp"
+                                android:text="@string/Actual_vs_plannad_efforts"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    app:cardCornerRadius="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="6dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_gravity="center"
+                                android:layout_height="30dp"
+                                android:src="@drawable/analitycs" />
+
+                            <TextView
+                                android:text="@string/Throughput_Velocity_Delivery_rend"
+                                android:textSize="18dp"
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:text="@string/Comparisions_of_tasks_created_versus_tasks_successfully_approved_and_completed"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:layout_height="wrap_content" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#E0E0E0"/>
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/throughputChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp" />
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    app:cardCornerRadius="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="6dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/useraccount" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Team_Delivery_Productivity_Benchmark"
+                                android:textStyle="bold"
+                                android:textSize="18dp"
+                                android:layout_gravity="center" />
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="6dp"
+                            android:background="#E0E0E0"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/light_grey"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:weightSum="6">
+
+
+
+                            <TextView
+                                android:text="@string/CREATED"
+                                android:textStyle="bold"
+                                android:layout_width="0dp"
+                                android:textSize="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:text="@string/completed"
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:text="@string/ACTIVE"
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:text="@string/OVERDUE"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:text="@string/ON_TIME_SLA"
+                                android:layout_width="0dp"
+                                android:gravity="center"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:gravity="center"
+                                android:text="@string/HOURS_LOGGED"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_marginTop="6dp"
+                            android:id="@+id/teamrecyler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    app:cardCornerRadius="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="6dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/bolt" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Individual_Contributor_Throughput"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:textSize="18dp"
+                                android:layout_gravity="center" />
+
+                        </LinearLayout>
+                        <View
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#E0E0E0"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/light_grey"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:weightSum="6">
+
+
+
+                            <TextView
+                                android:text="@string/ASSINGED"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:textSize="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:text="@string/completed"
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:text="@string/ACTIVE"
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:text="@string/OVERDUE"
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:text="@string/ON_TIME_SLA"
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:textSize="10dp"
+                                android:text="@string/HOURS_LOGGED"
+                                android:layout_width="0dp"
+                                android:gravity="center"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/contributorRecycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:id="@+id/filterLayout"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="16dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:focusable="true">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="6dp"
-                android:layout_margin="12dp">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:overScrollMode="never">
 
+                <!-- ScrollView ka single child -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_margin="8dp"
+                    <TextView
+                        android:text="@string/Select_Day"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="COMPLETED" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="4dp">
+
+                        <Spinner
+                            android:id="@+id/dateSpinner"
+                            android:background="@drawable/custombtn"
+                            android:layout_width="match_parent"
+                            android:spinnerMode="dropdown"
+                            android:layout_height="match_parent"/>
 
                         <ImageView
                             android:layout_width="20dp"
-                            android:src="@drawable/checked"
-                            android:layout_height="20dp" />
-                    </LinearLayout>
-
+                            android:layout_gravity="end|center"
+                            android:layout_height="20dp"
+                            android:src="@drawable/outline_arrow_drop_down_24"/>
+                    </FrameLayout>
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:id="@+id/customDateLayout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginTop="14dp">
 
-                        <TextView
-                            android:id="@+id/completedCount"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-
-                            />
-
-                        <TextView
-                            android:id="@+id/velocitycount"
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/lightGreen"
-
-                            />
-
-
+                        <EditText
+                            android:id="@+id/startDateInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:background="@drawable/custombtn"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="8dp"
+                            android:hint="Select Date Range"
+                            android:textSize="14sp"
+                            android:textColor="#26364B"
+                            android:drawableEnd="@drawable/outline_calendar_month_24"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:singleLine="true"/>
                     </LinearLayout>
-
-                    <View
+                    <TextView
+                        android:text="@string/Select_Team"
                         android:layout_marginTop="6dp"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E0E0E0" />
+                        android:layout_height="wrap_content"/>
 
-                    <LinearLayout
-                        android:layout_margin="8dp"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="4dp"
+                        android:layout_height="40dp">
 
-                        <TextView
-                            android:text="Active remaining:"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:id="@+id/remaintask"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="6dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="ON-TIME SLA RATE" />
+                        <Spinner
+                            android:id="@+id/teamSpinner"
+                            android:background="@drawable/custombtn"
+                            android:layout_width="match_parent"
+                            android:spinnerMode="dropdown"
+                            android:layout_height="match_parent"/>
 
                         <ImageView
                             android:layout_width="20dp"
-                            android:src="@drawable/trend"
-                            android:layout_height="20dp" />
-                    </LinearLayout>
+                            android:layout_gravity="end|center"
+                            android:layout_height="20dp"
+                            android:src="@drawable/outline_arrow_drop_down_24"/>
+                    </FrameLayout>
+
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="8dp">
+                       
+                        android:weightSum="2">
 
-                        <TextView
-                            android:id="@+id/slaRate"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/duk_blue"
-
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="delivery compliance"
-                            android:textSize="10dp"
-
-
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E0E0E0"
-                        android:layout_marginTop="6dp" />
-
-                    <TextView
-                        android:id="@+id/sladueTask"
-                        android:layout_margin="8dp"
-                        android:textSize="12dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="6dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_margin="8dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/cancelbtn"
+                            android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="AVG LEAD TIME" />
+                            android:layout_height="42dp"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/Reset"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/white"
+                            app:backgroundTint="@color/brightRed"
+                            app:cornerRadius="4dp"
+                            android:textAllCaps="false"
+                            android:textSize="14sp"/>
 
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:src="@drawable/clock"
-                            android:layout_height="20dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/timeCount"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-
-                            />
-
-                        <TextView
-                            android:text="days per task"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
-
-                            />
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_marginTop="6dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E0E0E0" />
-
-                    <LinearLayout
-                        android:layout_margin="8dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:text="From start to completed status"
-                            android:layout_width="wrap_content"
-                            android:textSize="10dp"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="6dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/applyCustomRange"
+                            android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="HOURS ALLOCATED" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:src="@drawable/analitycs"
-                            android:layout_height="20dp" />
+                            android:layout_height="42dp"
+android:layout_marginLeft="4dp"
+                            android:text="@string/Apply"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/white"
+                            app:backgroundTint="@color/darknavey"
+                            app:cornerRadius="4dp"
+                            android:textAllCaps="false"
+                            android:textSize="14sp"/>
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="8dp">
-
-                        <TextView
-                            android:id="@+id/allocatedhours"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/duk_blue"
-
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="/196h est."
-                            android:textSize="11dp"
-                            android:layout_marginLeft="4dp"
-
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E0E0E0"
-                        android:layout_marginTop="6dp" />
-
-                    <TextView
-
-                        android:layout_margin="8dp"
-                        android:textSize="11dp"
-                        android:text="Actual vs plannad efforts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+
+            </ScrollView>
 
         </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            app:cardCornerRadius="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="6dp">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_gravity="center"
-                        android:layout_height="30dp"
-                        android:src="@drawable/analitycs" />
-
-                    <TextView
-                        android:text="Throughput Velocity &amp; Delivery Trend"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:layout_width="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <TextView
-                    android:text="Comparisions of tasks created versus tasks successfully approved and completed"
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="6dp"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E0E0E0"/>
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/throughputChart"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp" />
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            app:cardCornerRadius="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="6dp">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/useraccount" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Team Delivery &amp; Productivity Benchmark"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:layout_gravity="center" />
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="6dp"
-                    android:background="#E0E0E0"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/light_grey"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:weightSum="6">
-
-
-
-                    <TextView
-                        android:text="CREATED"
-                        android:textStyle="bold"
-                        android:layout_width="0dp"
-                        android:textSize="10dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:text="COMPLTD"
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:text="ACTIVE"
-                        android:gravity="center"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:text="OVERDUE"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:text="ON_TIME SLA"
-                        android:layout_width="0dp"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:gravity="center"
-                        android:text="HOURS LOGGED"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/teamrecyler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            app:cardCornerRadius="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="6dp">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/bolt" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Individual Contributor Throughput"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:layout_gravity="center" />
-
-                </LinearLayout>
-                <View
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E0E0E0"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/light_grey"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:weightSum="6">
-
-
-
-                    <TextView
-                        android:text="ASSINGED"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:layout_width="0dp"
-                        android:textSize="10dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:text="COMPLETD"
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:gravity="center"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:text="ACTIVE"
-                        android:gravity="center"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:text="OVERDUE"
-                        android:gravity="center"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:text="ON_TIME SLA"
-                        android:gravity="center"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:text="HOURS LOGGED"
-                        android:layout_width="0dp"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </LinearLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/contributorRecycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
-
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

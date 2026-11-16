@@ -1,6 +1,8 @@
 package com.example.taskmanagement;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.response.AuthResponse;
+import com.example.taskmanagement.response.LogoutResponse;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -126,4 +128,44 @@ responseCallback.onError(throwable.getMessage());
             }
         });
     }
+    public void getAuthMe(ResponseCallback<User>responseCallback){
+        apiService.getAuthMe().enqueue(new Callback<AuthResponse>() {
+            @Override
+            public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                responseCallback.onSuccess(response.body().getData(),"Succcess");
+            }
+
+            @Override
+            public void onFailure(Call<AuthResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void UpdateCurrentMe(UpdateProfileRequest request,ResponseCallback<AuthResponse>responseCallback){
+        apiService.UpdateAuth(request).enqueue(new Callback<AuthResponse>() {
+            @Override
+            public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                responseCallback.onSuccess(response.body(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<AuthResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void Logout(ResponseCallback<LogoutResponse>responseCallback){
+        apiService.logout().enqueue(new Callback<LogoutResponse>() {
+            @Override
+            public void onResponse(Call<LogoutResponse> call, Response<LogoutResponse> response) {
+                responseCallback.onSuccess(response.body(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<LogoutResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+
 }

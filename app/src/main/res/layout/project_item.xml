@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_weight="2"
+
         android:orientation="horizontal">
 
         <TextView
@@ -49,11 +50,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
+
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/projectName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pak Supplies"
                 android:textColor="#101828"
@@ -62,7 +64,7 @@
 
             <TextView
                 android:id="@+id/projectTeam"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="Core Backend Team"
@@ -99,7 +101,7 @@
             <!-- Description -->
             <TextView
                 android:id="@+id/projectDescription"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="No project description provided."
@@ -108,7 +110,7 @@
 
             <!-- Task Progress -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:gravity="center_vertical"
@@ -164,7 +166,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Project Lead"
+                    android:text="@string/Project_Lead"
+
                     android:textColor="#98A2B3"
                     android:textSize="13sp" />
 

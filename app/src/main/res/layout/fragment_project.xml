@@ -15,7 +15,9 @@
             android:id="@+id/projectRecyler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/projectBtn"/>
+            android:layout_above="@id/projectBtn"
+            android:paddingBottom="90dp"
+            android:clipToPadding="false"/>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

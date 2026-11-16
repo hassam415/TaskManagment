@@ -53,13 +53,13 @@
                         android:orientation="vertical"
                         android:layout_margin="8dp">
                         <TextView
-                            android:text="Add New Team Member "
+                            android:text="@string/Add_New_Team_Member"
                             android:textStyle="bold"
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                         <TextView
-                            android:text="Provision credential, assign RBCA role and team membership. "
+                            android:text="@string/provision_credential_assign_RBCA_role_and_team_membership"
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -68,7 +68,7 @@
                 </LinearLayout>
                 <TextView
                     android:layout_marginTop="8dp"
-                    android:text="Full Name*"
+                    android:text="@string/Full_Name"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
 
 
-                    android:hint="Username">
+                    android:hint="@string/username">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -92,13 +92,13 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_marginTop="10dp"
-                    android:text="Corporate Email Address*"/>
+                    android:text="@string/Corporate_Email_Address"/>
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="john@example.com"
+                    android:hint="@string/johnexamplecom"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -125,7 +125,7 @@ android:visibility="gone"
                 </LinearLayout>
                 <TextView
                     android:layout_marginTop="12dp"
-                    android:text="Initial Password*"
+                    android:text="@string/Initial_Password"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -135,7 +135,7 @@ android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:hint="Maximum 8 Characters"
+                    android:hint="@string/Maximum_8_Characters"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -147,7 +147,7 @@ android:visibility="gone"
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:textColor="@color/black"
-                    android:text="Job title*"
+                    android:text="@string/Job_title"
                     android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -157,7 +157,7 @@ android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:hint="e.g Senior Frontend Developer"
+                    android:hint="@string/e_g_Senior_Frontend_Developer"
             >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -166,7 +166,7 @@ android:visibility="gone"
                         android:paddingStart="20dp"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:text="RBAC Role*"
+                    android:text="@string/RBAC_Role"
                     android:layout_marginTop="12dp"
                     android:textColor="@color/black"
 
@@ -191,7 +191,7 @@ android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"
-                        android:text="Admin"
+                        android:text="@string/Admin"
                         android:textSize="16sp"
                         android:dropDownHeight="wrap_content"/>
 
@@ -205,7 +205,7 @@ android:visibility="gone"
                 <TextView
                     android:layout_marginTop="12dp"
                     android:textColor="@color/black"
-                    android:text="Account Status*"
+                    android:text="@string/Account_Status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <com.google.android.material.textfield.TextInputLayout
@@ -228,7 +228,7 @@ android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:inputType="none"
                         android:padding="12dp"
-                        android:text="Admin"
+                        android:text="@string/Admin"
                         android:textSize="16sp"
                         android:dropDownHeight="wrap_content"/>
 
@@ -244,7 +244,7 @@ android:visibility="gone"
 
         <Button
             android:id="@+id/savebtn"
-            android:text="Register"
+            android:text="@string/Register"
             android:backgroundTint="@color/darknavey"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

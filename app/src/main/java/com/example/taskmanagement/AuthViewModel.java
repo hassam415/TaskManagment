@@ -1,6 +1,8 @@
 package com.example.taskmanagement;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.response.AuthResponse;
+import com.example.taskmanagement.response.LogoutResponse;
 
 import java.util.List;
 
@@ -29,5 +31,14 @@ public class AuthViewModel {
     }
     public void UpdateUser(int id,RequestUser requestUser,ResponseCallback responseCallback){
         authRepository.updateUser(id,requestUser,responseCallback);
+    }
+    public void getAuthMe(ResponseCallback<User>responseCallback){
+        authRepository.getAuthMe(responseCallback);
+    }
+    public void updateCurrentMe(UpdateProfileRequest request, ResponseCallback<AuthResponse>responseCallback){
+        authRepository.UpdateCurrentMe(request,responseCallback);
+    }
+    public void logout(ResponseCallback<LogoutResponse>responseCallback){
+        authRepository.Logout(responseCallback);
     }
 }

@@ -3,52 +3,53 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_margin="12dp">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="2"
+
     android:orientation="horizontal">
-    <LinearLayout
+    <TextView
+        android:id="@+id/taskId"
+        android:text="123"
+        android:textColor="@color/dark_slate_blue"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:layout_gravity="start"
+
+        android:layout_height="wrap_content"/>
+    <Space
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/taskId"
-            android:textColor="@color/dark_slate_blue"
-            android:layout_width="match_parent"
-            android:textStyle="bold"
-            android:layout_gravity="start"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/due_Date"
+        android:text="due date"
+        android:textColor="@color/brightRed"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
 
-            android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
         <TextView
             android:id="@+id/team"
-
-            android:layout_width="match_parent"
+            android:text="coreback"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/title"
             android:textColor="@color/black"
+            android:text="title"
             android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/due_Date"
-            android:textColor="@color/brightRed"
-            android:layout_gravity="end"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"/>
 
-    </LinearLayout>
 </LinearLayout>
 
     <View

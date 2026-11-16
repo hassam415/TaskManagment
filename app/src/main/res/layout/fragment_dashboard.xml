@@ -38,7 +38,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12sp"
+                        android:layout_marginStart="12sp"
                         android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
@@ -50,34 +50,34 @@
                             android:paddingTop="5dp"
                             android:paddingEnd="12dp"
                             android:paddingBottom="5dp"
-                            android:text="Admin Workspace"
+                            android:text="@string/admin_workspace"
                             android:textColor="#A5B4FC"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="7dp"
-                            android:text="Live Metrics &amp; Orchestration"
+                            android:layout_marginStart="7dp"
+                            android:text="@string/live_metric_orchestration"
                             android:textColor="@color/grey" />
                     </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="13dp"
+                        android:layout_marginStart="13dp"
                         android:layout_marginTop="8dp"
-                        android:text="Enterprice Operations &amp; Team Delivery"
+                        android:text="@string/enterprise_multi_user_task_management"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="13dp"
+                        android:layout_marginStart="13dp"
                         android:layout_marginTop="6sp"
-                        android:text="Real-time overview of tasks,team workload,allocations,review backlogs,and milstone progress "
+                        android:text="@string/realtime_overview"
                         android:textColor="@color/grey" />
 
                     <androidx.cardview.widget.CardView
@@ -97,11 +97,11 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="12sp"
+                                android:layout_marginStart="12sp"
                                 android:layout_marginTop="8sp"
-                                android:text="Completion rate"
+                                android:text="@string/completion_rate"
                                 android:textColor="@color/grey" />
 
                             <LinearLayout
@@ -115,7 +115,7 @@
                                     android:id="@+id/completionRate"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="12sp"
+                                    android:layout_marginStart="12sp"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="%"
@@ -172,7 +172,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="TOTAL ACTIVE"
+                                    android:text="@string/Total_Task"
                                     android:textStyle="bold" />
 
                                 <ImageView
@@ -201,7 +201,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:text="total tasks" />
+                                    android:text="@string/total_task" />
                             </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -231,7 +231,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="PENDING REVIEW"
+                                    android:text="@string/pending_reivew"
                                     android:textStyle="bold" />
 
                                 <ImageView
@@ -260,7 +260,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:text="needs approval"
+                                    android:text="@string/need_approval"
                                     android:textColor="@color/dark_slate_blue" />
                             </LinearLayout>
                         </LinearLayout>
@@ -300,7 +300,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="COMPLETED"
+                                    android:text="@string/completed"
                                     android:textStyle="bold" />
 
                                 <ImageView
@@ -362,7 +362,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="OVERDUE SLA"
+                                    android:text="@string/overdue_sla"
                                     android:textColor="@color/brightRed"
                                     android:textStyle="bold" />
 
@@ -393,7 +393,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:text="action required"
+                                    android:text="@string/action_required"
                                     android:textColor="@color/brightRed" />
                             </LinearLayout>
                         </LinearLayout>
@@ -428,8 +428,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:text="Task Status Distribution"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/task_status_distribution"
                             android:textColor="@color/black"
                             android:textSize="18dp"
                             android:textStyle="bold" />
@@ -533,7 +533,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Draft"
+                                android:text="@string/draft"
                                 android:textColor="#334155"
                                 android:textSize="14sp" />
 
@@ -563,7 +563,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Assigned"
+                                android:text="@string/assigned"
                                 android:textColor="#334155"
                                 android:textSize="14sp" />
 
@@ -593,7 +593,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="In Progress"
+                                android:text="@string/in_progres"
                                 android:textColor="#334155"
                                 android:textSize="14sp" />
 
@@ -623,7 +623,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="On Hold"
+                                android:text="@string/on_hold"
                                 android:textColor="#334155"
                                 android:textSize="14sp" />
 
@@ -653,7 +653,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="In Review"
+                                android:text="@string/in_review"
                                 android:textColor="#334155"
                                 android:textSize="14sp" />
 
@@ -683,7 +683,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Changes Requested"
+                                android:text="@string/change_request"
                                 android:textColor="#334155"
                                 android:textSize="12sp" />
 
@@ -712,7 +712,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Completed"
+                                android:text="@string/completed"
                                 android:textColor="#334155"
                                 android:textSize="14sp" />
 
@@ -741,7 +741,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Cancelled"
+                                android:text="@string/cancelled"
                                 android:textColor="#334155"
                                 android:textSize="14sp" />
 
@@ -787,8 +787,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="6dp"
-                            android:text="Priority Allocation"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/priority_Allocation"
                             android:textColor="@color/black"
                             android:textSize="18dp"
                             android:textStyle="bold" />
@@ -798,7 +798,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="end"
-                            android:text="Risk profile" />
+                            android:text="@string/Risk_profile" />
                     </LinearLayout>
 
                     <View
@@ -816,7 +816,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Low" />
+                            android:text="@string/low" />
 
                         <TextView
                             android:id="@+id/lowTaskCount"
@@ -847,7 +847,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Normal" />
+                            android:text="@string/Normal" />
 
                         <TextView
                             android:id="@+id/normaltaskcount"
@@ -878,7 +878,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="High" />
+                            android:text="@string/high" />
 
                         <TextView
                             android:id="@+id/highcount"
@@ -909,7 +909,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="urgent" />
+                            android:text="@string/urgent" />
 
                         <TextView
                             android:id="@+id/urgentcount"
@@ -957,11 +957,11 @@
                             android:src="@drawable/clock" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:text="Upcoming Deadline &amp; Milstones"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/upcoming_deadline_Milstones"
                             android:textColor="@color/black"
                             android:textSize="18dp"
                             android:textStyle="bold" />
@@ -1007,14 +1007,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Deliverables Awaiting Review"
+                            android:text="@string/deliverables_awaiting_review"
                             android:textColor="@color/black"
                             android:textSize="18dp"
                             android:textStyle="bold" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"/>
 
                         <TextView
                             android:id="@+id/pendingreview"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/review_text"
@@ -1061,11 +1065,11 @@
                             android:src="@drawable/useraccount" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="6dp"
-                            android:text="Team Workload &amp; Resource Allocation "
+                            android:layout_marginStart="6dp"
+                            android:text="@string/team_workload_resource_allocation"
                             android:textColor="@color/black"
                             android:textSize="18dp"
                             android:textStyle="bold" />
@@ -1073,10 +1077,10 @@
                     </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Member capacity tracking,active task count,and workload health across projects" />
+                        android:layout_marginStart="10dp"
+                        android:text="@string/member_capacity_tracking_active_task_count_and_workload_health_across_projects" />
 
                     <View
                         android:layout_width="match_parent"
@@ -1103,7 +1107,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.8"
-                            android:text="TEAM MEMBER"
+                            android:text="@string/team_member"
                             android:textSize="10dp"
                             android:textStyle="bold" />
 
@@ -1113,7 +1117,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.8"
 
-                            android:text="ACTIVE TASK"
+                            android:text="@string/active_task"
                             android:textSize="10dp"
                             android:textStyle="bold" />
 
@@ -1122,7 +1126,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1.1"
-                            android:text="COMPLETED"
+                            android:text="@string/completed"
                             android:textSize="10dp"
                             android:textStyle="bold" />
 
@@ -1130,18 +1134,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:layout_weight="1.1"
-                            android:text="OVERDUE"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.1"
-                            android:text="ALLOCATED HOURS"
+                            android:text="@string/OVERDUE"
                             android:textSize="10dp"
                             android:textStyle="bold" />
 
@@ -1150,7 +1145,16 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1.1"
-                            android:text="CAPACITY STATE"
+                            android:text="@string/ALLOCATEDHOURS"
+                            android:textSize="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.1"
+                            android:text="@string/CAPACITYSTATE"
                             android:textSize="10dp"
                             android:textStyle="bold" />
 

@@ -78,7 +78,7 @@
                 <!-- Task Title -->
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:textColor="@color/darknavey"
@@ -113,18 +113,22 @@
 
                     <TextView
                         android:id="@+id/team"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:text="coreBackend"
                         android:layout_marginStart="10dp"
                         android:textSize="13sp"
                         android:gravity="center_vertical" />
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"/>
 
                     <TextView
                         android:id="@+id/category"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:text="category"
                         android:layout_marginStart="8dp"
                         android:textSize="13sp"
                         android:gravity="end|center_vertical" />

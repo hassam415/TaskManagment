@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 <TextView
     android:textColor="@color/black"
-    android:text="Assign To Team"
+    android:text="@string/Assign_To_Team"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView

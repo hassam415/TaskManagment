@@ -1,5 +1,6 @@
 package com.example.taskmanagement;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,10 @@ public class LoginActivity extends AppCompatActivity {
 
     USerViewModel uSerViewModel;
     AuthViewModel authViewModel;
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LanguageHelper.applyLanguage(newBase));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,14 +29,15 @@ public class LoginActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         uSerViewModel = new USerViewModel(new UserRepository());
         authViewModel = new AuthViewModel(new AuthRepository());
+
         binding.loginbtn.setOnClickListener(v -> {
             String email = binding.email.getEditText().getText().toString();
             String pass = binding.password.getEditText().getText().toString();
-            binding.loader.setVisibility(View.VISIBLE);
-binding.loginbtn.setVisibility(View.GONE);
+            showLoader();
             loginmethod(email, pass);
         });
     }
+
 
     private void loginmethod(String email, String pass) {
 //        uSerViewModel.loginmethod(email, pass, new ResponseCallback<User>() {
@@ -72,13 +77,11 @@ binding.loginbtn.setVisibility(View.GONE);
         //      Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
         //    }
         //  });
-        binding.email.setVisibility(View.GONE);
-        binding.password.setVisibility(View.GONE);
 
         authViewModel.login(email, pass, new AuthRepository.LoginCallBack() {
             @Override
             public void OnSuccess(LoginResponse loginResponse) {
-                binding.loader.setVisibility(View.GONE);
+               HideLoader();
 
                 String token = loginResponse.getAccess_token();
                 ApiSesson.setAccess_Token(token);
@@ -89,15 +92,21 @@ binding.loginbtn.setVisibility(View.GONE);
 
             @Override
             public void OnError(String message) {
-                binding.loader.setVisibility(View.GONE);
-                binding.email.setVisibility(View.VISIBLE);
-                binding.password.setVisibility(View.VISIBLE);
-                binding.loginbtn.setVisibility(View.VISIBLE);
+                HideLoader();
                 Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
             }
         });
     }
-
+    private void showLoader(){
+        binding.loginbtn.setEnabled(false);
+        binding.loginbtn.setText("");
+        binding.loader.setVisibility(View.VISIBLE);
+    }
+    private void HideLoader(){
+        binding.loginbtn.setEnabled(true);
+        binding.loginbtn.setText("Login");
+        binding.loader.setVisibility(View.GONE);
+    }
 
 }

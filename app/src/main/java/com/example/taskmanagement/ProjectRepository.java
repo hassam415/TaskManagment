@@ -120,4 +120,17 @@ responseCallback.onError(throwable.getMessage());
             }
         });
     }
+    public void getFilterReport(String datepreset,String startDate,String endDate,int teamId,ResponseCallback<Report>responseCallback){
+        apiService.getfilterReport(datepreset,startDate,endDate,teamId).enqueue(new Callback<ReportResponse>() {
+            @Override
+            public void onResponse(Call<ReportResponse> call, Response<ReportResponse> response) {
+                responseCallback.onSuccess(response.body().getData(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<ReportResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
 }

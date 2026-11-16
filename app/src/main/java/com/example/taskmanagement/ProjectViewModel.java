@@ -32,4 +32,7 @@ public class ProjectViewModel {
     public void getReport(ResponseCallback<Report>responseCallback){
         projectRepository.getReport(responseCallback);
     }
+    public void getFilterReport(String datePreset,String startDate,String endDate,int teamId,ResponseCallback<Report>responseCallback){
+        projectRepository.getFilterReport(datePreset,startDate,endDate,teamId,responseCallback);
+    }
 }

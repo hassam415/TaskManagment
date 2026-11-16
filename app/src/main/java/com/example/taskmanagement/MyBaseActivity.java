@@ -1,5 +1,6 @@
 package com.example.taskmanagement;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -42,6 +43,10 @@ public abstract class MyBaseActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LanguageHelper.applyLanguage(newBase));
+    }
     public abstract String gettoolbartitle();
 
     public abstract View getView();

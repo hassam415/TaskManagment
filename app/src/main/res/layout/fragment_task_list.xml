@@ -27,7 +27,8 @@
                     android:id="@+id/taskrecycler"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@id/taskbtn"/>
+                    android:paddingBottom="90dp"
+                    android:clipToPadding="false"/>
 
 
                 <LinearLayout
@@ -47,7 +48,7 @@ android:layout_centerInParent="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Loading..."
+                        android:text="@string/Loading"
                         android:textSize="14sp" />
 
                 </LinearLayout>

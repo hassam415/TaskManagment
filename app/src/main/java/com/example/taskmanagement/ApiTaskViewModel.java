@@ -21,8 +21,8 @@ public class ApiTaskViewModel {
         apiTaskRepository.creatTask(task, selectedUserIds, callback);
     }
 
-    public void getTask(ResponseCallback<PaginateResponse<Task>> taskCallBack) {
-        apiTaskRepository.getTask(taskCallBack);
+    public void getTask(int page,ResponseCallback<PaginateResponse<Task>> taskCallBack) {
+        apiTaskRepository.getTask(page,taskCallBack);
     }
 
     public void getSingleTask(String taskId, ResponseCallback<Task> taskCallBack) {

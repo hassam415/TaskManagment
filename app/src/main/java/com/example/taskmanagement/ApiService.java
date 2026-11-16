@@ -1,6 +1,8 @@
 package com.example.taskmanagement;
 
 import com.example.taskmanagement.response.APIResponse;
+import com.example.taskmanagement.response.AuthResponse;
+import com.example.taskmanagement.response.LogoutResponse;
 import com.example.taskmanagement.response.PaginateResponse;
 import com.google.gson.JsonObject;
 
@@ -93,5 +95,15 @@ public interface ApiService {
     Call<CalenderTask> getCalenderTasks(@Query("date")String date,@Query("date_type")String dateType);
     @GET("reports")
     Call<ReportResponse>getReport();
-
+    @GET("reports")
+    Call<ReportResponse>getfilterReport(@Query("date_preset")String datePreset,
+                                      @Query("start_date")String startDate,
+                                      @Query("end_date")String endDate,
+                                      @Query("team_id")int id);
+@GET("auth/me")
+    Call<AuthResponse>getAuthMe();
+@PUT("auth/me")
+    Call<AuthResponse>UpdateAuth(@Body UpdateProfileRequest request);
+@POST("auth/logout")
+    Call<LogoutResponse>logout();
 }

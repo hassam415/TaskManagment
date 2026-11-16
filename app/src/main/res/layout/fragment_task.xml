@@ -17,7 +17,7 @@
         <TextView
             android:layout_marginTop="16dp"
             android:textStyle="bold"
-            android:text="PROJECT*"
+            android:text="@string/PROJECT"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
             android:layout_width="match_parent"
@@ -113,7 +113,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="SELECT TEAM"
+                    android:text="@string/SELECT_TEAM"
                     android:textStyle="bold"
                     android:layout_weight="1"
                     android:textColor="@color/black"
@@ -124,7 +124,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="SELECT CATEGORY"
+                    android:text="@string/SELECT_CATEGORY"
                     android:layout_gravity="end"/>
             </LinearLayout>
 
@@ -193,7 +193,7 @@
                 android:weightSum="2">
                 <TextView
                     android:layout_width="0dp"
-                    android:text="SELECT PRIORITY"
+                    android:text="@string/SELECT_PRIORITY"
                     android:textStyle="bold"
                     android:layout_weight="1"
                     android:textColor="@color/black"
@@ -203,7 +203,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="DESIGINATED REVIEWERS"
+                    android:text="@string/DESIGINATED_REVIEWERS"
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -268,7 +268,7 @@
 
        </com.example.taskmanagement.CustomUserView>
         <TextView
-            android:text="ESTIMATE HOURS"
+            android:text="@string/ESTIMATE_HOURS"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginLeft="10dp"
@@ -289,7 +289,7 @@
                 android:paddingStart="40dp"/>
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
-            android:text="START DATE"
+            android:text="@string/START_DATE"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
@@ -314,7 +314,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:textStyle="bold"
-            android:text="DUE DATE"
+            android:text="@string/DUE_DATE"
             android:textColor="@color/black"
 
             android:layout_marginLeft="10dp"
@@ -340,7 +340,7 @@
         <Button
             android:id="@+id/savebtn"
             android:textColor="@color/white"
-            android:text="Create"
+            android:text="@string/Create"
             android:layout_gravity="center"
             android:backgroundTint="@color/darknavey"
             android:layout_width="match_parent"

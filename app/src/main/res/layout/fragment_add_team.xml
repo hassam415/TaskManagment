@@ -41,14 +41,14 @@
                         android:layout_marginLeft="4dp"
                         android:orientation="vertical">
                         <TextView
-                            android:text="Define Team Squad"
+                            android:text="@string/Define_Team_Squad"
                             android:textSize="20dp"
                             android:textStyle="bold"
                             android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                         <TextView
-                            android:text="Configue Team name,department,designate team lead, and initial member"
+                            android:text="@string/Configue_Team_name_department_designate_team_lead_and_initial_member"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
@@ -59,7 +59,7 @@
                     android:background="#E0E0E0"
                     android:layout_marginTop="14dp"/>
                 <TextView
-                    android:text="Team Squad Name*"
+                    android:text="@string/Team_Squad_Name"
                     android:layout_marginTop="18dp"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:hint="e.g.Core Backened infrastructure">
+                    android:hint="@string/e.g.Core_Backened_infrastructure">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/teamname"
@@ -80,7 +80,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:text="Department*"
+                    android:text="@string/Department"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
@@ -105,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="none"
                         android:textSize="16sp"
-                        android:hint="Select Department"
+                        android:hint="@string/Select_Department"
                         android:dropDownHeight="wrap_content"/>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:textStyle="bold"
-                    android:text="Squad Mission / Discription*"
+                    android:text="@string/Squad_Mission_Discription"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -134,7 +134,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Briefly state the focus,responsibilty and scop of this squad.."
+                    android:hint="@string/Briefly_state_the_focus_responsibilty_and_scop_of_this_squad"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -146,7 +146,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:text="Designated Team Lead*"
+                    android:text="@string/Designated_Team_Lead"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="none"
                         android:textSize="16sp"
-                        android:hint="Select Team"
+                        android:hint="@string/Select_Team"
                         android:dropDownHeight="wrap_content"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -184,7 +184,7 @@
         </androidx.cardview.widget.CardView>
         <Button
             android:id="@+id/savebtn"
-            android:text="Creat Team"
+            android:text="@string/Creat_Team"
             android:backgroundTint="@color/darknavey"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

@@ -3,58 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/dashboard"
-        android:title="Dashboard"
+        android:title="@string/Dashboard"
         android:icon="@drawable/outline_dashboard_24"
         />
+
     <item
         android:id="@+id/project"
-        android:title="Projects"
+        android:title="@string/Projects"
         android:icon="@drawable/outline_files_24"
         app:showAsAction="never" />
     <item
         android:id="@+id/user"
         android:icon="@drawable/outline_person_24"
-        android:title="User Management"
+        android:title="@string/User_Management"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/task"
-        android:title="Task Management"
+        android:title="@string/Task_Management"
         android:icon="@drawable/outline_add_task_24"
         app:showAsAction="never" />
     <item
         android:id="@+id/team"
-        android:title="Teams"
+        android:title="@string/Teams"
         android:icon="@drawable/outline_display_group_24"
         app:showAsAction="never" />
     <item
         android:id="@+id/calendar"
-        android:title="Calendar"
+        android:title="@string/Calendar"
         android:icon="@drawable/outline_calendar_month_24"/>
-    <item
-        android:id="@+id/status"
-        android:title="Statuses"
-        app:showAsAction="never"
-        android:icon="@drawable/outline_check_24"/>
-    <item
-        android:id="@+id/category"
-        android:title="Categories"
-        android:icon="@drawable/baseline_category_24"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/periorities"
-        android:title="Periorities"
-        app:showAsAction="never"
-        android:icon="@drawable/outline_flag_24"/>
+
+
     <item
         android:id="@+id/report"
-        android:title="Report &amp; Analytics"
+        android:title="@string/Report_Analytics"
         app:showAsAction="never"
         android:icon="@drawable/outline_bar_chart_4_bars_24"/>
     <item
-        android:id="@+id/logout"
-        android:title="Logout"
-        android:icon="@drawable/baseline_logout_24"
+        android:id="@+id/profile"
+        android:title="@string/profile"
+        android:icon="@drawable/outline_person_24"
         app:showAsAction="never" />
 
 </menu>

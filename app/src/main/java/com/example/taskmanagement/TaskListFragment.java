@@ -82,6 +82,9 @@ public class TaskListFragment extends Fragment {
     PeriorityViewModel periorityViewModel;
     ApiTaskViewModel apiTaskViewModel;
     FragmentTaskListBinding binding;
+    int currentPage=1;
+boolean isLoading=false;
+boolean isLastPage=false;
 
     public TaskListFragment() {
         // Required empty public constructor
@@ -111,7 +114,30 @@ public class TaskListFragment extends Fragment {
         binding.taskrecycler.setLayoutManager(
                 new LinearLayoutManager(requireContext()));
         binding.taskrecycler.setAdapter(taskAdapter);
+binding.taskrecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+    @Override
+    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
+    }
 
+    @Override
+    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        if (dy>0){
+            LinearLayoutManager layoutManager=(LinearLayoutManager) recyclerView.getLayoutManager();
+            if (layoutManager!=null){
+                int visibleitem=layoutManager.getChildCount();
+                int totalitem=layoutManager.getItemCount();
+                int firstvisibleitem=layoutManager.findFirstVisibleItemPosition();
+                if (!isLoading && !isLastPage &&
+                        (visibleitem + firstvisibleitem >= totalitem)) {
+
+                    TaskLoad();
+                }
+            }
+        }
+    }
+});
         binding.Loader.setVisibility(View.VISIBLE);
         //  filterBtn.setVisibility(View.VISIBLE);
         Bundle bundle = getArguments();
@@ -465,29 +491,35 @@ public class TaskListFragment extends Fragment {
                     });
 
         } else {
+            currentPage=1;
+            isLoading=false;
+            isLastPage=false;
+            taskList.clear();
+            taskAdapter.notifyDataSetChanged();
+TaskLoad();
+        //    binding.taskbtn.setVisibility(View.VISIBLE);
+          //  apiTaskViewModel.getTask(new ResponseCallback<>() {
+            //    @Override
+              //  public void onSuccess(PaginateResponse<Task> data, String message) {
+//
+   //                  binding.Loader.setVisibility(View.GONE);
+                    //taskList.clear();
 
-            binding.taskbtn.setVisibility(View.VISIBLE);
-            apiTaskViewModel.getTask(new ResponseCallback<>() {
-                @Override
-                public void onSuccess(PaginateResponse<Task> data, String message) {
-
-                    binding.Loader.setVisibility(View.GONE);
-                    taskList.clear();
 //                    JsonArray array = jsonReader.getAsJsonArray("data");
 //                    for (JsonElement jsonElement : array) {
 //                        Task task = new Gson().fromJson(jsonElement, Task.class);
 //                        taskList.add(task);
 //                    }
-                    taskList.addAll(data.getData());
+     //               taskList.addAll(data.getData());
+//
+   //                  taskAdapter.notifyDataSetChanged();
+     //           }
 
-                    taskAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onError(String message) {
-
-                }
-            });
+       //         @Override
+         //       public void onError(String message) {
+//
+   //              }
+     //       });
             //   taskViewModel.getTask(
             //         new ResponseCallback<List<Task>>() {
             //           @Override
@@ -510,6 +542,52 @@ public class TaskListFragment extends Fragment {
             //         }
             //   });
         }
+    }
+
+    private void TaskLoad() {
+        if (isLoading || isLastPage){
+            return;
+        }
+        isLoading=true;
+        binding.taskbtn.setVisibility(View.VISIBLE);
+
+        apiTaskViewModel.getTask(currentPage,new ResponseCallback<>() {
+            @Override
+            public void onSuccess(PaginateResponse<Task> data, String message) {
+
+                binding.Loader.setVisibility(View.GONE);
+                //taskList.clear();
+                isLoading=false;
+                if (data.getData()!=null){
+                    int oldData=taskList.size();
+
+                    taskList.addAll(data.getData());
+                    taskAdapter.notifyItemRangeInserted(oldData,data.getData().size());
+                }
+
+                if (data.getData().isEmpty() ||
+                        data.getData().size() < data.getPerPage()) {
+
+                    isLastPage = true;
+
+                } else {
+                    currentPage++;
+                }
+//                    JsonArray array = jsonReader.getAsJsonArray("data");
+//                    for (JsonElement jsonElement : array) {
+//                        Task task = new Gson().fromJson(jsonElement, Task.class);
+//                        taskList.add(task);
+//                    }
+
+
+
+            }
+
+            @Override
+            public void onError(String message) {
+isLoading=false;
+            }
+        });
     }
 
     @Override

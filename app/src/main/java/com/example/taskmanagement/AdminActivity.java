@@ -64,34 +64,21 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
             setToolbarText("Task Managment");
 
         }
+        if (id==R.id.profile){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProfileFragment()).addToBackStack(null).commit();
+            setToolbarText("Profile");
+        }
         if (id == R.id.dashboard) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).commit();
             setToolbarText("Executive Oepration Dashboard");
         }
-        if (id == R.id.logout) {
-            mauth.signOut();
-            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
 
-            startActivity(intent);
-            finish();
-        }
-        if (id == R.id.periorities) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new PeriorityFragment()).commit();
-            setToolbarText("Periority");
-        }
         if (id==R.id.report){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ReportFragment()).commit();
             setToolbarText("Reports");
         }
-        if (id == R.id.status) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new StatusFragment()).commit();
-            setToolbarText("Status");
-        }
-        if (id == R.id.category) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new CategoryFragment()).commit();
-            setToolbarText("Category");
-        }
+
+
 if (id==R.id.project){
     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProjectFragment()).commit();
     setToolbarText("Projects Workspace");
