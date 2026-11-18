@@ -270,6 +270,6 @@ if (projectId!=0){
         super.onResume();
 
         ((AdminActivity) requireActivity())
-                .setToolbarText("Create New Project");
+                .setToolbarText(getResources().getString(R.string.Create_New_Project));
     }
 }

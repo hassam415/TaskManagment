@@ -164,6 +164,6 @@ else {
     @Override
     public void onResume() {
         super.onResume();
-        ((AdminActivity) requireActivity()).setToolbarText("Creat New Team Squad");
+        ((AdminActivity) requireActivity()).setToolbarText(getResources().getString(R.string.Creat_New_Team_Squad));
     }
 }

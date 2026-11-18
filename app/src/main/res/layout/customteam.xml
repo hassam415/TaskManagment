@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 <TextView
-    android:textColor="@color/black"
+    android:textColor="?attr/colorOnSurface"
     android:text="@string/Assign_To_Team"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>

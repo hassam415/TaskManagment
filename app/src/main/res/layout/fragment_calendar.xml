@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="?attr/colorSurface"
         tools:context=".CalendarFragment">
 
 
@@ -42,7 +43,7 @@
                     android:text="November 2026"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#172B4D"/>
+                    android:textColor="@color/darknavey"/>
 
                 <ImageButton
                     android:id="@+id/nextMonth"
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="3"
+
             android:layout_margin="4dp">
             <androidx.cardview.widget.CardView
                 android:layout_weight="1"
@@ -172,6 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:layout_marginTop="40dp"
+                android:background="?attr/colorSurface"
                 app:cv_dayViewResource="@layout/calendar_day_layout"
                 app:cv_daySize="seventhWidth"
                 app:cv_outDateStyle="endOfGrid"

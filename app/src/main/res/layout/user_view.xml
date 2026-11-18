@@ -6,12 +6,12 @@
     android:padding="8dp">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TASK_ASSIGNEES"
         android:textStyle="bold"
         android:textSize="14sp"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         android:paddingBottom="8dp" />
 
     <ProgressBar

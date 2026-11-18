@@ -101,7 +101,6 @@ boolean isLastPage=false;
         apiTaskViewModel = new ApiTaskViewModel(new ApiTaskRepository());
 
 
-        ImageView filterBtn = requireActivity().findViewById(R.id.filterBtn);
 
         statusViewModel = new StatusViewModel(new StatusRepository());
         categoryViewModel = new CategoryViewModel(new CategoryRepository());
@@ -109,7 +108,8 @@ boolean isLastPage=false;
         taskViewModel = new TaskViewModel(new TaskRepository());
 
         taskAdapter = new TaskAdapter(requireContext(), taskList);
-
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+        filterBtn.setVisibility(View.GONE);
         binding.taskrecycler.setHasFixedSize(true);
         binding.taskrecycler.setLayoutManager(
                 new LinearLayoutManager(requireContext()));
@@ -396,23 +396,23 @@ binding.taskrecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
         loadTasks();
 
 
-        taskAdapter.setOnTaskClick(position -> {
-            if (position < 0 || position >= taskList.size()) return;
+     //   taskAdapter.setOnTaskClick(position -> {
+       //     if (position < 0 || position >= taskList.size()) return;
 
-            Task task = taskList.get(position);
+         //   Task task = taskList.get(position);
 
-            Bundle taskBundle = new Bundle();
-            taskBundle.putString("Id", task.getId());
+           // Bundle taskBundle = new Bundle();
+          //  taskBundle.putString("Id", task.getId());
 
-            TaskDisplayFragment fragment = new TaskDisplayFragment();
-            fragment.setArguments(taskBundle);
+            //TaskDisplayFragment fragment = new TaskDisplayFragment();
+          //  fragment.setArguments(taskBundle);
 
-            getParentFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
+         //   getParentFragmentManager()
+             //       .beginTransaction()
+           //         .replace(R.id.fragmentContainer, fragment)
+               //     .addToBackStack(null)
+                //    .commit();
+      //  });
 
         binding.taskbtn.setOnClickListener(v -> {
             getParentFragmentManager()
@@ -593,6 +593,7 @@ isLoading=false;
     @Override
     public void onResume() {
         super.onResume();
-        ((AdminActivity) requireActivity()).setToolbarText("Task Managment");
+        ((AdminActivity) requireActivity()).setToolbarText(getResources().getString(R.string.app_name));
     }
+
 }

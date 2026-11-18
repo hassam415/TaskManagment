@@ -142,6 +142,6 @@ authViewModel.deleteUser(Userid, new ResponseCallback() {
     @Override
     public void onResume() {
         super.onResume();
-        ((AdminActivity) requireActivity()).setToolbarText("User Managment & RBAC Governance");
+        ((AdminActivity) requireActivity()).setToolbarText(getResources().getString(R.string.User_Managment));
     }
 }

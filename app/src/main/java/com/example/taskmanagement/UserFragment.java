@@ -250,6 +250,6 @@ private ActivityResultLauncher<String> cameraLaucnher;
     @Override
     public void onResume() {
         super.onResume();
-        ((AdminActivity) requireActivity()).setToolbarText("Create Organization User");
+        ((AdminActivity) requireActivity()).setToolbarText(getResources().getString(R.string.Create_Organization_User));
     }
 }

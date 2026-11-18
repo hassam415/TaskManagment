@@ -13,13 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="?attr/colorSurface"
         tools:context=".TaskFragment">
         <TextView
             android:layout_marginTop="16dp"
             android:textStyle="bold"
             android:text="@string/PROJECT"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <com.google.android.material.textfield.TextInputLayout
@@ -31,18 +32,19 @@
             app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusBottomEnd="12dp"
-            app:boxStrokeColor="#6750FF"
+
             app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="2dp"
             android:layout_marginLeft="10dp"
-            app:endIconTint="#263238">
+           >
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/projectSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:hint="Default"
+
+            android:hint="@string/Default"
             android:textSize="16sp"
             android:paddingStart="40dp"
             android:dropDownHeight="wrap_content"/>
@@ -54,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Title">
+            android:hint="@string/Title">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -87,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
 
-            android:hint="Discription">
+            android:hint="@string/Discription">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -116,11 +118,13 @@
                     android:text="@string/SELECT_TEAM"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
+
                     android:layout_marginLeft="14dp"/>
                 <TextView
                     android:layout_width="0dp"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
+
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -133,11 +137,14 @@
                 android:layout_height="wrap_content"
                 android:weightSum="2"
                 android:paddingStart="6dp"
+                android:orientation="horizontal"
+                android:background="?attr/colorSurface"
                 android:paddingEnd="6dp">
 
                 <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="40dp"
+
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     android:layout_marginTop="4dp">
@@ -196,7 +203,8 @@
                     android:text="@string/SELECT_PRIORITY"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
+
                     android:layout_marginTop="6dp"
                     android:layout_marginLeft="13dp"
                     android:layout_height="wrap_content"/>
@@ -205,7 +213,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/DESIGINATED_REVIEWERS"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
+
                     android:textStyle="bold"
                     android:layout_marginTop="6dp"/>
             </LinearLayout>
@@ -213,6 +222,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="?attr/colorSurface"
                 android:weightSum="2">
                 <FrameLayout
                     android:layout_width="0dp"
@@ -270,7 +280,8 @@
         <TextView
             android:text="@string/ESTIMATE_HOURS"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
+
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -290,7 +301,8 @@
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:text="@string/START_DATE"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
+
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
@@ -301,7 +313,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="dd/mm/yyyy"
+            android:hint="@string/ddmmyyyy"
             android:layout_margin="10dp"
             >
 
@@ -310,12 +322,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="40dp"
-              android:drawableEnd="@drawable/outline_calendar_month_24" />
+                android:drawableTint="?attr/colorOnSurface"
+
+                android:drawableEnd="@drawable/outline_calendar_month_24" />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:textStyle="bold"
             android:text="@string/DUE_DATE"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
+
 
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
@@ -327,13 +342,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
 
-            android:hint="dd/mm/yyyy">
+            android:hint="@string/ddmmyyyy">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dueDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="40dp"
+                android:drawableTint="?attr/colorOnSurface"
+
                 android:drawableEnd="@drawable/outline_calendar_month_24"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -343,7 +360,7 @@
             android:text="@string/Create"
             android:layout_gravity="center"
             android:backgroundTint="@color/darknavey"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </ScrollView>

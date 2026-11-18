@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +56,8 @@ public class CalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
-
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+        filterBtn.setVisibility(View.GONE);
         projectViewModel=new ProjectViewModel(new ProjectRepository());
         currentMonth = YearMonth.now();
         selectedDate = LocalDate.now();
@@ -227,7 +229,7 @@ public class CalendarFragment extends Fragment {
        calendertaskdialogueBinding.taskrecyler.setAdapter(calenderTaskAdapter);
         MaterialAlertDialogBuilder materialAlertDialogBuilder=new MaterialAlertDialogBuilder(requireContext(),R.style.RoundedDialogueTheme);
 
-calendertaskdialogueBinding.date.setText("Tasks / "+date);
+calendertaskdialogueBinding.date.setText("  Tasks / "+date);
         materialAlertDialogBuilder.setView(calendertaskdialogueBinding.getRoot());
         materialAlertDialogBuilder.setPositiveButton("Close", null);
         AlertDialog dialog = materialAlertDialogBuilder.create();

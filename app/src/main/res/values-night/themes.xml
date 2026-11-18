@@ -1,7 +1,23 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TaskManagement" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<resources>
+
+    <style name="Base.Theme.TaskManagement"
+        parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="colorOnSurface">#FFFFFF</item>
+
+
     </style>
+
+        <color name="dark_slate_blue">#B8AEF5</color>
+    <color name="light_grey">#202020</color>
+    <color name="status">#303B50</color>
+    <color name="user_name_color">#AFC8E8</color>
+    <color name="darknavey">#4A6FA5</color>
+    <color name="status_dropdown_bg">#000000</color>
+    <color name="status_dropdown_text">#FFFFFF</color>
+
+
+    <style name="Theme.TaskManagement"
+        parent="Base.Theme.TaskManagement" />
+
 </resources>

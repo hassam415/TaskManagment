@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="?attr/colorSurface"
             android:padding="16dp"
             tools:context=".ProfileFragment">
 
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
-                app:cardBackgroundColor="#172B4D">
+                app:cardBackgroundColor="@color/darknavey">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,7 +109,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="12dp"
                 android:text="@string/Personal_Information"
-                android:textColor="#172B4D"
+                android:textColor="@color/darknavey"
                 android:textSize="18sp"
                 android:textStyle="bold" />
             <LinearLayout
@@ -133,10 +134,10 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFFFFF">
+                >
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="18dp">
@@ -146,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Job_Title"
-                        android:textColor="#8993A4"
+
                         android:textSize="13sp" />
 
                     <TextView
@@ -155,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Project Lead"
-                        android:textColor="#172B4D"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -171,7 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Account_Role"
-                        android:textColor="#8993A4"
+
                         android:textSize="13sp" />
 
                     <TextView
@@ -180,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Admin"
-                        android:textColor="#172B4D"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -205,7 +206,7 @@
                         android:text="@string/SELECT_LANGUAGE"
                         android:textStyle="bold"
                         android:layout_gravity="center"
-                        android:textColor="@color/black"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="18dp"
                         android:layout_height="wrap_content"
                        />
@@ -216,6 +217,42 @@
                     <TextView
                         android:gravity="end"
                         android:id="@+id/selectedLanguage"
+                        android:text="selected"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/themecard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+
+                    android:layout_margin="6dp">
+                    <TextView
+                        android:id="@+id/selectTheme"
+                        android:layout_width="wrap_content"
+                        android:text="@string/SELECT_THEME"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="18dp"
+                        android:layout_height="wrap_content"
+                        />
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:gravity="end"
+                        android:id="@+id/selectedtheme"
                         android:text="selected"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
@@ -234,7 +271,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
 
-                    android:backgroundTint="#172B4D"
+                    android:backgroundTint="@color/darknavey"
                     android:text="@string/logout"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"

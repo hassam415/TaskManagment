@@ -8,6 +8,7 @@
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/filterDrawer"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.core.widget.NestedScrollView
@@ -17,6 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="?attr/colorSurface"
                 tools:context=".ReportFragment">
 
 
@@ -68,7 +70,7 @@
                                     android:textSize="20dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/black"
+                                    android:textColor="?attr/colorOnSurface"
 
                                     />
 
@@ -172,8 +174,9 @@
                             <TextView
                                 android:id="@+id/sladueTask"
                                 android:layout_margin="8dp"
-                                android:textSize="12dp"
-                                android:layout_width="match_parent"
+                                android:textSize="11dp"
+                                android:text="abc"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
                         </LinearLayout>
@@ -228,7 +231,7 @@
                                     android:textSize="20dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/black"
+                                    android:textColor="?attr/colorOnSurface"
 
                                     />
 
@@ -236,7 +239,7 @@
                                     android:text="@string/days_per_task"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="4dp"
+                                    android:layout_marginStart="4dp"
 
                                     />
 
@@ -317,7 +320,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="/196h est."
                                     android:textSize="11dp"
-                                    android:layout_marginLeft="4dp"
+                                    android:layout_marginStart="4dp"
 
                                     />
 
@@ -334,7 +337,7 @@
                                 android:layout_margin="8dp"
                                 android:textSize="11dp"
                                 android:text="@string/Actual_vs_plannad_efforts"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
                         </LinearLayout>
@@ -377,7 +380,7 @@
                         <TextView
                             android:text="@string/Comparisions_of_tasks_created_versus_tasks_successfully_approved_and_completed"
                             android:layout_width="match_parent"
-                            android:layout_marginLeft="6dp"
+                            android:layout_marginStart="6dp"
                             android:layout_height="wrap_content" />
                         <View
                             android:layout_width="match_parent"
@@ -525,7 +528,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/Individual_Contributor_Throughput"
-                                android:textColor="@color/black"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold"
                                 android:textSize="18dp"
                                 android:layout_gravity="center" />
@@ -615,7 +618,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:orientation="vertical"
-            android:background="@android:color/white"
+            android:background="?attr/colorSurface"
             android:padding="16dp"
             android:layout_margin="10dp"
             android:clickable="true"
@@ -710,7 +713,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                       
+
                         android:weightSum="2">
 
                         <com.google.android.material.button.MaterialButton
@@ -732,7 +735,7 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="42dp"
-android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:text="@string/Apply"
                             android:layout_marginTop="10dp"
                             android:textColor="@color/white"

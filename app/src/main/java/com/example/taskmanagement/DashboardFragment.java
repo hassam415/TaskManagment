@@ -44,7 +44,9 @@ StatusViewModel statusViewModel;
                              Bundle savedInstanceState) {
         fragmentDashboardBinding=FragmentDashboardBinding.inflate(inflater,container,false);
 
+
         ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+        filterBtn.setVisibility(View.GONE);
 //fragmentDashboardBinding.dashboardrecyler.setHasFixedSize(true);
 //fragmentDashboardBinding.dashboardrecyler.setLayoutManager(new GridLayoutManager(getContext(),2));
 //dashboardAdapter=new DashboardAdapter(getContext(),statusList);

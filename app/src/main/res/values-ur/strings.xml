@@ -84,7 +84,7 @@
     <string name="Create_a_project_container_first_Every_task_in_this_project_will_be_prefixed_with_the_project_key">پہلے پروجیکٹ بنائیں۔ اس پروجیکٹ کے ہر ٹاسک کے ساتھ پروجیکٹ کی کلید شامل ہوگی۔</string>
     <string name="Project_Name">پروجیکٹ کا نام*</string>
     <string name="Project_Key">پروجیکٹ کی کلید*</string>
-    <string name="Status">حیثیت*</string>
+    <string name="Status">حیثیت</string>
     <string name="Primary_Team">بنیادی ٹیم</string>
     <string name="Project_Lead">پروجیکٹ لیڈ</string>
     <string name="Completion_Date">تکمیل کی تاریخ</string>
@@ -150,4 +150,20 @@
     <string name="Default">ڈیفالٹ</string>
 
     <string name="Describe_the_project_goals_milstones_and_deliverable">پروجیکٹ کے اہداف، اہم مراحل اور متوقع نتائج کی وضاحت کریں۔</string>
+    <string name="Title">عنوان</string>
+    <string name="Discription">تفصیل</string>
+    <string name="ddmmyyyy">دن/مہینہ/سال</string>
+    <string name="User_Managment">صارفین کا انتظام</string>
+    <string name="Create_Organization_User">تنظیم کا صارف بنائیں</string>
+    <string name="Create_New_Task">نیا ٹاسک بنائیں</string>
+    <string name="Executive_Oepration_Dashboard">ایگزیکٹو آپریشن ڈیش بورڈ</string>
+    <string name="Reports">رپورٹس</string>
+    <string name="Projects_Workspace">پروجیکٹس ورک اسپیس</string>
+    <string name="Team_Operational_Squads">ٹیم آپریشنل اسکواڈز</string>
+    <string name="Create_New_Project">نیا پروجیکٹ بنائیں</string>
+    <string name="Creat_New_Team_Squad">نئی ٹیم بنائیں</string>
+    <string name="Interactive_Calendar_Deadline">انٹرایکٹو کیلنڈر ڈیڈ لائن</string>
+    <string name="Account_Setting">اکاؤنٹ کی ترتیبات</string>
+    <string name="SELECT_THEME">تھیم منتخب کریں</string>
+    <string name="Statuss">حیثیت</string>
 </resources>

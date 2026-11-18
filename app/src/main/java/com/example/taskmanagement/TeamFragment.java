@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.example.taskmanagement.databinding.FragmentTeamBinding;
@@ -39,6 +40,8 @@ List<Team>teamList=new ArrayList<>();
         binding.teamRecyler.setLayoutManager(new LinearLayoutManager(getContext()));
         teamAdapter=new TeamAdapter(getContext(),teamList);
         binding.teamRecyler.setAdapter(teamAdapter);
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+        filterBtn.setVisibility(View.GONE);
         binding.Loader.setVisibility(View.VISIBLE);
         teamViewModel.getTeamList(new ResponseCallback<List<Team>>() {
             @Override
@@ -83,6 +86,6 @@ List<Team>teamList=new ArrayList<>();
     @Override
     public void onResume() {
         super.onResume();
-        ((AdminActivity) requireActivity()).setToolbarText("Team Operational Squads");
+        ((AdminActivity) requireActivity()).setToolbarText(getResources().getString(R.string.Team_Operational_Squads));
     }
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.example.taskmanagement.databinding.FragmentProjectBinding;
@@ -36,6 +37,8 @@ List<Project>projects=new ArrayList<>();
         projectAdapter=new ProjectAdapter(getContext(),projects);
         binding.projectRecyler.setAdapter(projectAdapter);
         projectViewModel=new ProjectViewModel(new ProjectRepository());
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+        filterBtn.setVisibility(View.GONE);
 binding.loader.setVisibility(View.VISIBLE);
         projectViewModel.getProjectList(new ResponseCallback<List<Project>>() {
             @Override
@@ -85,6 +88,6 @@ getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new
         super.onResume();
 
         ((AdminActivity) requireActivity())
-                .setToolbarText("Projects Workspace");
+                .setToolbarText(getResources().getString(R.string.Projects_Workspace));
     }
 }

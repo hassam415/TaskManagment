@@ -143,6 +143,20 @@
     <string name="Select_Status">Select Status</string>
     <string name="Default">Default</string>
     <string name="Describe_the_project_goals_milstones_and_deliverable">Describe the project goals,milstones, and deliverable</string>
-
-
+<string name="Title">Title</string>
+<string name="Discription">Discription</string>
+    <string name="ddmmyyyy">dd/mm/yyyy</string>
+    <string name="User_Managment">User Managment</string>
+    <string name="Create_Organization_User">Create Organization User</string>
+    <string name="Create_New_Task">Create New Task</string>
+    <string name="Executive_Oepration_Dashboard">Executive Oepration Dashboard</string>
+    <string name="Reports">Reports</string>
+    <string name="Projects_Workspace">Projects Workspace</string>
+    <string name="Team_Operational_Squads">Team Operational Squads</string>
+    <string name="Create_New_Project">Create New Project</string>
+    <string name="Creat_New_Team_Squad">Creat New Team Squad</string>
+    <string name="Interactive_Calendar_Deadline">Interactive Calendar Deadline</string>
+<string name="Account_Setting">Account Setting</string>
+    <string name="SELECT_THEME">SELECT THEME</string>
+    <string name="Statuss">Status</string>
 </resources>

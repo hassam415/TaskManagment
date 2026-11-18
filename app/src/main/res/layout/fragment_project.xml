@@ -9,13 +9,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
         tools:context=".ProjectFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/projectRecyler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/projectBtn"
             android:paddingBottom="90dp"
             android:clipToPadding="false"/>
 <LinearLayout
@@ -23,12 +23,13 @@
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:id="@+id/loader"
+    android:visibility="gone"
     android:orientation="vertical">
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
-        android:text="Loading.."
+        android:text="@string/Loading"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -71,7 +71,7 @@ HideLoader();
     @Override
     public void onResume() {
         super.onResume();
-        ((AdminActivity) requireActivity()).setToolbarText("Account Setting");
+        ((AdminActivity) requireActivity()).setToolbarText(getResources().getString(R.string.Account_Setting));
     }
     private void showLoader(){
         binding.updateBtn.setText("");

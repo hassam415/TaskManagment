@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="?attr/colorSurface"
         tools:context=".AddTeamFragment">
 
 
@@ -44,7 +45,7 @@
                             android:text="@string/Define_Team_Squad"
                             android:textSize="20dp"
                             android:textStyle="bold"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                         <TextView
@@ -62,6 +63,7 @@
                     android:text="@string/Team_Squad_Name"
                     android:layout_marginTop="18dp"
                     android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -83,6 +85,7 @@
                     android:text="@string/Department"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <com.google.android.material.textfield.TextInputLayout
@@ -94,10 +97,10 @@
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxStrokeColor="#6750FF"
+                    app:boxBackgroundColor="?attr/colorSurface"
                     app:boxStrokeWidth="1dp"
                     app:boxStrokeWidthFocused="2dp"
-                    app:endIconTint="#263238">
+                    >
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/departmentSpinner"
@@ -128,6 +131,7 @@
                     android:textStyle="bold"
                     android:text="@string/Squad_Mission_Discription"
                     android:layout_marginTop="10dp"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <com.google.android.material.textfield.TextInputLayout
@@ -149,6 +153,7 @@
                     android:text="@string/Designated_Team_Lead"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <com.google.android.material.textfield.TextInputLayout
@@ -160,10 +165,10 @@
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxStrokeColor="#6750FF"
+                    app:boxBackgroundColor="?attr/colorSurface"
                     app:boxStrokeWidth="1dp"
                     app:boxStrokeWidthFocused="2dp"
-                    app:endIconTint="#263238">
+                    >
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/teamleadSpinner"
@@ -185,6 +190,7 @@
         <Button
             android:id="@+id/savebtn"
             android:text="@string/Creat_Team"
+            android:textColor="@color/white"
             android:backgroundTint="@color/darknavey"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

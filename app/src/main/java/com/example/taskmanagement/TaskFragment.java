@@ -769,6 +769,6 @@ List<Project>projectList=new ArrayList<>();
     @Override
     public void onResume() {
         super.onResume();
-        ((AdminActivity) requireActivity()).setToolbarText("Create New Task");
+        ((AdminActivity) requireActivity()).setToolbarText(getResources().getString(R.string.Create_New_Task));
     }
 }

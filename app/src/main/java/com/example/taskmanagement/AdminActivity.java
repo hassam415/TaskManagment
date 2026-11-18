@@ -47,7 +47,7 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
         toggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
         toggle.syncState();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).commit();
-        setToolbarText("DashBoard");
+        setToolbarText(getResources().getString(R.string.Dashboard));
         return binding.getRoot();
     }
 
@@ -56,43 +56,53 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
         int id = menuItem.getItemId();
         if (id == R.id.user) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new UserListFragment()).commit();
-            setToolbarText("User Managment ");
+            setToolbarText(getResources().getString(R.string.User_Managment));
 
         }
         if (id == R.id.task) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new TaskListFragment()).addToBackStack(null).commit();
-            setToolbarText("Task Managment");
+            setToolbarText(getResources().getString(R.string.app_name));
 
         }
         if (id==R.id.profile){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProfileFragment()).addToBackStack(null).commit();
-            setToolbarText("Profile");
+            setToolbarText(getString(R.string.profile));
         }
         if (id == R.id.dashboard) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DashboardFragment()).commit();
-            setToolbarText("Executive Oepration Dashboard");
+            setToolbarText(getResources().getString(R.string.Dashboard));
         }
 
         if (id==R.id.report){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ReportFragment()).commit();
-            setToolbarText("Reports");
+            setToolbarText(getResources().getString(R.string.Reports));
         }
 
 
 if (id==R.id.project){
     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProjectFragment()).commit();
-    setToolbarText("Projects Workspace");
+    setToolbarText(getResources().getString(R.string.Projects_Workspace));
 }
 if (id==R.id.team){
     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new TeamFragment()).commit();
-    setToolbarText("Team Operational Squads");
+    setToolbarText(getResources().getString(R.string.Team_Operational_Squads));
 }
 if (id==R.id.calendar){
     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new CalendarFragment()).commit();
-    setToolbarText("Interactive Calendar Deadline");
+    setToolbarText(getResources().getString(R.string.Interactive_Calendar_Deadline));
 }
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+    @Override
+    public void onBackPressed() {
 
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

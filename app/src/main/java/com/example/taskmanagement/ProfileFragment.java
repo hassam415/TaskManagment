@@ -7,12 +7,14 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -40,9 +42,13 @@ String name,jobtitle;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding=FragmentProfileBinding.inflate(inflater,container,false);
+        ImageView filterBtn=requireActivity().findViewById(R.id.filterBtn);
+        filterBtn.setVisibility(View.GONE);
         authViewModel=new AuthViewModel(new AuthRepository());
         showlanguage();
+        showTheme();
         binding.loader.setVisibility(View.VISIBLE);
+
         authViewModel.getAuthMe(new ResponseCallback<User>() {
             @Override
             public void onSuccess(User data, String message) {
@@ -88,6 +94,7 @@ String name,jobtitle;
                     @Override
                     public void onSuccess(LogoutResponse data, String message) {
                         binding.progressloader.setVisibility(View.GONE);
+                        ApiSesson.clearSession(getContext());
                         Toast.makeText(getContext(), "Logout", Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(requireActivity(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
@@ -108,8 +115,45 @@ String name,jobtitle;
                 showLanguageDialog();
             }
         });
-
+binding.themecard.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        showThemeDialogue();
+        
+    }
+});
         return binding.getRoot();
+    }
+
+    private void showTheme() {
+        int theme=ThemeHelper.getTheme(getContext());
+        if (theme==AppCompatDelegate.MODE_NIGHT_YES){
+            binding.selectedtheme.setText("Dark Theme");
+        }
+        else {
+            binding.selectedtheme.setText("Light Theme");
+        }
+    }
+
+    private void showThemeDialogue() {
+        String []Theme={"Light","Dark"};
+        AlertDialog.Builder builder=new MaterialAlertDialogBuilder(getContext());
+        builder.setTitle("SELECT THEME");
+        builder.setSingleChoiceItems(Theme, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+if (which==0){
+    ThemeHelper.savetheme(getContext(), AppCompatDelegate.MODE_NIGHT_NO);
+    Toast.makeText(getContext(), "Light Mode On Please Restart the Application", Toast.LENGTH_LONG).show();
+}
+if (which==1){
+    ThemeHelper.savetheme(requireContext(),AppCompatDelegate.MODE_NIGHT_YES);
+    Toast.makeText(getContext(), "Dark Mode On Please Restart the Application", Toast.LENGTH_LONG).show();
+}
+            }
+        });
+        builder.create();
+        builder.show();
     }
 
     private void showLanguageDialog() {
@@ -149,6 +193,7 @@ builder.show();
     @Override
     public void onResume() {
         super.onResume();
-        ((AdminActivity) requireActivity()).setToolbarText("Profile");
+        ((AdminActivity) requireActivity()).setToolbarText(getResources().getString(R.string.profile));
     }
+    
 }

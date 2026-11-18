@@ -17,13 +17,18 @@
     <color name="softBlue">#5C7FE3</color>
     <color name="lightGreen">#6AC788</color>
     <color name="greyRaven">#6E7782</color>
-    <color name="dark_slate_blue">#483D8B</color>
+
     <color name="light_grey">#D3D3D3</color>
     <color name="duk_blue">#00009c</color>
 <color name="yellow">#F59E0B</color>
     <color name="totaltask">#344F7D</color>
     <color name="completedTask">#168B78</color>
-<color name="pendingColour">#D99536
-</color>
+<color name="pendingColour">#D99536</color>
+    <color name="screen_background">#FFFFFF</color>
+    <color name="dark_slate_blue">#483D8B</color>
+    <color name="user_name_color">#1E3A5F</color>
+    <color name="status_dropdown_bg">#FFFFFF</color>
+    <color name="status_dropdown_text">#000000</color>
+
 
 </resources>

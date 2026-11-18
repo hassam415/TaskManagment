@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="User Name"
-                        android:textColor="#1E3A5F"
+                        android:textColor="@color/user_name_color"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 <Space
@@ -49,6 +49,7 @@
                         android:id="@+id/updateBtn"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
+                        android:tint="?attr/colorOnSurface"
                         android:src="@drawable/options"/>
 
                 </LinearLayout>
@@ -62,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="user@email.com"
-                    android:textColor="#555555"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="14sp" />
 
                 <!-- Address -->
@@ -72,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="User Address"
-                    android:textColor="#777777"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="14sp" />
 
             </LinearLayout>

@@ -12,7 +12,8 @@
         android:text="7"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="#172B4D"/>
+        android:textColor="?attr/colorOnSurface"
+        android:background="?attr/colorSurface"/>
 
     <TextView
         android:id="@+id/taskCount"

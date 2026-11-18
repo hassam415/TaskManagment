@@ -17,7 +17,9 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
-            tools:context=".DashboardFragment">
+
+            tools:context=".DashboardFragment"
+            android:background="?attr/colorSurface">
 
 
 
@@ -321,7 +323,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
-                                    android:textColor="@color/black"
+                                    android:textColor="?attr/colorOnSurface"
                                     android:textSize="28sp"
                                     android:textStyle="bold" />
 
@@ -430,7 +432,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="10dp"
                             android:text="@string/task_status_distribution"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textSize="18dp"
                             android:textStyle="bold" />
 
@@ -534,7 +536,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/draft"
-                                android:textColor="#334155"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -542,7 +544,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:textColor="#0F172A"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -564,7 +566,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/assigned"
-                                android:textColor="#334155"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -572,7 +574,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:textColor="#0F172A"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -594,7 +596,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/in_progres"
-                                android:textColor="#334155"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -602,7 +604,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:textColor="#0F172A"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -624,7 +626,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/on_hold"
-                                android:textColor="#334155"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -632,7 +634,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:textColor="#0F172A"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -654,7 +656,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/in_review"
-                                android:textColor="#334155"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -662,7 +664,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:textColor="#0F172A"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -684,7 +686,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/change_request"
-                                android:textColor="#334155"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textSize="12sp" />
 
                             <TextView
@@ -692,7 +694,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:textColor="#0F172A"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -713,7 +715,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/completed"
-                                android:textColor="#334155"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -721,7 +723,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:textColor="#0F172A"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -742,7 +744,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/cancelled"
-                                android:textColor="#334155"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -750,7 +752,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:textColor="#0F172A"
+                                android:textColor="?attr/colorOnSurface"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -789,7 +791,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="6dp"
                             android:text="@string/priority_Allocation"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textSize="18dp"
                             android:textStyle="bold" />
 
@@ -823,7 +825,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -854,7 +856,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -885,7 +887,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -916,7 +918,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -962,7 +964,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="5dp"
                             android:text="@string/upcoming_deadline_Milstones"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textSize="18dp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -1008,7 +1010,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/deliverables_awaiting_review"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textSize="18dp"
                             android:textStyle="bold" />
                         <Space
@@ -1070,7 +1072,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="6dp"
                             android:text="@string/team_workload_resource_allocation"
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorOnSurface"
                             android:textSize="18dp"
                             android:textStyle="bold" />
 

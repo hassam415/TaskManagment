@@ -11,6 +11,7 @@
     <LinearLayout
         android:id="@+id/main"
         android:orientation="vertical"
+        android:background="?attr/colorSurface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".UserActivity">
@@ -55,7 +56,7 @@
                         <TextView
                             android:text="@string/Add_New_Team_Member"
                             android:textStyle="bold"
-
+android:textColor="?attr/colorOnSurface"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                         <TextView
@@ -69,7 +70,7 @@
                 <TextView
                     android:layout_marginTop="8dp"
                     android:text="@string/Full_Name"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -90,7 +91,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginTop="10dp"
                     android:text="@string/Corporate_Email_Address"/>
                 <com.google.android.material.textfield.TextInputLayout
@@ -126,7 +127,7 @@ android:visibility="gone"
                 <TextView
                     android:layout_marginTop="12dp"
                     android:text="@string/Initial_Password"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <com.google.android.material.textfield.TextInputLayout
@@ -146,7 +147,7 @@ android:visibility="gone"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/Job_title"
                     android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
@@ -168,9 +169,9 @@ android:visibility="gone"
                 <TextView
                     android:text="@string/RBAC_Role"
                     android:layout_marginTop="12dp"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
 
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/roleLayout"
@@ -181,10 +182,10 @@ android:visibility="gone"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxStrokeColor="#6750FF"
+                    app:boxBackgroundColor="?attr/colorSurface"
                     app:boxStrokeWidth="1dp"
                     app:boxStrokeWidthFocused="2dp"
-                    app:endIconTint="#263238">
+                    >
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/roleSpinner"
@@ -204,7 +205,7 @@ android:visibility="gone"
                 </com.example.taskmanagement.CustomteamView>
                 <TextView
                     android:layout_marginTop="12dp"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/Account_Status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -217,10 +218,10 @@ android:visibility="gone"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxStrokeColor="#6750FF"
+                    app:boxBackgroundColor="?attr/colorSurface"
                     app:boxStrokeWidth="1dp"
                     app:boxStrokeWidthFocused="2dp"
-                    app:endIconTint="#263238">
+                   >
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/statusSpinner"
@@ -228,7 +229,7 @@ android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:inputType="none"
                         android:padding="12dp"
-                        android:text="@string/Admin"
+                        android:hint="@string/Statuss"
                         android:textSize="16sp"
                         android:dropDownHeight="wrap_content"/>
 
@@ -245,6 +246,8 @@ android:visibility="gone"
         <Button
             android:id="@+id/savebtn"
             android:text="@string/Register"
+
+            android:textColor="@color/white"
             android:backgroundTint="@color/darknavey"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

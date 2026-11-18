@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -75,14 +76,22 @@ holder.binding.projectLead.setText(project.getLead().getName());
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             if (item.getItemId()==R.id.update){
+
                                 AddProjectFragment addProjectFragment=new AddProjectFragment();
                                 Bundle bundle=new Bundle();
-bundle.putString("name", project.getName());
-bundle.putInt("projectId", project.getId());
+                         if (project.getName()!=null){
+                             bundle.putString("name", project.getName());
+                         }
+if (project.getId()!=0){
+    bundle.putInt("projectId", project.getId());
+}
+
 bundle.putString("key", project.getKey());
 bundle.putString("status",project.getStatus().getLabel());
+if (project.getTeam()!=null){
+    bundle.putInt("team",project.getTeam().getId());
+}
 
-bundle.putInt("team",project.getTeam().getId());
 bundle.putInt("projectLead",project.getLead().getId());
 bundle.putString("startDate",project.getStart_date());
 bundle.putString("endDate",project.getTarget_end_date());

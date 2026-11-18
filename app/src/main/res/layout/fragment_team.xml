@@ -9,6 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
         tools:context=".TeamFragment">
 
 
@@ -19,7 +20,7 @@
             android:layout_height="match_parent"
             android:paddingBottom="90dp"
             android:clipToPadding="false"
-            android:layout_above="@id/teamAddBtn"/>
+           />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

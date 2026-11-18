@@ -29,7 +29,16 @@ public class LoginActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         uSerViewModel = new USerViewModel(new UserRepository());
         authViewModel = new AuthViewModel(new AuthRepository());
+        ThemeHelper.applytheme(this);
+        String token = ApiSesson.getAccess_Token(this);
 
+        if (token != null && !token.isEmpty()) {
+
+            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         binding.loginbtn.setOnClickListener(v -> {
             String email = binding.email.getEditText().getText().toString();
             String pass = binding.password.getEditText().getText().toString();
@@ -84,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                HideLoader();
 
                 String token = loginResponse.getAccess_token();
-                ApiSesson.setAccess_Token(token);
+                ApiSesson.setAccess_Token(LoginActivity.this,token);
                 Toast.makeText(LoginActivity.this, "Login SuccessFull ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                 startActivity(intent);
