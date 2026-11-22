@@ -2,8 +2,10 @@ package com.example.taskmanagement;
 
 import com.example.taskmanagement.response.APIResponse;
 import com.example.taskmanagement.response.AuthResponse;
+import com.example.taskmanagement.response.CheckListResponse;
 import com.example.taskmanagement.response.LogoutResponse;
 import com.example.taskmanagement.response.PaginateResponse;
+import com.example.taskmanagement.response.TaskResponse;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -31,7 +34,7 @@ public interface ApiService {
     Call<ResponseDashBoard> getDashboard();
 
     @GET("tasks/{id}")
-    Call<Task> getSingleTask(@Path("id") String taskid);
+    Call<TaskResponse> getSingleTask(@Path("id") String taskid);
 
     @GET("users/assignable")
     Call<JsonObject> getUsers();
@@ -106,4 +109,20 @@ public interface ApiService {
     Call<AuthResponse>UpdateAuth(@Body UpdateProfileRequest request);
 @POST("auth/logout")
     Call<LogoutResponse>logout();
+@GET("tasks/{task}/comments")
+    Call<PaginateResponse<Comment>> getApiComment(@Path("task")String taskid);
+@POST("tasks/{task}/comments")
+    Call<Comment> creatComment(@Body RequestComment requestComment,@Path("task") String idTask );
+@DELETE("tasks/{task}/comments/{comment}")
+    Call<Comment> DeleteComment(@Path("task") String taskId,@Path("comment")int id);
+@GET("tasks/{task}/checklists")
+    Call<PaginateResponse<CheckList>> getCheckList(@Path("task") String taskID);
+@POST("tasks/{task}/checklists")
+    Call<CheckListResponse> creatCheckList(@Body RequestCheckList checkList, @Path("task")String taskid);
+@DELETE("tasks/{task}/checklists/{checklist}")
+    Call<CheckList> deletCheckListt(@Path("task")String taskId,@Path("checklist")int id);
+@PATCH("tasks/{task}/checklists/{checklist}/toggle")
+    Call<CheckListToggleResponse> toggleCheckList(@Path("task")String taskId,@Path("checklist")int checkId);
+@GET("tasks/{task}/activities")
+    Call<PaginateResponse<TaskActivity>> getTaskActivity(@Path("task")String taskId);
 }

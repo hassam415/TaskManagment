@@ -46,4 +46,19 @@ public class ApiTaskViewModel {
    public void getRole(ResponseCallback<List<Role>> responseCallback){
         apiTaskRepository.getRole(responseCallback);
    }
+   public void getCheckList(String taskId,ResponseCallback<List<CheckList>>responseCallback){
+        apiTaskRepository.getCheckList(taskId,responseCallback);
+   }
+   public void creatCheckList(String taskId,RequestCheckList checkList,ResponseCallback<CheckList>responseCallback){
+        apiTaskRepository.creatCheckList(taskId,checkList,responseCallback);
+   }
+   public void deletCheckList(String taskId,int checkListId,ResponseCallback<CheckList>responseCallback){
+        apiTaskRepository.deletCheckList(taskId,checkListId,responseCallback);
+   }
+   public void toggleCheclist(String taskId,int checkListId,ResponseCallback<CheckList>responseCallback){
+        apiTaskRepository.toggleCheckList(taskId,checkListId,responseCallback);
+   }
+   public void getTaskActivity(String taskId,ResponseCallback<List<TaskActivity>>responseCallback){
+        apiTaskRepository.getTaskActivity(taskId,responseCallback);
+   }
 }

@@ -93,22 +93,22 @@ List<Comment>commentList=new ArrayList<>();
 
          }
      });
-     commentsAdapter.setOnBtnClick(new CommentsAdapter.OnBtnClick() {
-         @Override
-         public void Onclick(String reply, String Id) {
-             commentsViewModel.savereply(id, Id, reply, new ResponseCallback<Comment>() {
-                 @Override
-                 public void onSuccess(Comment data, String message) {
+   //  commentsAdapter.setOnBtnClick(new CommentsAdapter.OnBtnClick() {
+     //    @Override
+       //  public void Onclick(String reply, String Id) {
+         //    commentsViewModel.savereply(id, Id, reply, new ResponseCallback<Comment>() {
+           //      @Override
+             //    public void onSuccess(Comment data, String message) {
 
-                 }
+               //  }
 
-                 @Override
-                 public void onError(String message) {
+                 //@Override
+                // public void onError(String message) {
 
-                 }
-             });
-         }
-     });
+                // }
+            // });
+      //   }
+    // });
      imgbtn.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
@@ -117,17 +117,17 @@ List<Comment>commentList=new ArrayList<>();
              TextInputLayout commentedit=view1.findViewById(R.id.commentedit);
              new AlertDialog.Builder(getContext()).setView(view1).setPositiveButton("Send",(dialog, which) -> {
                  String comment=commentedit.getEditText().getText().toString();
-                 commentsViewModel.saveComment(id, comment, new ResponseCallback<Comment>() {
-                     @Override
-                     public void onSuccess(Comment data, String message) {
+                // commentsViewModel.saveComment(id, comment, new ResponseCallback<Comment>() {
+                  //   @Override
+                    // public void onSuccess(Comment data, String message) {
 
-                     }
+                    // }
 
-                     @Override
-                     public void onError(String message) {
+                    // @Override
+                    // public void onError(String message) {
 
-                     }
-                 });
+                    // }
+                // });
              }).setNegativeButton("Cancel",(dialog, which) -> {
                  dialog.dismiss();
              }).show();

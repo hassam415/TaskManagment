@@ -12,13 +12,22 @@ public class CommentsViewModel {
     public CommentsViewModel(CommentsRepository commentsRepository) {
         this.commentsRepository = commentsRepository;
     }
-    public void saveComment(String id, String Comment, ResponseCallback<Comment>responseCallback){
-        commentsRepository.saveComment(id, Comment, responseCallback);
-    }
+  //  public void saveComment(String id, String Comment, ResponseCallback<Comment>responseCallback){
+    //    commentsRepository.saveComment(id, Comment, responseCallback);
+    //}
     public void savereply(String id, String comentId, String reply, ResponseCallback<Comment>responseCallback){
         commentsRepository.replycoment(id,comentId,reply,responseCallback);
     }
     public void getList(String id, ResponseCallback<List<Comment>>responseCallback){
         commentsRepository.getlist(id,responseCallback);
+    }
+    public void getApiComments(String id ,ResponseCallback<List<Comment>> responseCallback){
+        commentsRepository.getApiComment(id,responseCallback);
+    }
+    public void creatApiComment(RequestComment requestComment,String id,ResponseCallback<Comment>responseCallback){
+        commentsRepository.creatComment(id, requestComment, responseCallback);
+    }
+    public void DeleteComment(String taskid,int commentId,ResponseCallback<Comment> responseCallback){
+        commentsRepository.DeleteComment(taskid,commentId,responseCallback);
     }
 }

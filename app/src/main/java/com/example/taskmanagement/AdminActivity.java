@@ -55,7 +55,7 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
         if (id == R.id.user) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new UserListFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new UserListFragment()).addToBackStack(null).commit();
             setToolbarText(getResources().getString(R.string.User_Managment));
 
         }
@@ -74,21 +74,21 @@ public class AdminActivity extends MyBaseActivity implements NavigationView.OnNa
         }
 
         if (id==R.id.report){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ReportFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ReportFragment()).addToBackStack(null).commit();
             setToolbarText(getResources().getString(R.string.Reports));
         }
 
 
 if (id==R.id.project){
-    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProjectFragment()).commit();
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ProjectFragment()).addToBackStack(null).commit();
     setToolbarText(getResources().getString(R.string.Projects_Workspace));
 }
 if (id==R.id.team){
-    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new TeamFragment()).commit();
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new TeamFragment()).addToBackStack(null).commit();
     setToolbarText(getResources().getString(R.string.Team_Operational_Squads));
 }
 if (id==R.id.calendar){
-    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new CalendarFragment()).commit();
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new CalendarFragment()).addToBackStack(null).commit();
     setToolbarText(getResources().getString(R.string.Interactive_Calendar_Deadline));
 }
         binding.drawerLayout.closeDrawer(GravityCompat.START);

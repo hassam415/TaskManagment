@@ -396,23 +396,23 @@ binding.taskrecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
         loadTasks();
 
 
-     //   taskAdapter.setOnTaskClick(position -> {
-       //     if (position < 0 || position >= taskList.size()) return;
+        taskAdapter.setOnTaskClick(position -> {
+            if (position < 0 || position >= taskList.size()) return;
 
-         //   Task task = taskList.get(position);
+            Task task = taskList.get(position);
 
-           // Bundle taskBundle = new Bundle();
-          //  taskBundle.putString("Id", task.getId());
+            Bundle taskBundle = new Bundle();
+            taskBundle.putString("Id", task.getId());
 
-            //TaskDisplayFragment fragment = new TaskDisplayFragment();
-          //  fragment.setArguments(taskBundle);
+            TaskDisplayFragment fragment = new TaskDisplayFragment();
+            fragment.setArguments(taskBundle);
 
-         //   getParentFragmentManager()
-             //       .beginTransaction()
-           //         .replace(R.id.fragmentContainer, fragment)
-               //     .addToBackStack(null)
-                //    .commit();
-      //  });
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         binding.taskbtn.setOnClickListener(v -> {
             getParentFragmentManager()

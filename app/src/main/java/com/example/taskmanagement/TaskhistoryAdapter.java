@@ -2,6 +2,7 @@ package com.example.taskmanagement;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -42,22 +43,37 @@ public class TaskhistoryAdapter extends RecyclerView.Adapter<TaskHistoryViewhold
     public void onBindViewHolder(@NonNull TaskHistoryViewholder holder, int position) {
 
 TaskActivity activity=taskActivities.get(position);
-holder.binding.detail.setText(" Detail :"+activity.getDetail());
-holder.binding.status.setText("Status :"+activity.getStatus());
-        SimpleDateFormat dateFormat=new SimpleDateFormat("dd MM yyyy,hh:mm a", Locale.getDefault());
-        holder.binding.time.setText(dateFormat.format(activity.getTime_stamp().toDate()));
-        FirebaseFirestore.getInstance().collection("User").document(activity.getUserId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String username=documentSnapshot.getString("name");
-                holder.binding.username.setText("username :"+username);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+holder.binding.detail.setText(activity.getDescription());
+        if (activity.getProperties() != null) {
+
+            holder.binding.status.setVisibility(View.VISIBLE);
+
+            holder.binding.status.setText(
+                    "Status: " +
+                            activity.getProperties().old_status +
+                            " to " +
+                            activity.getProperties().new_status
+            );
+
+        } else {
+            holder.binding.status.setVisibility(View.GONE);
+        }
+
+
+        holder.binding.time.setText(activity.getFormatted_created_at());
+        holder.binding.username.setText(activity.getUser().getName());
+      //  FirebaseFirestore.getInstance().collection("User").document(activity.getUserId()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        //    @Override
+          //  public void onSuccess(DocumentSnapshot documentSnapshot) {
+            //    String username=documentSnapshot.getString("name");
+              //  holder.binding.username.setText("username :"+username);
+           // }
+      //  }).addOnFailureListener(new OnFailureListener() {
+        //    @Override
+          //  public void onFailure(@NonNull Exception e) {
+            //    Toast.makeText(context, ""+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+          //  }
+      //  });
     }
 
     @Override

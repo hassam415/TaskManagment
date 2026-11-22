@@ -20,36 +20,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.taskmanagement.callback.ResponseCallback;
-import com.google.android.material.button.MaterialButton;
+import com.example.taskmanagement.databinding.FragmentTaskDisplayBinding;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.Timestamp;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 
 public class TaskDisplayFragment extends Fragment {
-
+FragmentTaskDisplayBinding binding;
     TaskViewModel taskViewModel;
-    CustomImagView customImage;
-    CustomUserView customUser;
+
     CommentsAdapter commentsAdapter;
     List<Comment> commentList = new ArrayList<>();
-    RecyclerView commentRecycler;
     String id;
-    TextView date;
-    TextView title, discript;
-    ImageButton imgbtn;
-    ImageView materialbtn;
     CommentsViewModel commentsViewModel;
-    Spinner spinner, categoryspinner, periorityspinner;
     ArrayAdapter<String> statusAdapter;
     List<Status> statusList = new ArrayList<>();
     StatusViewModel statusViewModel;
@@ -70,6 +56,8 @@ public class TaskDisplayFragment extends Fragment {
     StatusApiRepository statusApiRepository;
     PriorityRepository priorityRepository;
     CategoryApiRepository categoryApiRepository;
+    List<CheckList>checkLists=new ArrayList<>();
+CheckListAdapter checkListAdapter;
 
     public TaskDisplayFragment() {
         // Required empty public constructor
@@ -80,44 +68,112 @@ public class TaskDisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_task_display, container, false);
+        binding=FragmentTaskDisplayBinding.inflate(inflater,container,false);
         statusViewModel = new StatusViewModel(new StatusRepository());
         categoryViewModel = new CategoryViewModel(new CategoryRepository());
-        customImage = view.findViewById(R.id.customImage);
-        categoryspinner = view.findViewById(R.id.categoryspinner);
-        periorityspinner = view.findViewById(R.id.periorityspinner);
-        imgbtn = view.findViewById(R.id.imgbtn);
-        date = view.findViewById(R.id.date);
+        binding.checkListReycler.setHasFixedSize(true);
+        binding.checkListReycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        checkListAdapter=new CheckListAdapter(getContext(),checkLists);
+        binding.checkListReycler.setAdapter(checkListAdapter);
+
         apiTaskViewModel = new ApiTaskViewModel(new ApiTaskRepository());
         statusApiRepository = new StatusApiRepository();
         priorityRepository = new PriorityRepository();
         categoryApiRepository = new CategoryApiRepository();
-        spinner = view.findViewById(R.id.spinner);
-        materialbtn = view.findViewById(R.id.materialbtn);
-        title = view.findViewById(R.id.title);
-        discript = view.findViewById(R.id.discript);
+
         periorityViewModel = new PeriorityViewModel(new PeriorityRepository());
         ImageView filterBtn = requireActivity().findViewById(R.id.filterBtn);
         filterBtn.setVisibility(View.GONE);
-        commentRecycler = view.findViewById(R.id.commentRecycler);
-        customUser = view.findViewById(R.id.customUser);
-        customImage.showLoader();
-        customUser.showLoader();
+
+      //  binding.customImage.showLoader();
+        binding.customUser.showLoader();
 
         commentsViewModel = new CommentsViewModel(new CommentsRepository());
         taskViewModel = new TaskViewModel(new TaskRepository());
 
-        commentRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        commentRecycler.setNestedScrollingEnabled(false);
+        binding.commentRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.commentRecycler.setNestedScrollingEnabled(false);
 
         commentsAdapter = new CommentsAdapter(getContext(), commentList);
-        commentRecycler.setAdapter(commentsAdapter);
+        binding.commentRecycler.setAdapter(commentsAdapter);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            id = bundle.getString("Id");
+        }
+      //  binding.customImage.setview();
+        commentsViewModel.getApiComments(id, new ResponseCallback<List<Comment>>() {
+            @Override
+            public void onSuccess(List<Comment> data, String message) {
+                commentList.addAll(data);
+                commentsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+
+apiTaskViewModel.getCheckList(id, new ResponseCallback<List<CheckList>>() {
+    @Override
+    public void onSuccess(List<CheckList> data, String message) {
+        checkLists.clear();
+        checkLists.addAll(data);
+        binding.checklist.setText("Deliverable Checklists("+data.size()+")");
+        checkListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onError(String message) {
+
+    }
+});
+checkListAdapter.setOnCheckBoxCLick(new CheckListAdapter.OnCheckBoxCLick() {
+    @Override
+    public void onClick(int Id, int position) {
+        apiTaskViewModel.toggleCheclist(id, Id, new ResponseCallback<CheckList>() {
+            @Override
+            public void onSuccess(CheckList data, String message) {
+                CheckList updatedItem = data;
+
+                checkLists.set(position, updatedItem);
+
+                checkListAdapter.notifyItemChanged(position);
 
 
-        customImage.setview();
-        // customUser.setview();
+            }
 
-        materialbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+    }
+});
+
+binding.additem.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        String item= binding.checklistitem.getText().toString();
+       RequestCheckList req=new RequestCheckList();
+       req.setTitle(item);
+       apiTaskViewModel.creatCheckList(id, req, new ResponseCallback<CheckList>() {
+           @Override
+           public void onSuccess(CheckList data, String message) {
+               binding.checklistitem.setText("");
+               checkLists.add(data);
+               checkListAdapter.notifyDataSetChanged();
+           }
+
+           @Override
+           public void onError(String message) {
+
+           }
+       });
+    }
+});
+
+        binding.materialbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -150,23 +206,23 @@ public class TaskDisplayFragment extends Fragment {
 
 //            }
         //      });
-        statusApiRepository.getStatusList(new ResponseCallback<List<String>>() {
-            @Override
-            public void onSuccess(List<String> data, String message) {
-                statusAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, data);
-                statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(statusAdapter);
-            }
+     //   statusApiRepository.getStatusList(new ResponseCallback<List<String>>() {
+       //     @Override
+         //   public void onSuccess(List<String> data, String message) {
+           //     statusAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, data);
+             //   statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+              //  spinner.setAdapter(statusAdapter);
+          //  }
 
-            @Override
-            public void onError(String message) {
+          //  @Override
+          //  public void onError(String message) {
 
-            }
-        });
+           // }
+      //  });
         categoryName.add("Category");
         categoryAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, categoryName);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categoryspinner.setAdapter(categoryAdapter);
+        binding.categoryspinner.setAdapter(categoryAdapter);
         categoryViewModel.getList(new ResponseCallback<List<Category>>() {
             @Override
             public void onSuccess(List<Category> data, String message) {
@@ -188,7 +244,7 @@ public class TaskDisplayFragment extends Fragment {
         periorityName.add("Periority");
         periorityAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, periorityName);
         periorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        periorityspinner.setAdapter(periorityAdapter);
+        binding.periorityspinner.setAdapter(periorityAdapter);
         periorityViewModel.getList(new ResponseCallback<List<Periority>>() {
             @Override
             public void onSuccess(List<Periority> data, String message) {
@@ -206,22 +262,20 @@ public class TaskDisplayFragment extends Fragment {
 
             }
         });
-        Bundle bundle = getArguments();
 
-        if (bundle != null) {
 
-            id = bundle.getString("Id");
+
+
+
             apiTaskViewModel.getSingleTask(id, new ResponseCallback<Task>() {
                 @Override
                 public void onSuccess(Task data, String message) {
-//                    Log.e("API", "OnSuccess: " + jsonReader);
-//
-//                    JsonObject array = jsonReader.getAsJsonObject("data");
-//                    String titl = array.get("title").getAsString();
-//                    String discrip = array.get("description").getAsString();
+                    Log.e("API ", "onSuccess: "+data.getTitle() );
+                    Log.e("API ", "onSuccess: "+data.getDescription() );
+                    binding.title.setText(data.getTitle() + "");
+                    binding.discript.setText(data.getDescription() + "");
 
-                    title.setText(data.getTitle() + "");
-                    discript.setText(data.getDescription() + "");
+
                 }
 
                 @Override
@@ -289,7 +343,7 @@ public class TaskDisplayFragment extends Fragment {
 
                 @Override
                 public void onSuccess(List<TaskActivity> data, String message) {
-                    periorityspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    binding.periorityspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long itemId) {
                             String selecteedPeriority = parent.getItemAtPosition(position).toString().trim();
@@ -311,7 +365,7 @@ public class TaskDisplayFragment extends Fragment {
 
                         }
                     });
-                    categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    binding.categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long ItemId) {
                             String selectedCategory = parent.getItemAtPosition(position).toString().trim();
@@ -333,7 +387,7 @@ public class TaskDisplayFragment extends Fragment {
 
                         }
                     });
-                    spinner.setOnItemSelectedListener(
+                    binding.spinner.setOnItemSelectedListener(
                             new AdapterView.OnItemSelectedListener() {
 
                                 @Override
@@ -373,49 +427,45 @@ public class TaskDisplayFragment extends Fragment {
                 @Override
                 public void onError(String message) {
 
-                    spinner.setEnabled(false);
+                    binding.spinner.setEnabled(false);
                 }
             });
-        }
-
-        customImage.setOnImageClick(new CustomImagView.OnImageClick() {
-
-            @Override
-            public void OnClick(String imagUrl) {
-
-                Intent intent =
-                        new Intent(getContext(), PhotoZoomActivity.class);
-
-                intent.putExtra("ImageUrl", imagUrl);
-
-                startActivity(intent);
-            }
-        });
 
 
-        commentsAdapter.setOnBtnClick(new CommentsAdapter.OnBtnClick() {
+       // binding.customImage.setOnImageClick(new CustomImagView.OnImageClick() {
 
-            @Override
-            public void Onclick(String reply, String Id) {
+         //   @Override
+           // public void OnClick(String imagUrl) {
 
-                commentsViewModel.savereply(id, Id, reply, new ResponseCallback<Comment>() {
+             //   Intent intent =
+               //         new Intent(getContext(), PhotoZoomActivity.class);
 
-                            @Override
-                            public void onSuccess(Comment data, String message) {
+               // intent.putExtra("ImageUrl", imagUrl);
 
-                            }
-
-                            @Override
-                            public void onError(String message) {
-
-                            }
-                        }
-                );
-            }
-        });
+               // startActivity(intent);
+          //  }
+      //  });
 
 
-        imgbtn.setOnClickListener(new View.OnClickListener() {
+       commentsAdapter.setOnBtnClick(new CommentsAdapter.OnBtnClick() {
+           @Override
+           public void Onclick(int Id, int positon) {
+               commentsViewModel.DeleteComment(id, Id, new ResponseCallback<Comment>() {
+                   @Override
+                   public void onSuccess(Comment data, String message) {
+                       commentList.remove(positon);
+                       commentsAdapter.notifyItemRemoved(positon);
+                   }
+
+                   @Override
+                   public void onError(String message) {
+
+                   }
+               });
+           }
+       });
+
+        binding.imgbtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -431,22 +481,35 @@ public class TaskDisplayFragment extends Fragment {
                                 (dialog, which) -> {
 
                                     String comment = commentedit.getEditText().getText().toString();
+                                    RequestComment requestComment=new RequestComment();
+                                    requestComment.setComment(comment);
+                                    commentsViewModel.creatApiComment(requestComment, id, new ResponseCallback<Comment>() {
+    @Override
+    public void onSuccess(Comment data, String message) {
+        commentList.add(data);
+        categoryAdapter.notifyDataSetChanged();
+    }
 
-                                    commentsViewModel.saveComment(id, comment, new ResponseCallback<Comment>() {
+    @Override
+    public void onError(String message) {
 
-                                                @Override
-                                                public void onSuccess(Comment data, String message) {
+    }
+});
+                                //    commentsViewModel.saveComment(id, comment, new ResponseCallback<Comment>() {
 
-                                                }
+                                  //              @Override
+                                    //            public void onSuccess(Comment data, String message) {
 
-                                                @Override
-                                                public void onError(String message) {
+                                      //          }
 
-                                                }
-                                            }
-                                    );
+                                        //        @Override
+                                          //      public void onError(String message) {
+
+                                              //  }
+                                          //  }
+                                   // );
                                 }
-                        )
+                       )
 
                         .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
 
@@ -454,7 +517,7 @@ public class TaskDisplayFragment extends Fragment {
             }
         });
 
-        return view;
+        return binding.getRoot();
     }
 
     public void setSelectedStatus() {
@@ -462,7 +525,7 @@ public class TaskDisplayFragment extends Fragment {
             for (int i = 0; i < statusList.size(); i++) {
                 Status status = statusList.get(i);
                 if (statusId.equals(status.getId())) {
-                    spinner.setSelection(i + 1);
+                    binding.spinner.setSelection(i + 1);
                     break;
                 }
             }
@@ -474,7 +537,7 @@ public class TaskDisplayFragment extends Fragment {
             for (int i = 0; i < categories.size(); i++) {
                 Category category = categories.get(i);
                 if (categoryID.equals(category.getId())) {
-                    categoryspinner.setSelection(i + 1);
+                    binding.categoryspinner.setSelection(i + 1);
                     break;
                 }
             }
@@ -486,7 +549,7 @@ public class TaskDisplayFragment extends Fragment {
             for (int i = 0; i < periorities.size(); i++) {
                 Periority periority = periorities.get(i);
                 if (periorityId.equals(periority.getId())) {
-                    periorityspinner.setSelection(i + 1);
+                    binding.periorityspinner.setSelection(i + 1);
                     break;
                 }
             }

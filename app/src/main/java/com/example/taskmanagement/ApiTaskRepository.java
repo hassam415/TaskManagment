@@ -4,7 +4,9 @@ import android.util.JsonReader;
 import android.util.Log;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.response.CheckListResponse;
 import com.example.taskmanagement.response.PaginateResponse;
+import com.example.taskmanagement.response.TaskResponse;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -175,15 +177,15 @@ public class ApiTaskRepository {
     }
 
     public void getSingleTask(String taskId, ResponseCallback<Task> taskCallBack) {
-        apiService.getSingleTask(taskId).enqueue(new Callback<Task>() {
+        apiService.getSingleTask(taskId).enqueue(new Callback<TaskResponse>() {
             @Override
-            public void onResponse(Call<Task> call, Response<Task> response) {
-                taskCallBack.onSuccess(response.body(), "");
+            public void onResponse(Call<TaskResponse> call, Response<TaskResponse> response) {
+                taskCallBack.onSuccess(response.body().getData(),"Success");
             }
 
             @Override
-            public void onFailure(Call<Task> call, Throwable throwable) {
-                taskCallBack.onError(throwable.getMessage());
+            public void onFailure(Call<TaskResponse> call, Throwable throwable) {
+
             }
         });
     }
@@ -292,6 +294,71 @@ responseCallback.onError(throwable.getMessage());
             public void onFailure(Call<RoleResponse> call, Throwable t) {
                 Log.e("ROLE_API", "Request failed", t);
                 responseCallback.onError(t.getMessage());
+            }
+        });
+    }
+    public void getCheckList(String taskId,ResponseCallback<List<CheckList>>responseCallback){
+        apiService.getCheckList(taskId).enqueue(new Callback<PaginateResponse<CheckList>>() {
+            @Override
+            public void onResponse(Call<PaginateResponse<CheckList>> call, Response<PaginateResponse<CheckList>> response) {
+                responseCallback.onSuccess(response.body().getData(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<PaginateResponse<CheckList>> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void creatCheckList(String taskid,RequestCheckList checkList,ResponseCallback<CheckList>responseCallback){
+        apiService.creatCheckList(checkList,taskid).enqueue(new Callback<CheckListResponse>() {
+            @Override
+            public void onResponse(Call<CheckListResponse> call, Response<CheckListResponse> response) {
+                responseCallback.onSuccess(response.body().getData(),"Succes");
+            }
+
+            @Override
+            public void onFailure(Call<CheckListResponse> call, Throwable throwable) {
+
+            }
+        });
+    }
+    public void deletCheckList(String taskId,int checkListId,ResponseCallback<CheckList>responseCallback){
+        apiService.deletCheckListt(taskId,checkListId).enqueue(new Callback<CheckList>() {
+            @Override
+            public void onResponse(Call<CheckList> call, Response<CheckList> response) {
+                responseCallback.onSuccess(response.body(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<CheckList> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void toggleCheckList(String taskId,int checkListId,ResponseCallback<CheckList>responseCallback){
+        apiService.toggleCheckList(taskId,checkListId).enqueue(new Callback<CheckListToggleResponse>() {
+            @Override
+            public void onResponse(Call<CheckListToggleResponse> call, Response<CheckListToggleResponse> response) {
+                responseCallback.onSuccess(response.body().getData(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<CheckListToggleResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void getTaskActivity(String taskid,ResponseCallback<List<TaskActivity>> responseCallback){
+        apiService.getTaskActivity(taskid).enqueue(new Callback<PaginateResponse<TaskActivity>>() {
+            @Override
+            public void onResponse(Call<PaginateResponse<TaskActivity>> call, Response<PaginateResponse<TaskActivity>> response) {
+                responseCallback.onSuccess(response.body().getData(),"Success");
+            }
+
+            @Override
+            public void onFailure(Call<PaginateResponse<TaskActivity>> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
             }
         });
     }

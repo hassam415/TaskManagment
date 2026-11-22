@@ -180,12 +180,12 @@ OnDeletBtnClick onDeletBtnClick;
 
 
 
-        //    holder.itemView.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-        //    public void onClick(View v) {
-             //   onTaskClick.onClick(position);
-          //  }
-       // });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onTaskClick.onClick(position);
+            }
+        });
 
     }
 

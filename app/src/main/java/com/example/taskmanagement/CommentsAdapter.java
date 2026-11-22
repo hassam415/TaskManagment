@@ -30,7 +30,7 @@ OnBtnClick onBtnClick;
         this.commentList = commentList;
     }
 public interface  OnBtnClick{
-        void  Onclick(String reply, String Id);
+        void  Onclick( int Id,int positon);
 }
 
     @NonNull
@@ -44,40 +44,47 @@ public interface  OnBtnClick{
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
 Comment comment=commentList.get(position);
 holder.binding.commentTextView.setText(comment.getComment());
-
-        holder.binding.username.setText(comment.getUsername() + " :");
-        List<String> replies = comment.getReplies();
-        List<String> replyUserNames = comment.getUserReplies();
-
-        if (replies != null && replyUserNames != null)
-        { int size = Math.min(replies.size(), replyUserNames.size());
-            for (int i = 0; i < size; i++) {
-               LayoutInflater inflater=LayoutInflater.from(context);
-               View view=inflater.inflate(R.layout.reply_item,holder.binding.replyContainer,false);
-               TextView replyUser=view.findViewById(R.id.replyUser);
-               TextView replytxt=view.findViewById(R.id.replytxt);
-               replyUser.setText(replyUserNames.get(i));
-               replytxt.setText(replies.get(i));
-               holder.binding.replyContainer.addView(view);
+holder.binding.time.setText(comment.getCreated_at());
+        holder.binding.username.setText(comment.getUser().getName() + " :");
+        holder.binding.deletbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position1=holder.getPosition();
+                onBtnClick.Onclick(comment.getId(),position1);
             }
-        }
-holder.binding.replybtn.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        LayoutInflater inflater=LayoutInflater.from(context);
-        View view=inflater.inflate(R.layout.reply_dialogue,null);
+        });
+       // List<String> replies = comment.getReplies();
+       // List<String> replyUserNames = comment.getUserReplies();
 
-        TextInputLayout replyinputedit=view.findViewById(R.id.replyinputedit);
+      //  if (replies != null && replyUserNames != null)
+      //  { int size = Math.min(replies.size(), replyUserNames.size());
+        //    for (int i = 0; i < size; i++) {
+          //     LayoutInflater inflater=LayoutInflater.from(context);
+            //   View view=inflater.inflate(R.layout.reply_item,holder.binding.replyContainer,false);
+              // TextView replyUser=view.findViewById(R.id.replyUser);
+              // TextView replytxt=view.findViewById(R.id.replytxt);
+             //  replyUser.setText(replyUserNames.get(i));
+             //  replytxt.setText(replies.get(i));
+             //  holder.binding.replyContainer.addView(view);
+          //  }
+      //  }
+//holder.binding.replybtn.setOnClickListener(new View.OnClickListener() {
+  //  @Override
+  //  public void onClick(View v) {
+    //    LayoutInflater inflater=LayoutInflater.from(context);
+      //  View view=inflater.inflate(R.layout.reply_dialogue,null);
 
-        new AlertDialog.Builder(context).setView(view).setPositiveButton("Send",(dialog, which) -> {
-            String reply=replyinputedit.getEditText().getText().toString();
-            onBtnClick.Onclick(reply, comment.getId());
-        }).setNegativeButton("Cancel",(dialog, which) -> {
-            dialog.dismiss();
-        }).show();
+     //   TextInputLayout replyinputedit=view.findViewById(R.id.replyinputedit);
 
-    }
-});
+       // new AlertDialog.Builder(context).setView(view).setPositiveButton("Send",(dialog, which) -> {
+         //   String reply=replyinputedit.getEditText().getText().toString();
+           // onBtnClick.Onclick(reply, comment.getId());
+        //}).setNegativeButton("Cancel",(dialog, which) -> {
+          //  dialog.dismiss();
+       // }).show();
+
+   // }
+//});
     }
 
     @Override

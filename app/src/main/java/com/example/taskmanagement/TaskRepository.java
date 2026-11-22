@@ -146,7 +146,7 @@ task.setTimes_tamp(Timestamp.now());
 
         documentReference.set(task)
                 .addOnSuccessListener(unused -> {
-                    saveUserTask(taskid, selecteduser, responseCallback, task);
+                    //saveUserTask(taskid, selecteduser, responseCallback, task);
 
 
                 })
@@ -155,30 +155,30 @@ task.setTimes_tamp(Timestamp.now());
                 });
     }
 
-    public void saveUserTask(String taskid, List<String> selecteduser, ResponseCallback<Task> responseCallback, Task task) {
-        for (String userId : selecteduser) {
-            TaskActivity taskActivity = new TaskActivity();
-            taskActivity.setTaskId(taskid);
-            taskActivity.setUserId(userId);
-            taskActivity.setDetail("Task is created");
-            taskActivity.setStatus("Task Assigned");
-            taskActivity.setTime_stamp(Timestamp.now());
-            DocumentReference reference = fb.collection("Task Activity").document();
-            taskActivity.setId(reference.getId());
-            reference.set(taskActivity).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    responseCallback.onSuccess(task, "Succes");
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    responseCallback.onError(e.getLocalizedMessage());
-                }
-            });
-        }
+   // public void saveUserTask(String taskid, List<String> selecteduser, ResponseCallback<Task> responseCallback, Task task) {
+      //  for (String userId : selecteduser) {
+         //   TaskActivity taskActivity = new TaskActivity();
+           // taskActivity.setTaskId(taskid);
+         //   taskActivity.setUserId(userId);
+       //     taskActivity.setDetail("Task is created");
+     //       taskActivity.setStatus("Task Assigned");
+   //         taskActivity.setTime_stamp(Timestamp.now());
+           // DocumentReference reference = fb.collection("Task Activity").document();
+         //   taskActivity.setId(reference.getId());
+       //     reference.set(taskActivity).addOnSuccessListener(new OnSuccessListener<Void>() {
+               // @Override
+             //   public void onSuccess(Void unused) {
+           //         responseCallback.onSuccess(task, "Succes");
+         //       }
+       //     }).addOnFailureListener(new OnFailureListener() {
+             //   @Override
+            //    public void onFailure(@NonNull Exception e) {
+          //          responseCallback.onError(e.getLocalizedMessage());
+        //        }
+      //      });
+    //    }
 
-    }
+  //  }
 
     public void getTask(ResponseCallback<List<Task>> responseCallback) {
         fb.collection("Task").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -270,7 +270,7 @@ task.setTimes_tamp(Timestamp.now());
                 List<TaskActivity> taskActivities = new ArrayList<>();
                 for (DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()) {
                     TaskActivity taskActivity = ds.toObject(TaskActivity.class);
-                    taskActivity.setId(ds.getId());
+                 //   taskActivity.setId(ds.getId());
                     Log.e("ActivityID", "FireStore ID " + ds.getId());
                     taskActivities.add(taskActivity);
                     Log.d("ACTIVITY_ID",
@@ -320,12 +320,12 @@ fb.collection("Status").whereEqualTo("name",status).get().addOnSuccessListener(n
 
                             DocumentReference activityRef = fb.collection("Task Activity").document();
 
-                            activity.setId(activityRef.getId());
-                            activity.setTaskId(taskId);
-                            activity.setUserId(userId);
-                            activity.setStatus(status);
-                            activity.setDetail("Status changed to " + status);
-                            activity.setTime_stamp(Timestamp.now());
+                        //    activity.setId(activityRef.getId());
+                         //   activity.setTaskId(taskId);
+                           // activity.setUserId(userId);
+                          //  activity.setStatus(status);
+                          //  activity.setDetail("Status changed to " + status);
+                            //activity.setTime_stamp(Timestamp.now());
 
                             activityRef.set(activity).addOnSuccessListener(aVoid ->
                                             Log.d("TaskActivity", "Activity saved for: " + userId))
