@@ -4,6 +4,7 @@ import com.example.taskmanagement.callback.ResponseCallback;
 import com.example.taskmanagement.response.PaginateResponse;
 import com.google.gson.JsonObject;
 
+import java.io.File;
 import java.util.List;
 
 public class ApiTaskViewModel {
@@ -60,5 +61,14 @@ public class ApiTaskViewModel {
    }
    public void getTaskActivity(String taskId,ResponseCallback<List<TaskActivity>>responseCallback){
         apiTaskRepository.getTaskActivity(taskId,responseCallback);
+   }
+   public void getAttachment(String taskId,ResponseCallback<List<Attachement>>responseCallback){
+        apiTaskRepository.getAttachement(taskId,responseCallback);
+   }
+   public void uploadAttachment(String taskid, File file,ResponseCallback<Attachement>responseCallback){
+        apiTaskRepository.uploadAttachment(taskid,file,responseCallback);
+   }
+   public void deletAttachement(String taskID,int attachementId,ResponseCallback<Attachement>responseCallback){
+        apiTaskRepository.deleteAttachement(taskID,attachementId,responseCallback);
    }
 }

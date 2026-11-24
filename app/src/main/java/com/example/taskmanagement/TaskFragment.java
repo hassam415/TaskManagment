@@ -452,7 +452,7 @@ List<Project>projectList=new ArrayList<>();
         });
         cameraLauncher = registerForActivityResult(new ActivityResultContracts.TakePicture(), result -> {
             if (result && cameraUri != null) {
-                customImagView.uriList.add(cameraUri.toString());
+               // customImagView.uriList.add(cameraUri.toString());
                 customImagView.imageAdpter.notifyDataSetChanged();
             }
         });

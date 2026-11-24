@@ -54,7 +54,7 @@ dashbordRecyler.setAdapter(dashboardAdapter);
         id = auth.getCurrentUser().getUid();
 taskViewModel=new TaskViewModel(new TaskRepository());
 statusViewModel=new StatusViewModel(new StatusRepository());
-dashboardViewModel=new DashboardViewModel(new DashboardRepository());
+dashboardViewModel=new DashboardViewModel(new DashboardRepository(requireContext()));
 statusViewModel.getList(new ResponseCallback<List<Status>>() {
     @Override
     public void onSuccess(List<Status> data, String message) {
@@ -86,7 +86,7 @@ statusViewModel.getList(new ResponseCallback<List<Status>>() {
 
 
         taskViewModel = new TaskViewModel(new TaskRepository());
-        dashboardViewModel=new DashboardViewModel(new DashboardRepository());
+        dashboardViewModel=new DashboardViewModel(new DashboardRepository(requireContext()));
 
 
         taskViewModel.getTaskCount(id, new ResponseCallback() {

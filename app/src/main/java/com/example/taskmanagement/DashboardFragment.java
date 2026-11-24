@@ -53,7 +53,7 @@ StatusViewModel statusViewModel;
 //fragmentDashboardBinding.dashboardrecyler.setAdapter(dashboardAdapter);
 //statusViewModel=new StatusViewModel(new StatusRepository());
 //filterBtn.setVisibility(View.GONE);
-       dashboardViewModel=new DashboardViewModel(new DashboardRepository());
+       dashboardViewModel=new DashboardViewModel(new DashboardRepository(getContext()));
        fragmentDashboardBinding.deadlineList.setHasFixedSize(true);
        fragmentDashboardBinding.deadlineList.setLayoutManager(new LinearLayoutManager(getContext()));
         deadlineListAdapter=new DeadlineListAdapter(getContext(),upcomingDeadLines);

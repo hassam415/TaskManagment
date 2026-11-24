@@ -1,6 +1,7 @@
 package com.example.taskmanagement;
 
 import com.example.taskmanagement.response.APIResponse;
+import com.example.taskmanagement.response.AttachmentResponse;
 import com.example.taskmanagement.response.AuthResponse;
 import com.example.taskmanagement.response.CheckListResponse;
 import com.example.taskmanagement.response.LogoutResponse;
@@ -10,13 +11,16 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -125,4 +129,11 @@ public interface ApiService {
     Call<CheckListToggleResponse> toggleCheckList(@Path("task")String taskId,@Path("checklist")int checkId);
 @GET("tasks/{task}/activities")
     Call<PaginateResponse<TaskActivity>> getTaskActivity(@Path("task")String taskId);
+@GET("tasks/{task}/attachments")
+    Call<APIResponse<Attachement>> getAttachment(@Path("task")String taskId);
+@Multipart
+    @POST("tasks/{task}/attachments")
+    Call<AttachmentResponse> uploadAttachement(@Path("task")String taskid, @Part MultipartBody.Part file);
+@DELETE("tasks/{task}/attachments/{attachment}")
+    Call<Attachement> DeleteAttachemnt(@Path("task")String taskid,@Path("attachment")int attachemnt);
 }

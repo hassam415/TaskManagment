@@ -63,7 +63,7 @@ List<Comment>commentList=new ArrayList<>();
          discription.setText("Discription :"+data.getDescription());
 
          customimg.uriList.clear();
-         customimg.uriList.addAll(data.getSelectedImges());
+        // customimg.uriList.addAll(data.getSelectedImges());
          customimg.imageAdpter.notifyDataSetChanged();
          }
 

@@ -1,5 +1,8 @@
 package com.example.taskmanagement;
 
+import android.content.Context;
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 
 import com.example.taskmanagement.callback.ResponseCallback;
@@ -16,11 +19,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardRepository {
+    private Context context;
     FirebaseFirestore fb;
     public ApiService apiService;
-    public DashboardRepository() {
-  fb=FirebaseFirestore.getInstance();
-    apiService=ApiClient.getRetrofit().create(ApiService.class);}
+    public DashboardRepository(Context context) {
+
+        this.context = context.getApplicationContext();
+
+        fb = FirebaseFirestore.getInstance();
+
+        apiService = ApiClient.getRetrofit()
+                .create(ApiService.class);
+    }
     public interface DashBoardResponse{
         void OnSuccess(ResponseDashBoard responseDashBoard);
         void OnError(String message);
@@ -99,8 +109,12 @@ fb.collection("Task").whereArrayContains("selecteduser",id).whereEqualTo("status
 
                             callback.onSuccess(response.body(), "Success");
 
-                        } else {
-                            callback.onError("API Error: " + response.code());
+                        } else if (response.code()==401) {
+                            ApiSesson.clearSession(context);
+                            Intent intent=new Intent(context,LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            context.startActivity(intent);
+
                         }
                     }
 

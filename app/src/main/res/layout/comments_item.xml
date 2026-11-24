@@ -27,7 +27,7 @@ android:padding="6dp"
                 android:layout_height="wrap_content"
                 android:text="Username"
                 android:textSize="12sp"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/colorOnSurface"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/time"
@@ -48,12 +48,12 @@ android:padding="6dp"
         <TextView
 
             android:id="@+id/commentTextView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Comment"
             android:textSize="16sp"
 
-            android:textColor="@android:color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"/>
 
      <!--   <TextView

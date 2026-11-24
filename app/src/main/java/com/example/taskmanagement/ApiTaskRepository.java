@@ -4,6 +4,8 @@ import android.util.JsonReader;
 import android.util.Log;
 
 import com.example.taskmanagement.callback.ResponseCallback;
+import com.example.taskmanagement.response.APIResponse;
+import com.example.taskmanagement.response.AttachmentResponse;
 import com.example.taskmanagement.response.CheckListResponse;
 import com.example.taskmanagement.response.PaginateResponse;
 import com.example.taskmanagement.response.TaskResponse;
@@ -12,8 +14,12 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -160,7 +166,10 @@ public class ApiTaskRepository {
         apiService.getTasks(page).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<PaginateResponse<Task>> call, Response<PaginateResponse<Task>> response) {
-                taskCallBack.onSuccess(response.body(), "");
+                if (response.body()!=null){
+                    taskCallBack.onSuccess(response.body(),"Sucess");
+                }
+
 
                 Log.e("onSuccess: ", response.message() + "");
 
@@ -358,6 +367,53 @@ responseCallback.onError(throwable.getMessage());
 
             @Override
             public void onFailure(Call<PaginateResponse<TaskActivity>> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void getAttachement(String taskId,ResponseCallback<List<Attachement>>responseCallback){
+        apiService.getAttachment(taskId).enqueue(new Callback<APIResponse<Attachement>>() {
+            @Override
+            public void onResponse(Call<APIResponse<Attachement>> call, Response<APIResponse<Attachement>> response) {
+                if (response.body()!=null){
+                    responseCallback.onSuccess(response.body().getData(),"Success");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<APIResponse<Attachement>> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+            }
+        });
+    }
+    public void uploadAttachment(String taskid, File file,ResponseCallback<Attachement>
+                                 responseCallback){
+        RequestBody requestBody = RequestBody.create(
+                MediaType.parse("image/jpeg"),
+                file
+        );
+        MultipartBody.Part filepart=MultipartBody.Part.createFormData("file", file.getName(),requestBody);
+apiService.uploadAttachement(taskid,filepart).enqueue(new Callback<AttachmentResponse>() {
+    @Override
+    public void onResponse(Call<AttachmentResponse> call, Response<AttachmentResponse> response) {
+        responseCallback.onSuccess(response.body().getData(),"Succcess");
+    }
+
+    @Override
+    public void onFailure(Call<AttachmentResponse> call, Throwable throwable) {
+responseCallback.onError(throwable.getMessage());
+    }
+});
+    }
+    public void deleteAttachement(String taskId,int attachmentId,ResponseCallback<Attachement>responseCallback){
+        apiService.DeleteAttachemnt(taskId,attachmentId).enqueue(new Callback<Attachement>() {
+            @Override
+            public void onResponse(Call<Attachement> call, Response<Attachement> response) {
+                responseCallback.onSuccess(response.body(),"Succcess");
+            }
+
+            @Override
+            public void onFailure(Call<Attachement> call, Throwable throwable) {
 responseCallback.onError(throwable.getMessage());
             }
         });

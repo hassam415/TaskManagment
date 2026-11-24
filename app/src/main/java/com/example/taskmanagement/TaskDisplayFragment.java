@@ -1,13 +1,19 @@
 package com.example.taskmanagement;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +24,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.example.taskmanagement.databinding.FragmentTaskDisplayBinding;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,10 +47,10 @@ import java.util.List;
 public class TaskDisplayFragment extends Fragment {
 FragmentTaskDisplayBinding binding;
     TaskViewModel taskViewModel;
-
     CommentsAdapter commentsAdapter;
     List<Comment> commentList = new ArrayList<>();
     String id;
+    AuthViewModel authViewModel;
     CommentsViewModel commentsViewModel;
     ArrayAdapter<String> statusAdapter;
     List<Status> statusList = new ArrayList<>();
@@ -42,7 +58,6 @@ FragmentTaskDisplayBinding binding;
     List<String> statusName = new ArrayList<>();
     List<Category> categories = new ArrayList<>();
     List<String> categoryName = new ArrayList<>();
-
     ArrayAdapter<String> categoryAdapter;
     CategoryViewModel categoryViewModel;
     List<Periority> periorities = new ArrayList<>();
@@ -58,7 +73,74 @@ FragmentTaskDisplayBinding binding;
     CategoryApiRepository categoryApiRepository;
     List<CheckList>checkLists=new ArrayList<>();
 CheckListAdapter checkListAdapter;
+List<Attachement>attachementList=new ArrayList<>();
+List<User> userList=new ArrayList<>();
+List<Integer>integerList=new ArrayList<>();
+    File selectedFile;
+    ActivityResultLauncher<Intent> cameraLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
 
+                        if (result.getResultCode() == Activity.RESULT_OK
+                                && result.getData() != null) {
+
+                            Bundle extras = result.getData().getExtras();
+
+                            if (extras != null) {
+                                Bitmap bitmap = (Bitmap) extras.get("data");
+
+                                try {
+                                    selectedFile = new File(
+                                            requireContext().getCacheDir(),
+                                            "camera_" + System.currentTimeMillis() + ".jpg"
+                                    );
+
+                                    FileOutputStream outputStream =
+                                            new FileOutputStream(selectedFile);
+
+                                    bitmap.compress(
+                                            Bitmap.CompressFormat.JPEG,
+                                            90,
+                                            outputStream
+                                    );
+
+                                    outputStream.close();
+
+                                    uploadSelectedFile();
+
+                                } catch (Exception e) {
+                                    Toast.makeText(getContext(),
+                                            e.getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+            );
+
+    ActivityResultLauncher<Intent> galleryLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+
+                        if (result.getResultCode() == Activity.RESULT_OK
+                                && result.getData() != null) {
+
+                            Uri imageUri = result.getData().getData();
+
+                            try {
+                                selectedFile = uriToFile(imageUri);
+                                uploadSelectedFile();
+
+                            } catch (Exception e) {
+                                Toast.makeText(getContext(),
+                                        e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+            );
     public TaskDisplayFragment() {
         // Required empty public constructor
     }
@@ -75,7 +157,7 @@ CheckListAdapter checkListAdapter;
         binding.checkListReycler.setLayoutManager(new LinearLayoutManager(getContext()));
         checkListAdapter=new CheckListAdapter(getContext(),checkLists);
         binding.checkListReycler.setAdapter(checkListAdapter);
-
+authViewModel=new AuthViewModel(new AuthRepository());
         apiTaskViewModel = new ApiTaskViewModel(new ApiTaskRepository());
         statusApiRepository = new StatusApiRepository();
         priorityRepository = new PriorityRepository();
@@ -85,7 +167,7 @@ CheckListAdapter checkListAdapter;
         ImageView filterBtn = requireActivity().findViewById(R.id.filterBtn);
         filterBtn.setVisibility(View.GONE);
 
-      //  binding.customImage.showLoader();
+        binding.customImage.showLoader();
         binding.customUser.showLoader();
 
         commentsViewModel = new CommentsViewModel(new CommentsRepository());
@@ -96,11 +178,12 @@ CheckListAdapter checkListAdapter;
 
         commentsAdapter = new CommentsAdapter(getContext(), commentList);
         binding.commentRecycler.setAdapter(commentsAdapter);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             id = bundle.getString("Id");
         }
-      //  binding.customImage.setview();
+
         commentsViewModel.getApiComments(id, new ResponseCallback<List<Comment>>() {
             @Override
             public void onSuccess(List<Comment> data, String message) {
@@ -121,6 +204,21 @@ apiTaskViewModel.getCheckList(id, new ResponseCallback<List<CheckList>>() {
         checkLists.addAll(data);
         binding.checklist.setText("Deliverable Checklists("+data.size()+")");
         checkListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onError(String message) {
+
+    }
+});
+
+apiTaskViewModel.getAttachment(id, new ResponseCallback<List<Attachement>>() {
+    @Override
+    public void onSuccess(List<Attachement> data, String message) {
+attachementList.clear();
+attachementList.addAll(data);
+binding.customImage.setAttachments(attachementList);
+
     }
 
     @Override
@@ -274,6 +372,10 @@ binding.additem.setOnClickListener(new View.OnClickListener() {
                     Log.e("API ", "onSuccess: "+data.getDescription() );
                     binding.title.setText(data.getTitle() + "");
                     binding.discript.setText(data.getDescription() + "");
+userList=data.getAssignees();
+
+binding.customUser.hideLoader();
+binding.customUser.setUsers(userList);
 
 
                 }
@@ -432,19 +534,19 @@ binding.additem.setOnClickListener(new View.OnClickListener() {
             });
 
 
-       // binding.customImage.setOnImageClick(new CustomImagView.OnImageClick() {
+        binding.customImage.setOnImageClick(new CustomImagView.OnImageClick() {
 
-         //   @Override
-           // public void OnClick(String imagUrl) {
+            @Override
+            public void OnClick(String imagUrl) {
 
-             //   Intent intent =
-               //         new Intent(getContext(), PhotoZoomActivity.class);
+                Intent intent =
+                        new Intent(getContext(), PhotoZoomActivity.class);
 
-               // intent.putExtra("ImageUrl", imagUrl);
+                intent.putExtra("ImageUrl", imagUrl);
 
-               // startActivity(intent);
-          //  }
-      //  });
+                startActivity(intent);
+            }
+        });
 
 
        commentsAdapter.setOnBtnClick(new CommentsAdapter.OnBtnClick() {
@@ -464,6 +566,36 @@ binding.additem.setOnClickListener(new View.OnClickListener() {
                });
            }
        });
+binding.customImage.setOnGallerClick(new CustomImagView.OnGallerClick() {
+    @Override
+    public void onClick() {
+        opengallary();
+    }
+});
+binding.customImage.setOnCameraClick(new CustomImagView.OnCameraClick() {
+    @Override
+    public void onClick() {
+        opencamera();
+    }
+});
+        binding.customImage.setOnDeletBtn(new ImageAdpter.OnDeletBtn() {
+            @Override
+            public void OnClick(int Id, int position) {
+                apiTaskViewModel.deletAttachement(id, Id, new ResponseCallback<Attachement>() {
+                    @Override
+                    public void onSuccess(Attachement data, String message) {
+                        attachementList.remove(position);
+                        binding.customImage.setAttachments(attachementList);
+                        binding.customImage.imageAdpter.notifyItemRemoved(position);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                    }
+                });
+            }
+        });
 
         binding.imgbtn.setOnClickListener(new View.OnClickListener() {
 
@@ -495,6 +627,7 @@ binding.additem.setOnClickListener(new View.OnClickListener() {
 
     }
 });
+
                                 //    commentsViewModel.saveComment(id, comment, new ResponseCallback<Comment>() {
 
                                   //              @Override
@@ -519,7 +652,16 @@ binding.additem.setOnClickListener(new View.OnClickListener() {
 
         return binding.getRoot();
     }
+public void opencamera(){
+        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    cameraLauncher.launch(intent);
+}
+public void opengallary(){
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        galleryLauncher.launch(intent);
 
+}
     public void setSelectedStatus() {
         if (statusId != null) {
             for (int i = 0; i < statusList.size(); i++) {
@@ -542,6 +684,94 @@ binding.additem.setOnClickListener(new View.OnClickListener() {
                 }
             }
         }
+    }
+    private void uploadSelectedFile() {
+
+        if (selectedFile == null || !selectedFile.exists()) {
+            return;
+        }
+
+        binding.customImage.showLoader();
+
+        apiTaskViewModel.uploadAttachment(id,
+                selectedFile,
+                new ResponseCallback<Attachement>() {
+
+                    @Override
+                    public void onSuccess(Attachement data, String message) {
+
+                        binding.customImage.hideLoader();
+
+                        Toast.makeText(getContext(),
+                                "Attachment uploaded successfully",
+                                Toast.LENGTH_SHORT).show();
+
+                        // Refresh attachment list
+                        apiTaskViewModel.getAttachment(
+                                id,
+                                new ResponseCallback<List<Attachement>>() {
+                                    @Override
+                                    public void onSuccess(
+                                            List<Attachement> data,
+                                            String message
+                                    ) {
+                                        attachementList.clear();
+                                        attachementList.addAll(data);
+
+                                        binding.customImage.setAttachments(
+                                                attachementList
+                                        );
+                                    }
+
+                                    @Override
+                                    public void onError(String message) {
+                                        Toast.makeText(getContext(),
+                                                message,
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                        );
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                        binding.customImage.hideLoader();
+
+                        Toast.makeText(getContext(),
+                                message,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+    private File uriToFile(Uri uri) throws IOException {
+
+        File file = new File(
+                requireContext().getCacheDir(),
+                "gallery_" + System.currentTimeMillis() + ".jpg"
+        );
+
+        InputStream inputStream =
+                requireContext().getContentResolver().openInputStream(uri);
+
+        if (inputStream == null) {
+            throw new IOException("Unable to read selected image");
+        }
+
+        FileOutputStream outputStream = new FileOutputStream(file);
+
+        byte[] buffer = new byte[4096];
+        int length;
+
+        while ((length = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, length);
+        }
+
+        inputStream.close();
+        outputStream.close();
+
+        return file;
     }
 
     public void setSelectedPeriority() {

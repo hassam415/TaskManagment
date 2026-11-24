@@ -1,5 +1,7 @@
 package com.example.taskmanagement;
 
+import android.widget.Toast;
+
 import com.example.taskmanagement.callback.ResponseCallback;
 import com.example.taskmanagement.response.AuthResponse;
 import com.example.taskmanagement.response.LogoutResponse;
@@ -106,7 +108,10 @@ responseCallback.onError(throwable.getMessage());
         apiService.getUser().enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                responseCallback.onSuccess(response.body().getData(),"Sucess");
+                if (response.body()!=null){
+                    responseCallback.onSuccess(response.body().getData(),"Sucess");
+                }
+
             }
 
             @Override
@@ -132,7 +137,10 @@ responseCallback.onError(throwable.getMessage());
         apiService.getAuthMe().enqueue(new Callback<AuthResponse>() {
             @Override
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
-                responseCallback.onSuccess(response.body().getData(),"Succcess");
+                if (response.body()!=null){
+                    responseCallback.onSuccess(response.body().getData(),"Succcess");
+                }
+
             }
 
             @Override

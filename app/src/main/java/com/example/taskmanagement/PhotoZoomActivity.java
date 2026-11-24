@@ -25,6 +25,6 @@ ActivityPhotoZoomBinding binding;
             return insets;
         });
         String imagurl=getIntent().getStringExtra("ImageUrl");
-        Picasso.get().load(imagurl).into(binding.photoView);
+     PicasoUtility.loadImage(this,imagurl,binding.photoView);
     }
 }

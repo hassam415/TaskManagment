@@ -24,10 +24,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static final String TAG = "ApiClient";
-    private static final String Base_Url = "https://beta-tasks.petelaj.com/api/v1/";
+    private static final String Base_Url = "http://192.168.1.11:8012/api/v1/";
 
     private static Retrofit retrofit;
     private static ApiService apiService;
+
 
     /**
      * Returns the singleton Retrofit instance configured with OkHttpClient,
@@ -48,10 +49,10 @@ public class ApiClient {
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
+
         }
         return retrofit;
     }
-
     /**
      * Convenience method to get ApiService directly.
      */

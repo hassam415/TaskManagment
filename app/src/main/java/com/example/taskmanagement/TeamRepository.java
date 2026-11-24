@@ -19,7 +19,10 @@ public void TeamList(ResponseCallback<List<Team>>responseCallback ){
         apiService.getTeamList().enqueue(new Callback<APIResponse<Team>>() {
             @Override
             public void onResponse(Call<APIResponse<Team>> call, Response<APIResponse<Team>> response) {
-                responseCallback.onSuccess(response.body().getData(),"Success");
+                if (response.body()!=null){
+                    responseCallback.onSuccess(response.body().getData(),"Sucess");
+                }
+
             }
 
             @Override

@@ -121,6 +121,7 @@ public class CustomUserView extends LinearLayout {
 
 
     public List<User> getSelectedUsers() {
+
         return new ArrayList<>(selecteduser);
     }
 
@@ -199,5 +200,24 @@ public class CustomUserView extends LinearLayout {
         }
 
         return ids;
+    }
+    public void setAssignees(List<User> users) {
+
+        userList.clear();
+        selecteduser.clear();
+
+        if (users != null) {
+            userList.addAll(users);
+            selecteduser.addAll(users);
+        }
+
+        taskitemAdapter.setUsers(new ArrayList<>(userList));
+
+        taskitemAdapter.setSelectedUsers(
+                new ArrayList<>(selecteduser)
+        );
+
+        Log.d("ASSIGNEES",
+                "Selected users: " + getSelectedUserIds());
     }
 }

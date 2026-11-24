@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,7 +29,7 @@ LinearLayout Loader;
         this.onImageClick = onImageClick;
     }
 
-    List<String>uriList=new ArrayList<>();
+    List<Attachement>uriList=new ArrayList<>();
     public interface OnGallerClick{
         void  onClick();
 
@@ -41,7 +42,7 @@ LinearLayout Loader;
     }
     public OnGallerClick onGallerClick;
 public OnCameraClick onCameraClick;
-
+public ImageAdpter.OnDeletBtn onDeletBtn;
     public void setOnCameraClick(OnCameraClick onCameraClick) {
         this.onCameraClick = onCameraClick;
     }
@@ -53,6 +54,10 @@ public OnCameraClick onCameraClick;
     public CustomImagView(Context context) {
         super(context);
         init(context);
+    }
+    public void setOnDeletBtn(ImageAdpter.OnDeletBtn listener) {
+        this.onDeletBtn = listener;
+        imageAdpter.setOnDeletBtn(listener);
     }
 
     public CustomImagView(Context context, @Nullable AttributeSet attrs) {
@@ -94,7 +99,9 @@ public OnCameraClick onCameraClick;
         imageAdpter.setOnimageClick(new ImageAdpter.OnimageClick() {
             @Override
             public void OnClick(String imageUrl) {
-                onImageClick.OnClick(imageUrl);
+                if (onImageClick != null) {
+                    onImageClick.OnClick(imageUrl);
+                }
             }
         });
 
@@ -115,5 +122,17 @@ if (onCameraClick!=null){
 }).show();
             }
         });
+    }
+
+    public void setAttachments(List<Attachement> attachments) {
+
+        uriList.clear();
+
+
+            uriList.addAll(attachments);
+
+        imageAdpter.notifyDataSetChanged();
+
+        hideLoader();
     }
 }

@@ -25,7 +25,10 @@ public class ProjectRepository {
         apiService.getProject().enqueue(new Callback<APIResponse<Project>>() {
             @Override
             public void onResponse(Call<APIResponse<Project>> call, Response<APIResponse<Project>> response) {
-                responseCallback.onSuccess(response.body().getData(), "Projects Loaded");
+                if (response.body()!=null){
+                    responseCallback.onSuccess(response.body().getData(), "Projects Loaded");
+                }
+
 
             }
 
@@ -80,12 +83,15 @@ responseCallback.onError(throwable.getMessage());
         apiService.getCalender(month).enqueue(new Callback<CalenderResponse>() {
             @Override
             public void onResponse(Call<CalenderResponse> call, Response<CalenderResponse> response) {
-                Calendar calendar=response.body().getData();
+                if (response.body()!=null){
+                    Calendar calendar=response.body().getData();
 
-                Log.d("CalendarAPI", "API Total = " + calendar.getTotal_tasks());
-                Log.d("CalendarAPI", "API Completed = " + calendar.getCompleted_tasks());
-                Log.d("CalendarAPI", "API Pending = " + calendar.getPending_tasks());
-                responseCallback.onSuccess(calendar,"Success");
+                    Log.d("CalendarAPI", "API Total = " + calendar.getTotal_tasks());
+                    Log.d("CalendarAPI", "API Completed = " + calendar.getCompleted_tasks());
+                    Log.d("CalendarAPI", "API Pending = " + calendar.getPending_tasks());
+                    responseCallback.onSuccess(calendar,"Success");
+                }
+
             }
 
             @Override
